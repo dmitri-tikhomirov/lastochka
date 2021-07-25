@@ -1,56 +1,57 @@
-/*============================================================================
-  Imported styles and fonts
-  ============================================================================*/
+/*******************************************************************************
+* Imported styles and fonts *
+*******************************************************************************/
 
 @font-face {
   font-family: "Open Sans";
-  src: url("../fonts/open-sans-regular.ttf");
+  src: url("../fonts/open-sans-normal.woff2");
   font-weight: normal;
   font-style: normal;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Open Sans";
-  src: url("../fonts/open-sans-semi-bold.ttf");
+  src: url("../fonts/open-sans-600.woff2");
   font-weight: 600;
   font-style: normal;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Open Sans";
-  src: url("../fonts/open-sans-bold.ttf");
+  src: url("../fonts/open-sans-bold.woff2");
   font-weight: bold;
   font-style: normal;
+  font-display: block;
 }
 
 @font-face {
   font-family: "Alegreya SC";
-  src: url("../fonts/alegreya-sc-medium.ttf");
+  src: url("../fonts/alegreya-sc-500.woff2");
   font-weight: 500;
   font-style: normal;
+  font-display: block;
 }
 
-/*============================================================================
-  Global settings
-  ============================================================================*/
+/*******************************************************************************
+* Global settings *
+*******************************************************************************/
 
 :root {
-  --max-website-width: 1248px;
+  --color-red:           hsl(4, 77%, 58%); /* #e64c41, orig #e64e43 */
+  --color-platinum:      hsl(72, 11%, 91%); /* #eaebe6, orig #e9eae4 */
+  --color-platinum-dark: hsl(72, 11%, 65%);
+  --color-white:         hsl(0, 0%, 100%);
+  --color-black:         hsl(0, 0%, 10%);
 
-  --color-primary:           hsl(4, 77%, 58%); /* #e64c41, orig #e64e43 */
-  --color-primary-light:     hsl(4, 77%, 72%);
-  --color-bg:                hsl(72, 11%, 91%); /* #eaebe6, orig #e9eae4 */
-  --color-bg-shadow:         hsl(72, 11%, 70%);
-  --color-bg-shadow-light:   hsl(72, 11%, 75%);
-  --color-gray:              hsl(0, 0%, 55%);
-  --color-gray-shadow:       hsl(0, 0%, 70%);
-  --color-gray-shadow-light: hsl(0, 0%, 75%);
+  --color-shadow:       hsla(0, 0%, 0%, 0.3);
+  --color-shadow-light: hsla(0, 0%, 0%, 0.2);
+  --color-shadow-dark:  hsla(0, 0%, 0%, 0.6);
 
-  --trans-time: 0.15s;
-  --trans-func: linear;
-
-  --box-shadow-s: 0px 1px 4px;
-  --box-shadow-m: 0px 2px 8px;
+  --opacity-s: 0.65;
+  --opacity-m: 0.55;
+  --opacity-l: 0.45;
 
   --space-xxs: 2px;
   --space-xs:  4px;
@@ -59,14 +60,51 @@
   --space-l:   16px;
   --space-xl:  24px;
   --space-xxl: 32px;
+  --space-3xl: 48px;
+  --space-4xl: 64px;
 
   --text-xs:  13px;
   --text-s:   16px;
   --text-m:   18px;
   --text-l:   22px;
-  --text-xl:  26px;
+  --text-xl:  28px;
   --text-xxl: 30px;
+
+  --shadow-xxs: 0px calc(var(--space-xxs) / 4) var(--space-xxs);
+  --shadow-xs:  0px calc(var(--space-xs) / 4) var(--space-xs);
+  --shadow-s:   0px calc(var(--space-s) / 4) var(--space-s);
+
+  --max-website-width: 1248px;
+  --website-padding: var(--space-xl);
+
+  --trans-time: 0.2s;
+  --trans-func: linear;
 }
+
+@media (max-width: 1030px) {
+  :root {
+    --space-xxs: 1px;  /* - 1px */
+    --space-xs:  3px;  /* - 1px */
+    --space-s:   6px;  /* - 2px */
+    --space-m:   10px; /* - 2px */
+    --space-l:   13px; /* - 3px */
+    --space-xl:  21px; /* - 3px */
+    --space-xxl: 28px; /* - 4px */
+    --space-3xl: 44px; /* - 4px */
+    --space-4xl: 59px; /* - 5px */
+
+    --text-xs:  12px;
+    --text-s:   15px;
+    --text-m:   16px;
+    --text-l:   20px;
+    --text-xl:  23px;
+    --text-xxl: 27px;
+  }
+}
+
+/*******************************************************************************
+* Basic elements *
+*******************************************************************************/
 
 html {
   box-sizing: border-box;
@@ -78,27 +116,27 @@ html {
   padding: 0;
 }
 
-/*============================================================================
-  Basic elements
-  ============================================================================*/
-
 body {
   font: var(--text-m)/1.6 "Open Sans", Verdana, sans-serif;
+  background-color: var(--color-white);
+  color: var(--color-black);
 }
 
 a {
-  color: inherit;
+  color: var(--color-black);
   text-decoration: none;
-  transition: color var(--trans-time) var(--trans-func);
+  transition: opacity var(--trans-time) var(--trans-func);
 }
 
 a:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-red);
   outline-offset: var(--space-xs);
 }
 
-a:not(.btn):hover {
-  color: var(--color-gray);
+@media (hover: hover) and (pointer: fine) {
+  a:hover {
+    opacity: var(--opacity-l);
+  }
 }
 
 h1, h2, h3 {
@@ -108,6 +146,7 @@ h1, h2, h3 {
 
 h1 {
   font-size: var(--text-xxl);
+  display: inline;
 }
 
 h2 {
@@ -122,44 +161,44 @@ img, svg {
   display: block;
 }
 
-/*============================================================================
-  Utility classes
-  ============================================================================*/
+/*******************************************************************************
+* Utility classes *
+*******************************************************************************/
 
 .container {
   max-width: var(--max-website-width);
   margin: 0 auto;
-  padding: 0 var(--space-xl);
+  padding-left: var(--website-padding);
+  padding-right: var(--website-padding);
 }
 
-.icon {
-  fill: var(--color-primary);
-  transition: fill var(--trans-time) var(--trans-func);
+.section {
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-xxl);
 }
 
-.icon:hover {
-  fill: var(--color-primary-light);
+.section-heading {
+  padding-bottom: var(--space-xl);
+  text-align: center;
 }
 
 .hide {
   display: none !important;
 }
 
-/*============================================================================
-  Components
-  ============================================================================*/
+.line-separator {
+  border-top: 1px solid var(--color-platinum-dark);
+}
 
 .btn {
   padding: var(--space-s) var(--space-l);
-  border: 1px solid var(--color-primary);
-  box-shadow: var(--box-shadow-s) var(--color-bg-shadow);
-  color: var(--color-primary);
+  border: 1px solid var(--color-red);
+  box-shadow: var(--shadow-xs) var(--color-shadow);
+  color: var(--color-red);
   border-radius: var(--space-s);
   display: inline-block;
   text-align: center; /* In case there are several lines of text */
-  transition-property: opacity, border-color, box-shadow;
-  transition-duration: var(--trans-time);
-  transition-timing-function: var(--trans-func);
+  transition: opacity var(--trans-time) var(--trans-func);
 }
 
 .btn-lg {
@@ -168,230 +207,262 @@ img, svg {
 }
 
 .btn-filled {
-  background-color: var(--color-primary);
+  background-color: var(--color-red);
   color: #fff;
 }
 
-.btn:hover {
-  opacity: 0.75;
-  border-color: var(--color-primary-light);
-  box-shadow: var(--box-shadow-s) var(--color-bg-shadow-light);
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    opacity: var(--opacity-l);
+  }
+
+  .btn-filled:hover {
+    opacity: var(--opacity-s);
+  }
 }
 
-.btn-filled:hover {
-  border-color: var(--color-primary);
-}
+/*******************************************************************************
+* Logo, whatsapp, phone *
+*******************************************************************************/
 
-/*============================================================================
-  Header
-  ============================================================================*/
-
-.header {
-  display: flex;
+.logo {
+  display: inline-flex;
   align-items: center;
-  padding-top: var(--space-xxl);
 }
 
-.header-logo {
-  display: flex;
-  align-items: center;
-  font-size: var(--text-s);
+.logo-img {
+  height: calc(5 * var(--text-s));
+  width: auto;
 }
 
-.header-nav-and-contacts {
-  min-width: 0;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  font-size: var(--text-xs);
-}
-
-.header-logo img {
-  height: calc(5 * var(--text-s)); /* Icon size based on text size */
-}
-
-.header-logo p {
-  font-family: "Alegreya SC", Arial, sans-serif;
-  font-weight: 500;
-  line-height: 1.4;
+.logo-text {
+  font: 500 var(--text-s)/1.4 "Alegreya SC", Arial, sans-serif;
   margin-left: var(--space-l);
 }
 
-.header-contacts {
-  color: var(--color-gray);
-  display: flex;
+.whatsapp {
+  display: inline-flex;
   align-items: center;
-  justify-content: flex-end;
+  transition: none;
 }
 
-.header-contacts > * + * {
-  margin-left: var(--space-xxl);
-}
-
-.header-whatsapp {
-  display: flex;
-  align-items: center;
-}
-
-.header-whatsapp-icon {
-  fill: #000;
+.whatsapp-icon {
+  fill: var(--color-black);
   height: var(--text-l);
+  transition: opacity var(--trans-time) var(--trans-func);
 }
 
-.header-whatsapp:hover .header-whatsapp-icon {
-  fill: var(--color-gray);
+@media (hover: hover) and (pointer: fine) {
+  .whatsapp:hover {
+    opacity: 1;
+  }
+
+  .whatsapp:hover .whatsapp-icon {
+    opacity: var(--opacity-l);
+  }
 }
 
-.header-whatsapp p {
+.whatsapp-text {
+  font-size: var(--text-xs);
+  opacity: var(--opacity-l);
   margin-left: var(--space-s);
 }
 
-.header-phone {
-  display: flex;
+.phone {
+  display: inline-flex;
   align-items: center;
 }
 
-.header-phone-icon {
+.phone-icon {
+  fill: var(--color-red);
   height: var(--text-xxl);
 }
 
-.header-phone-text {
+@media (hover: hover) and (pointer: fine) {
+  .phone-icon-link:hover {
+    opacity: var(--opacity-m);
+  }
+}
+
+.phone-text {
   margin-left: var(--space-m);
 }
 
-.header-phone-text a {
+.phone-number {
   display: inline-block;
-  margin-bottom: var(--space-xxs);
   font-size: var(--text-m);
   font-weight: bold;
-  color: #000;
+  color: var(--color-black);
 }
 
-.header-contacts .btn {
-  font-size: var(--text-s);
+.phone-hours {
+  font-size: var(--text-xs);
+  opacity: var(--opacity-l);
+  margin-top: var(--space-xxs);
 }
 
-/*============================================================================
-  Navigation
-  ============================================================================*/
+/*******************************************************************************
+* Triangles *
+*******************************************************************************/
 
-nav {
-  display: flex;
-  font-weight: 600;
-  text-transform: uppercase;
-  white-space: nowrap;
-  margin-top: var(--space-s);
+.tr {
+  --base: 200px;
+  --base-angle: 30deg;
+  --tan: 0.57735; /* tan(30) = 0.57735, tan(45) = 1, tan(60) = 1.73205 */
+  --sin: 0.5; /* sin(30) = 0.5, sin(45) = 0.70711, sin(60) = 0.86603 */
+  --space-top: 0px;  /* For example, to accomodate box-shadow */
+  --space-lr: 0px;
+  overflow: hidden;
+  position: relative;
+  --base-plus-space: calc(var(--base) + var(--space-lr) * 2);
+  --altitude-plus-space:
+    calc((var(--base) / 2) * var(--tan) + var(--space-top));
+  --rect-side: calc(var(--base) * var(--sin));
+  --skew-angle: calc(90deg - var(--base-angle) * 2);
+}
+
+.tr .tr-shape {
+  background-color: var(--color-red);
+  position: absolute;
+}
+
+.tr-up {
+  width: var(--base-plus-space);
+  height: var(--altitude-plus-space);
+}
+
+.tr-up .tr-shape {
+  height: var(--rect-side);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: var(--space-top) var(--space-lr) 0;
+  transform-origin: 0 100%;
+  transform:
+    rotate(var(--base-angle)) skewX(calc(0deg - var(--skew-angle)));
+}
+
+.tr-down {
+  width: var(--base-plus-space);
+  height: var(--altitude-plus-space);
+}
+
+.tr-down .tr-shape {
+  height: var(--rect-side);
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 0 var(--space-lr) var(--space-top);
+  transform-origin: 100% 0;
+  transform:
+    rotate(var(--base-angle)) skewX(calc(0deg - var(--skew-angle)));
+}
+
+.tr-left {
+  width: var(--altitude-plus-space);
+  height: var(--base-plus-space);
+}
+
+.tr-left .tr-shape {
+  width: var(--rect-side);
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: var(--space-lr) 0 var(--space-lr) var(--space-top);
+  transform-origin: 100% 100%;
+  transform:
+    rotate(var(--base-angle)) skewY(var(--skew-angle));
+}
+
+.tr-right {
+  width: var(--altitude-plus-space);
+  height: var(--base-plus-space);
+}
+
+.tr-right .tr-shape {
+  width: var(--rect-side);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: var(--space-lr) var(--space-top) var(--space-lr) 0;
+  transform-origin: 0 0;
+  transform:
+    rotate(var(--base-angle)) skewY(var(--skew-angle));
+}
+
+/*******************************************************************************
+* Price tag *
+*******************************************************************************/
+
+.tag {
+  --height: calc(2 * var(--text-s));
+  display: inline-flex;
   position: relative;
 }
 
-.nav-no-javascript {
-  overflow-x: auto;
+.tag-tr-on-top,
+.tag-tr-below {
+  --base: calc(3 * var(--height) / 5);
+  --base-angle: 60deg;
+  --tan: 1.73205;
+  --sin: 0.86603;
+  --space-top: var(--space-xs);
+  --space-lr: calc(var(--height) / 5);
 }
 
-nav > *:first-child {
-  margin-left: auto;
+.tag-tr-on-top .tr-shape,
+.tag-tr-below .tr-shape {
+  background-color: var(--color-platinum-dark);
 }
 
-nav, nav > * + * {
-  margin-left: var(--space-xl);
+.tag-tr-on-top .tr-shape {
+  border: 1px solid var(--color-black);
+  box-shadow: var(--shadow-xs) var(--color-shadow-dark);
 }
 
-nav a {
-  transition: color var(--trans-time) var(--trans-func);
+.tag-tr-on-top::after { /* Circle */
+  content: "";
+  width: calc(var(--base) / 3);
+  height: calc(var(--base) / 3);
+  border-radius: 50%;
+  background-color: #fff;
+  border: 1px solid var(--color-black);
+  box-shadow: var(--shadow-xxs) var(--color-shadow-dark) inset;
+  position: absolute;
+  top: 50%;
+  right: 1px;
+  transform: translateY(-50%);
 }
 
-.nav-more-and-dropdown {
-  display: none;
+.tag-tr-below { /* Without it there might be a small gap when rotating a tag */
+  position: absolute;
+  z-index: -1;
+  left: 1px;
 }
 
-.nav-more {
+.tag-content {
+  font-size: var(--text-s);
+  font-weight: bold;
+  white-space: nowrap;
+  height: var(--height);
+  box-shadow: var(--shadow-xs) var(--color-shadow-dark);
+  background-color: var(--color-platinum-dark);
+  border-radius: var(--space-s);
+  color: #fff;
   display: flex;
   align-items: center;
+  padding: 0 var(--space-m);
+  border: 1px solid var(--color-black);
+  margin-left: -1px;
+  z-index: -2;
 }
 
-.nav-dropdown-icon {
-  height: var(--space-s);
-  margin-left: var(--space-s);
-  transition: transform var(--trans-time) var(--trans-func),
-              fill var(--trans-time) var(--trans-func);
-}
-
-.nav-dropdown-hover {
-  position: absolute;
-  right: 0;
-  top: 100%;
-  padding-top: var(--space-l);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity var(--trans-time) var(--trans-func),
-              visibility var(--trans-time) var(--trans-func);
-}
-
-.nav-more-and-dropdown:hover .nav-dropdown-hover {
-  opacity: 1;
-  visibility: visible;
-}
-
-.nav-more-and-dropdown:hover .nav-dropdown-icon {
-  transform: rotate(180deg);
-  fill: var(--color-primary-light);
-}
-
-.nav-more-and-dropdown:hover .nav-more {
-  color: var(--color-gray);
-}
-
-.nav-dropdown {
-  position: relative;
-  padding: var(--space-xl) 0;
-  border-radius: var(--space-s);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  --color-bg: #fff;
-  background-color: var(--color-bg);
-  box-shadow: var(--box-shadow-m) var(--color-bg-shadow);
-}
-
-.nav-dropdown-triangle {
-  --extra-space: var(--space-xs); /* Space to accomodate box-shadow */
-  --width: calc(var(--space-l) + var(--extra-space) * 2);
-  width: var(--width);
-  /* height = (width / 2) * tan(rotateDeg) */
-  height: calc((var(--width) / 2) * 0.58 + var(--extra-space));
-  overflow: hidden;
-  position: absolute;
-  bottom: 100%;
-  right: calc(var(--space-xl) - var(--extra-space));
-}
-
-.nav-dropdown-triangle div {
-  background: var(--color-bg);
-  width: 100%;
-  /* height = width * sin(rotateDeg) */
-  height: calc(calc(var(--width) - var(--extra-space) * 2) * 0.5);
-  position: absolute;
-  left: var(--extra-space);
-  bottom: 0;
-  transform-origin: 0 100%;
-  transform: rotate(30deg) skewX(-30deg); /* skewXDeg = rotateDeg * 2 - 90 */
-  box-shadow: var(--box-shadow-m) var(--color-bg-shadow);
-}
-
-.nav-dropdown a {
-  padding: var(--space-s) var(--space-xl);
-}
-
-.nav-mobile {
-  display: none;
-}
-
-/*============================================================================
-  Cover
-  ============================================================================*/
+/*******************************************************************************
+* Cover *
+*******************************************************************************/
 
 .cover {
-  background-color: var(--color-bg);
+  background-color: var(--color-platinum);
 }
 
 .cover-img {
@@ -402,18 +473,24 @@ nav a {
   flex-direction: column;
 }
 
-.cover-content {
+.cover-content-wrapper {
   flex-grow: 1;
   display: flex;
   align-items: center;
 }
 
-.cover-text {
+.cover-content {
   width: 50%;
-  padding: var(--space-xxl) 0;
+  padding: var(--space-3xl) 0;
 }
 
-.cover-text > * + * {
+.cover-tag {
+  position: absolute;
+  transform: translatey(10%) rotate(7deg);
+  transform-origin: 0 100%;
+}
+
+.cover-content > * + * {
   margin-top: var(--space-xxl);
 }
 
@@ -428,82 +505,15 @@ nav a {
   margin: var(--space-m) var(--space-l);
 }
 
-/*============================================================================
-  404 page
-  ============================================================================*/
-
-.full-page-bg {
-  height: 100vh;
-  background-color: var(--color-bg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-/*
-.full-page-bg > * + * {
-  margin-top: var(--space-xl);
-}*/
-
-.full-page-bg img {
-  height: calc(4 * var(--text-xxl));
-  margin-bottom: var(--space-m);
-}
-
-.full-page-bg a {
-  font-size: var(--text-s);
-  margin-top: var(--space-l);
-}
-
-/*============================================================================
-  Assets for medium and large screens
-  ============================================================================*/
-
-  @media (min-width: 721px) and (max-width: 1248px) {
-    .cover-img {
-      background: url("../images/cover-1248px-95pct.webp") 50% 27.52%/cover;
-    }
-  }
-
-  @media (min-width: 1249px) {
-    .cover-img {
-      background: url("../images/cover-1324px-95pct.webp") 50%/cover;
-    }
-  }
-
-/*============================================================================
-  Styles for smaller screens
-  ============================================================================*/
-
-@media (max-width: 1020px) { /* Smaller font size */
-  :root { /* Avoid fractional pixels which may mess small details in browsers */
-    --box-shadow-s: 0px 1px 3px;
-    --box-shadow-m: 0px 2px 6px;
-
-    --space-xxs: 1px;  /* - 1px */
-    --space-xs:  3px;  /* - 1px */
-    --space-s:   6px;  /* - 2px */
-    --space-m:   10px; /* - 2px */
-    --space-l:   13px; /* - 3px */
-    --space-xl:  21px; /* - 3px */
-    --space-xxl: 28px; /* - 4px */
-
-    --text-xs:  12px;
-    --text-s:   15px;
-    --text-m:   16px;
-    --text-l:   20px;
-    --text-xl:  23px;
-    --text-xxl: 27px;
+@media (min-width: 721px) and (max-width: 1248px) {
+  .cover-img {
+    background: url("../images/cover/cover-1248px-95pct.webp") 50% 27.52%/cover;
   }
 }
 
-@media (max-width: 840px) { /* Hide phone, whatsapp text, etc. */
-  .hide-sm {
-    display: none !important;
-  }
-
-  nav {
-    margin-top: var(--space-m);
+@media (min-width: 1249px) {
+  .cover-img {
+    background: url("../images/cover/cover-1324px-95pct.webp") 50%/cover;
   }
 }
 
@@ -516,25 +526,75 @@ nav a {
     min-height: 0;
   }
 
-  .cover-img-sm {
+  .cover-img-sm-scr {
     height: 420px;
-    background: url("../images/cover-840px-height.webp") -62px 0/cover;
+    background: url("../images/cover/cover-840px-height.webp") -62px 0/cover;
   }
 
-  .cover-text {
+  .cover-content {
     width: 100%;
+    padding: var(--space-xl) 0 0;
   }
 
-  .cover-buttons .btn {
-    box-shadow: var(--box-shadow-s) var(--color-gray-shadow);
-  }
-
-  .cover-buttons .btn:hover {
-    box-shadow: var(--box-shadow-s) var(--color-gray-shadow-light);
+  .cover-tag {
+    position: static;
+    height: 1px;
+    transform: rotate(5deg);
+    vertical-align: sub;
   }
 }
 
-@media (max-width: 640px) { /* Hide header button etc. */
+/*******************************************************************************
+* Header *
+*******************************************************************************/
+
+.header {
+  display: flex;
+  align-items: center;
+  padding-top: var(--space-xl);
+}
+
+.header-nav-and-contacts {
+  min-width: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-contacts {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.header-contacts > * + * {
+  margin-left: var(--space-xxl);
+}
+
+.header .btn {
+  font-size: var(--text-s);
+}
+
+.header .nav {
+  margin-top: var(--space-s);
+  margin-left: var(--space-m);
+}
+
+@media (max-width: 840px) {
+  .header-contacts .whatsapp-text {
+    display: none;
+  }
+
+  .header-contacts .phone-text {
+    display: none;
+  }
+
+  .header .nav {
+    margin-top: var(--space-m);
+  }
+}
+
+@media (max-width: 640px) {
   .header-contacts .btn {
     display: none;
   }
@@ -543,72 +603,326 @@ nav a {
     margin-left: var(--space-xl);
   }
 
-  nav {
+  .header .nav {
     margin-top: var(--space-l);
   }
 }
 
-@media (max-width: 480px) { /* Show mobile menu */
-  .hide-x-sm {
-    display: none !important;
-  }
-
+@media (max-width: 480px) { /* Mobile menu */
   .header-nav-and-contacts {
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
   }
 
+  .header .nav {
+    margin-top: 0;
+  }
+
   .header-contacts > * + *,
-  nav {
+  .header .nav {
     margin-left: var(--space-xl);
   }
 
-  .header-logo img {
+  .header .logo-img {
     height: calc(4 * var(--text-s));
   }
+}
 
-  nav {
-    margin-top: 0;
+@media (max-width: 400px) {
+  .header-contacts .whatsapp {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .header .logo-text {
+    display: none;
+  }
+}
+
+/*******************************************************************************
+* Navigation *
+*******************************************************************************/
+
+.nav {
+  display: flex;
+  font-size: var(--text-xs);
+  position: relative;
+  left: var(--space-m);
+}
+
+.nav-no-javascript {
+  overflow-x: auto;
+}
+
+.nav-item,
+.nav-more {
+  padding: 0 var(--space-m);
+}
+
+.nav > *:first-child {
+  margin-left: auto;
+}
+
+.nav-item,
+.nav-more,
+.nav-item-dropdown {
+  font-weight: 600;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.nav-more-and-dropdown {
+  display: none;
+}
+
+.nav-more {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity var(--trans-time) var(--trans-func);
+}
+
+.nav-more-icon {
+  fill: var(--color-red);
+  height: var(--space-s);
+  margin-left: var(--space-s);
+  transition: transform var(--trans-time) var(--trans-func);
+}
+
+.nav-dropdown-hoverable {
+  position: absolute;
+  z-index: 9; /* Dropdown should be on top of any other elements */
+  right: var(--space-m);
+  top: 100%;
+  padding-top: var(--space-l);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--trans-time) var(--trans-func),
+    visibility var(--trans-time) var(--trans-func);
+}
+
+.nav-dropdown {
+  position: relative;
+  padding: var(--space-l) 0;
+  border-radius: var(--space-s);
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-s) var(--color-shadow);
+}
+
+.nav-dropdown-tr {
+  --space-top: var(--space-s);
+  --space-lr: var(--space-s);
+  --base: var(--space-xl);
+  position: absolute;
+  bottom: 100%;
+  right: calc(var(--space-xxl) - var(--space-lr));
+}
+
+.nav-dropdown-tr .tr-shape {
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-s) var(--color-shadow);
+}
+
+.nav-item-dropdown {
+  display: block;
+  text-align: right;
+  padding: var(--space-m) var(--space-xxl);
+}
+
+.nav-mobile,
+.nav-contacts {
+  display: none;
+}
+
+@media (max-width: 640px) { /* Show contacts in dropdown */
+  .nav-contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    white-space: nowrap;
+  }
+
+  .nav-contacts > * {
+    margin: var(--space-m) var(--space-xxl);
+  }
+
+  .nav-contacts .line-separator {
+    align-self: stretch;
+  }
+
+  .nav-contacts .phone-icon {
+    height: var(--text-l);
+  }
+
+  .nav-contacts .phone-number {
+    margin-left: var(--space-s);
+  }
+}
+
+@media (max-width: 480px) { /* Show mobile menu */
+  .nav {
+    left: 0;
   }
 
   .nav-no-javascript {
     overflow: visible;
   }
 
-  nav > * + * {
-    margin-left: 0;
-  }
-
   .nav-more-and-dropdown {
     display: block;
   }
 
-  .nav-dropdown-hover {
-    padding-top: var(--space-xl);
+  .nav-item,
+  .nav-more {
+    display: none;
   }
 
-  .nav-more-and-dropdown:hover .nav-mobile-icon {
-    fill: var(--color-primary-light);
+  .nav-dropdown-hoverable {
+    right: 0;
+    padding-top: var(--space-xl);
   }
 
   .nav-mobile {
     display: block;
+    position: relative;
+  }
+
+  .nav-mobile-icon,
+  .nav-close-icon {
+    height: var(--text-xxl);
+    transition: opacity var(--trans-time) var(--trans-func);
   }
 
   .nav-mobile-icon {
-    height: var(--text-xxl);
+    fill: var(--color-red);
+  }
+
+  .nav-close-icon {
+    fill: var(--color-red);
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
   }
 }
 
-@media (max-width: 400px) { /* Hide whatsapp icon */
-  .hide-xx-sm {
-    display: none !important;
+/*******************************************************************************
+* About us *
+*******************************************************************************/
+
+.about-us-text {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  margin-top: calc(0px - var(--space-xl));
+  margin-left: calc(0px - var(--space-3xl));
+}
+
+.about-us-text > * {
+  margin-top: var(--space-xl);
+  margin-left: var(--space-3xl);
+}
+
+.about-us-main-content {
+  flex: 9 1 380px;
+}
+
+.about-us-main-content > * + * {
+  margin-top: var(--space-m);
+}
+
+.about-us-side-content {
+  flex: 1 1 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-radius: var(--space-s);
+  padding: var(--space-xl) var(--space-l);
+  border: 1px solid var(--color-platinum-dark);
+}
+
+.about-us-side-content > * + * {
+  margin-top: var(--space-m);
+}
+
+.about-us-side-content-heading {
+  color: var(--color-red);
+}
+
+.about-us-side-content-paragraph {
+  font-size: var(--text-s);
+}
+
+.about-us-cards {
+  margin-top: var(--space-xxl);
+}
+
+/*******************************************************************************
+* Cards *
+*******************************************************************************/
+
+.cards {
+  display: grid;
+  gap: var(--space-xxl);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  /* Or "min(280px, 100%)" instead of a media query */
+}
+
+.cards-card {
+  background-color: var(--color-platinum);
+  border-radius: var(--space-s);
+  overflow: hidden;
+  padding-bottom: var(--space-xl);
+  box-shadow: var(--shadow-s) var(--color-shadow);
+}
+
+.cards-card > *:not(.cards-image) {
+  margin-top: var(--space-l);
+  padding: 0 var(--space-xl);
+}
+
+.cards-image {
+  width: 100%;
+  height: auto;
+}
+
+.cards-paragraph {
+  font-size: var(--text-s);
+}
+
+@media (max-width: 400px) {
+  .cards {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 360px) { /* Hide company name */
-  .hide-xxx-sm {
-    display: none !important;
-  }
+/*******************************************************************************
+* 404 page *
+*******************************************************************************/
+
+.not-found-page {
+  height: 100vh;
+  background-color: var(--color-platinum);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.not-found-page-logo {
+  height: calc(4 * var(--text-xxl));
+  width: auto;
+}
+
+.not-found-page-heading {
+  margin-top: var(--space-m);
+}
+
+.not-found-page .btn {
+  margin-top: var(--space-l);
+  font-size: var(--text-s);
 }
