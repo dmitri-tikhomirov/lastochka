@@ -51,18 +51,18 @@ document.addEventListener('click', (event) => {
   if (dropdownJustOpenedByMouseEnter) {
     return;
   }
-  // Add hover effects on tap
+  // Open dropdown on tap
   if (!dropdownOpened && navMoreAndDropdown.contains(event.target)) {
     openDropdown();
     return;
   }
-  // Remove hover effects on outside tap
+  // Close dropdown on outside tap
   if (dropdownOpened) {
     if (!navDropdownHoverable.contains(event.target)) {
       closeDropdown();
       return;
     } else {
-      // Remove hover effects on tapping or clicking a link
+      // Close dropdown on tapping or clicking an inside link
       const navDropdownLinks = document.querySelectorAll('.nav-dropdown a');
       navDropdownLinks.forEach((element) => {
         if (element.contains(event.target)) {
@@ -81,7 +81,6 @@ document.addEventListener('click', (event) => {
 // Remove CSS fallback used if no JavaScript is available
 document.querySelector('.nav').classList.remove('nav-no-javascript');
 
-// Hide nav and dropdown items
 const navItems = document.querySelectorAll('.nav-item');
 const navDropdownItems = document.querySelectorAll('.nav-item-dropdown');
 
@@ -97,13 +96,13 @@ const navAdapt = () => {
 
   navMoreAndDropdown.style.display = 'block';
 
-  // Hide nav items that don't fit
   const navWidth = document.querySelector('.nav').offsetWidth;
   let navMoreWidth = navMoreAndDropdown.offsetWidth;
   let stopWidth = navMoreWidth;
   let navHiddenItems = [];
   let stopReached = false;
 
+  // Hide nav items that don't fit
   navItems.forEach((item, index, array) => {
     if (stopReached === false) {
       // Try to fit the last item without "more"
@@ -138,3 +137,27 @@ const navAdapt = () => {
 navAdapt();
 // Adapt on window resize
 window.addEventListener('resize', navAdapt);
+
+/*******************************************************************************
+* Lazy loading images *
+*******************************************************************************/
+
+const observer = new IntersectionObserver(lazyLoad, {
+  rootMargin: '250px',
+  threshold: 0
+});
+
+// Observe each image
+document.querySelectorAll('.lazy').forEach((element) => {
+  observer.observe(element);
+});
+
+// Change the "src" and stop observing
+function lazyLoad(entries, observer) {
+  entries.forEach((entry) => {
+    if (entry.intersectionRatio > 0) {
+      entry.target.src = entry.target.dataset.src;
+      observer.unobserve(entry.target);
+    }
+  });
+};

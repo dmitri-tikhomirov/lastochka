@@ -1,283 +1,260 @@
 <!DOCTYPE html>
 <html lang="ru-RU">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <base href="">
-  <link rel="icon" href="icons/favicon-48x48.png">
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon-180x180.png">
-  <link rel="manifest" href="manifest.json">
-  <meta name="author" content="Dmitri Tikhomirov">
-  <meta name="description" content="Сеть пансионатов для пожилых людей
-    (частных домов престарелых) в Краснодаре. Пансионаты для лежачих.
-    Качественный уход за пожилыми людьми.">
-  <title>Сеть пансионатов «Ласточка»</title>
-  <script src="scripts/main.js" defer></script>
-  <!--
-  <link rel="preload" href="../fonts/open-sans-normal.woff2" as="font">
-  <link rel="preload" href="../fonts/open-sans-600.woff2" as="font">
-  <link rel="preload" href="../fonts/open-sans-bold.woff2" as="font">
-  <link rel="preload" href="../fonts/alegreya-sc-500.woff2" as="font">
-  <link
-    rel="preload"
-    href="../images/cover/cover-840px-height.webp"
-    as="image"
-    media="(max-width: 720px)">
-  <link
-    rel="preload"
-    href="../images/cover/cover-1248px-95pct.webp"
-    as="image"
-    media="(min-width: 721px) and (max-width: 1248px)">
-  <link
-    rel="preload"
-    href="../images/cover/cover-1324px-95pct.webp"
-    as="image"
-    media="(min-width: 1249px)">
-  -->
-  <link rel="stylesheet" href="css/main.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="">
+<link rel="icon" href="icons/favicon-48x48.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon-180x180.png">
+<link rel="manifest" href="manifest.json">
+<meta name="author" content="Dmitri Tikhomirov">
+<meta name="description" content="Сеть пансионатов для пожилых людей (частных
+  домов престарелых) в Краснодаре. Пансионаты для лежачих. Качественный уход
+  за пожилыми людьми.">
+<title>Сеть пансионатов «Ласточка»</title>
+<link rel="preload" href="fonts/open-sans-normal.woff2" as="font" crossorigin>
+<link rel="preload" href="fonts/open-sans-600.woff2" as="font" crossorigin>
+<link rel="preload" href="fonts/open-sans-bold.woff2" as="font" crossorigin>
+<link rel="preload" href="fonts/alegreya-sc-500.woff2" as="font" crossorigin>
+<link rel="preload" href="images/cover/cover-small-75.jpg" as="image"
+  media="(max-width: 720px)">
+<link rel="preload" href="images/cover/cover-medium-80.jpg" as="image"
+  media="(min-width: 721px) and (max-width: 1248px)">
+<link rel="preload" href="images/cover/cover-big-92.jpg" as="image"
+  media="(min-width: 1249px)">
+<script src="scripts/main.js" defer></script>
+<link rel="stylesheet" href="css/main.css">
 </head>
-<body>
-  <div class="cover">
-    <div class="cover-img">
-      <div class="cover-img-sm-scr">
-        <header class="header container">
-          <div class="logo">
-            <a href="#">
-              <img
-                src="icons/logo.svg" alt="Логотип сети пансионатов"
-                width="1" height="1"
-                class="logo-img">
-            </a>
-            <p class="logo-text">
-              Сеть&nbsp;пансионатов<br>
-              «Ласточка»
-            </p>
-          </div>
 
-          <div class="header-nav-and-contacts">
-            <div class="header-contacts">
-              <a href="https://wa.me/79186522334" class="whatsapp">
-                <svg class="whatsapp-icon" viewBox="0 0 448 448">
-                  <use href="icons/sprite.svg#whatsapp"/>
+<body>
+<div class="cover">
+  <div class="cover-img">
+    <div class="cover-img-sm-scr">
+      <header class="header container">
+        <div class="logo">
+          <a href="#" class="logo-img-link">
+            <img src="icons/logo.svg" alt="Логотип сети пансионатов" width="1"
+              height="1" class="logo-img">
+          </a>
+          <p class="logo-text">Сеть&nbsp;пансионатов<br>«Ласточка»</p>
+        </div>
+
+        <div class="header-nav-and-contacts">
+          <div class="header-contacts">
+            <a href="https://wa.me/79186522334" class="whatsapp">
+              <svg viewBox="0 0 448 448" class="whatsapp-icon">
+                <use href="icons/sprite.svg#whatsapp"/>
+              </svg>
+              <p class="whatsapp-text">Whatsapp</p>
+            </a>
+
+            <div class="phone">
+              <a href="tel:+79186522334" class="phone-icon-link">
+                <svg viewBox="0 0 511.9921875 511.9921875" class="phone-icon">
+                  <use href="icons/sprite.svg#phone"/>
                 </svg>
-                <p class="whatsapp-text">Whatsapp</p>
               </a>
-              <div class="phone">
-                <a href="tel:+79186522334" class="phone-icon-link">
-                  <svg
-                    class="phone-icon"
-                    viewBox="0 0 511.9921875 511.9921875">
-                      <use href="icons/sprite.svg#phone"/>
-                  </svg>
+              <div class="phone-text">
+                <a href="tel:+79186522334" class="phone-number">
+                  +7 918 652-23-34
                 </a>
-                <div class="phone-text">
-                  <a href="tel:+79186522334" class="phone-number">
-                    +7 918 652-23-34
-                  </a>
-                  <p class="phone-hours">Ежедневно с 9:00 до 22:00</p>
-                </div>
+                <p class="phone-hours">Ежедневно с 9:00 до 22:00</p>
               </div>
-              <a href="#" class="btn">Перезвоните мне</a>
             </div>
 
-            <nav class="nav nav-no-javascript">
-              <a href="#" class="nav-item">О нас</a>
-              <a href="#" class="nav-item">Фото</a>
-              <a href="#" class="nav-item">Показания</a>
-              <a href="#" class="nav-item">Противопоказания</a>
-              <a href="#" class="nav-item">Вопросы и ответы</a>
-              <a href="#" class="nav-item">Контакты</a>
-              <div class="nav-more-and-dropdown">
-                <div class="nav-more">
-                  <p>Еще</p>
-                  <svg
-                    class="nav-more-icon"
-                    viewBox="0 0 297.30859375 168.65234375">
-                      <use href="icons/sprite.svg#caret-down"/>
-                  </svg>
-                </div>
-                <div class="nav-mobile">
-                  <svg class="nav-mobile-icon" viewBox="0 0 448 392">
-                    <use href="icons/sprite.svg#bars"/>
-                  </svg>
-                  <svg class="nav-close-icon" viewBox="0 0 352 352">
-                    <use href="icons/sprite.svg#times"/>
-                  </svg>
-                </div>
-                <div class="nav-dropdown-hoverable">
-                  <div class="nav-dropdown">
-                    <div class="nav-dropdown-tr tr tr-up">
-                      <div class="tr-shape"></div>
-                    </div>
-                    <a href="#" class="nav-item-dropdown">О нас</a>
-                    <a href="#" class="nav-item-dropdown">Фото</a>
-                    <a href="#" class="nav-item-dropdown">Показания</a>
-                    <a href="#" class="nav-item-dropdown">Противопоказания</a>
-                    <a href="#" class="nav-item-dropdown">Вопросы и ответы</a>
-                    <a href="#" class="nav-item-dropdown">Контакты</a>
-                    <div class="nav-contacts">
-                      <div class="line-separator"></div>
-                      <div class="phone">
-                        <a href="tel:+79186522334" class="phone-icon-link">
-                          <svg
-                            class="phone-icon"
-                            viewBox="0 0 511.9921875 511.9921875">
-                              <use href="icons/sprite.svg#phone"/>
-                          </svg>
-                        </a>
-                        <a href="tel:+79186522334" class="phone-number">
-                          +7 918 652-23-34
-                        </a>
-                      </div>
-                      <a href="https://wa.me/79186522334" class="whatsapp">
-                        <svg class="whatsapp-icon" viewBox="0 0 448 448">
-                          <use href="icons/sprite.svg#whatsapp"/>
+            <a href="#" class="btn">Перезвоните мне</a>
+          </div>
+
+          <nav class="nav nav-no-javascript">
+            <a href="#" class="nav-item">О нас</a>
+            <a href="#" class="nav-item">Фото</a>
+            <a href="#" class="nav-item">Показания</a>
+            <a href="#" class="nav-item">Противопоказания</a>
+            <a href="#" class="nav-item">Вопросы и ответы</a>
+            <a href="#" class="nav-item">Контакты</a>
+
+            <div class="nav-more-and-dropdown">
+              <div class="nav-more">
+                <p>Еще</p>
+                <svg viewBox="0 0 297.30859375 168.65234375"
+                    class="nav-more-icon">
+                  <use href="icons/sprite.svg#caret-down"/>
+                </svg>
+              </div>
+
+              <div class="nav-mobile">
+                <svg viewBox="0 0 448 392" class="nav-mobile-icon">
+                  <use href="icons/sprite.svg#bars"/>
+                </svg>
+                <svg viewBox="0 0 352 352" class="nav-close-icon">
+                  <use href="icons/sprite.svg#times"/>
+                </svg>
+              </div>
+
+              <div class="nav-dropdown-hoverable">
+                <div class="nav-dropdown">
+                  <div class="nav-dropdown-tr tr tr-up">
+                    <div class="tr-shape"></div>
+                  </div>
+
+                  <a href="#" class="nav-item-dropdown">О нас</a>
+                  <a href="#" class="nav-item-dropdown">Фото</a>
+                  <a href="#" class="nav-item-dropdown">Показания</a>
+                  <a href="#" class="nav-item-dropdown">Противопоказания</a>
+                  <a href="#" class="nav-item-dropdown">Вопросы и ответы</a>
+                  <a href="#" class="nav-item-dropdown">Контакты</a>
+
+                  <div class="nav-contacts">
+                    <div class="nav-line-separator"></div>
+
+                    <div class="phone">
+                      <a href="tel:+79186522334" class="phone-icon-link">
+                        <svg viewBox="0 0 511.9921875 511.9921875"
+                            class="phone-icon">
+                          <use href="icons/sprite.svg#phone"/>
                         </svg>
-                        <p class="whatsapp-text">Whatsapp</p>
                       </a>
-                      <a href="#" class="btn">Перезвоните мне</a>
+                      <a href="tel:+79186522334" class="phone-number">
+                        +7 918 652-23-34
+                      </a>
                     </div>
+
+                    <a href="https://wa.me/79186522334" class="whatsapp">
+                      <svg viewBox="0 0 448 448" class="whatsapp-icon">
+                        <use href="icons/sprite.svg#whatsapp"/>
+                      </svg>
+                      <p class="whatsapp-text">Whatsapp</p>
+                    </a>
+
+                    <a href="#" class="btn">Перезвоните мне</a>
                   </div>
                 </div>
               </div>
-            </nav>
-          </div>
-        </header>
-      </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+    </div>
 
-      <div class="cover-content-wrapper container">
-        <div class="cover-content">
-          <div>
-            <h1>
-              Сеть пансионатов для пожилых людей «Ласточка» открыла в
-              Краснодаре новый пансионат
-            </h1>
-            <div class="cover-tag tag">
-              <div class="tag-tr-on-top tr tr-left">
-                <div class="tr-shape"></div>
-              </div>
-              <div class="tag-tr-below tr tr-left">
-                <div class="tr-shape"></div>
-              </div>
-              <p class="tag-content">От 1200 р. за сутки</p>
+    <div class="cover-content-wrapper container">
+      <div class="cover-content">
+        <div>
+          <h1>Сеть пансионатов для пожилых людей «Ласточка» открыла в Краснодаре
+            новый пансионат</h1>
+          <div class="cover-tag tag">
+            <div class="tag-tr-on-top tr tr-left">
+              <div class="tr-shape"></div>
             </div>
+            <div class="tag-tr-below tr tr-left">
+              <div class="tr-shape"></div>
+            </div>
+            <p class="tag-content">От 1200 р. за сутки</p>
           </div>
-          <p>
-            Наш пансионат  готов создать условия полноценной изоляции и
-            защитить самую уязвленную группу населения, при этом их проживание
-            будет скрашено повышенным комфортом.
-          </p>
-          <div class="cover-buttons-wrapper">
-            <div class="cover-buttons">
-              <a href="#" class="btn btn-lg">Наши меры против вируса</a>
-              <a href="#" class="btn btn-lg btn-filled">Заказать звонок</a>
-            </div>
+        </div>
+
+        <p>Наш пансионат  готов создать условия полноценной изоляции и защитить
+          самую уязвленную группу населения, при этом их проживание будет
+          скрашено повышенным комфортом.</p>
+
+        <div class="cover-buttons-wrapper">
+          <div class="cover-buttons">
+            <a href="#" class="btn btn-lg">Наши меры против вируса</a>
+            <a href="#" class="btn btn-lg btn-filled">Заказать звонок</a>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <section class="about-us container section">
-    <h2 class="section-heading">О нас</h2>
-    <div class="about-us-text-wrapper">
-      <div class="about-us-text">
-        <div class="about-us-main-content">
-          <p>
-            Мы одними из первых открыли пансионаты для пожилых людей (дома
-            престарелых) в Краснодаре и постоянно улучшаем наши услуги
-            используя накопленный опыт.
-          </p>
-          <p>
-            Пансионаты для лежачих больных оборудованы многофункциональными
-            медицинскими кроватями.
-          </p>
-          <p>
-            Для активных пожилых людей у нас есть большой бассейн и настольный
-            теннис.
-          </p>
-          <p>
-            Мы предоставляем качественный уход за пожилыми людьми, поможем
-            пенсионерам в бытовых делах и избавим от одиночества.
-          </p>
-        </div>
-        <aside class="about-us-side-content">
-          <h3 class="about-us-side-content-heading">Новая услуга</h3>
-          <p class="about-us-side-content-paragraph">
-            Сформированы группы дневного пребывания или «детский сад для
-            пожилых». Утром привозите, вечером забираете.
-          </p>
-        </aside>
+<section class="about-us container section">
+  <h2 class="section-heading">О нас</h2>
+  <div class="about-us-text-wrapper">
+    <div class="about-us-text">
+      <div class="about-us-main-content">
+        <p>Мы одними из первых открыли пансионаты для пожилых людей (дома
+          престарелых) в Краснодаре и постоянно улучшаем наши услуги используя
+          накопленный опыт.</p>
+        <p>Пансионаты для лежачих больных оборудованы многофункциональными
+          медицинскими кроватями.</p>
+        <p>Для активных пожилых людей у нас есть большой бассейн и настольный
+          теннис.</p>
+        <p>Мы предоставляем качественный уход за пожилыми людьми, поможем
+          пенсионерам в бытовых делах и избавим от одиночества.</p>
       </div>
+
+      <aside class="about-us-side-content">
+        <h3 class="about-us-side-content-heading">Новая услуга</h3>
+        <p class="about-us-side-content-paragraph">Сформированы группы дневного
+          пребывания или «детский сад для пожилых». Утром привозите, вечером
+          забираете.</p>
+      </aside>
+    </div>
+  </div>
+
+  <div class="about-us-cards cards">
+    <div class="cards-card">
+      <img data-src="images/cards/pitaniye.jpg"
+        src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox%3D'0 0 3 2'%2F%3E"
+        alt="Шикарное питание"
+        class="cards-image lazy">
+      <h3>Пятиразовое питание</h3>
+      <p class="cards-paragraph">Специальные программы питания в зависимости от
+        состояния здоровья.</p>
     </div>
 
-    <div class="about-us-cards cards">
-      <div class="cards-card">
-        <img
-          src="images/cards/pitaniye.webp" alt="Шикарное питание"
-          width="3" height="2"
-          class="cards-image">
-        <h3>Пятиразовое питание</h3>
-        <p class="cards-paragraph">
-          Специальные программы питания в зависимости от состояния здоровья.
-        </p>
-      </div>
-      <div class="cards-card">
-        <img
-          src="images/cards/nomera.webp" alt="Номера"
-          width="3" height="2"
-          class="cards-image">
-        <h3>Комфортные номера</h3>
-        <p class="cards-paragraph">
-          Оборудованные всем необходимым, включая телевизоры и Wi-Fi.
-        </p>
-      </div>
-      <div class="cards-card">
-        <img
-          src="images/cards/sidelki.webp" alt="Сиделки"
-          width="3" height="2"
-          class="cards-image">
-        <h3>Квалифицированные сиделки</h3>
-        <p class="cards-paragraph">
-          Уход сиделок включен в стоимость пребывания. Контроль приема
-          лекарств, прописанных врачом.
-        </p>
-      </div>
-      <div class="cards-card">
-        <img
-          src="images/cards/ukhod.webp" alt="Уход за пожилыми"
-          width="3" height="2"
-          class="cards-image">
-        <h3>Помощь в гигиенических процедурах и одевании</h3>
-        <p class="cards-paragraph">
-          Все гигиенические процедуры в полном объеме, включая стирку, глажку
-          постельного белья и личных вещей, помощь в мытье, стрижку.
-        </p>
-      </div>
-      <div class="cards-card">
-        <img
-          src="images/cards/vrach.webp" alt="Врач в штате"
-          width="3" height="2"
-          class="cards-image">
-        <h3>Осмотры врача</h3>
-        <p class="cards-paragraph">
-          Регулярные осмотры у врача и ежедневный мониторинг состояния
-          здоровья постояльцев.
-        </p>
-      </div>
-      <div class="cards-card">
-        <img
-          src="images/cards/dlya-lezhachikh.webp"
-          alt="Кровати для лежачих больных"
-          width="3" height="2"
-          class="cards-image">
-        <h3>Полное обеспечение для лежачих больных</h3>
-        <p class="cards-paragraph">
-          Противопролежневые матрацы, многофункциональные медицинские кровати,
-          специализированные помещения для приема гигиенических процедур.
-        </p>
-      </div>
+    <div class="cards-card">
+      <img data-src="images/cards/nomera.jpg"
+        src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox%3D'0 0 3 2'%2F%3E"
+        alt="Номера"
+        class="cards-image lazy">
+      <h3>Комфортные номера</h3>
+      <p class="cards-paragraph">Оборудованные всем необходимым, включая
+        телевизоры и Wi-Fi.</p>
     </div>
-  </section>
+
+    <div class="cards-card">
+      <img data-src="images/cards/sidelki.jpg"
+        src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox%3D'0 0 3 2'%2F%3E"
+        alt="Сиделки"
+        class="cards-image lazy">
+      <h3>Квалифицированные сиделки</h3>
+      <p class="cards-paragraph">Уход сиделок включен в стоимость пребывания.
+        Контроль приема лекарств, прописанных врачом.</p>
+    </div>
+
+    <div class="cards-card">
+      <img data-src="images/cards/ukhod.jpg"
+        src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox%3D'0 0 3 2'%2F%3E"
+        alt="Уход за пожилыми"
+        class="cards-image lazy">
+      <h3>Помощь в гигиенических процедурах и одевании</h3>
+      <p class="cards-paragraph">Все гигиенические процедуры в полном объеме,
+        включая стирку, глажку постельного белья и личных вещей, помощь в мытье,
+        стрижку.</p>
+    </div>
+
+    <div class="cards-card">
+      <img data-src="images/cards/vrach.jpg"
+        src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox%3D'0 0 3 2'%2F%3E"
+        alt="Врач в штате"
+        class="cards-image lazy">
+      <h3>Осмотры врача</h3>
+      <p class="cards-paragraph">Регулярные осмотры у врача и ежедневный
+        мониторинг состояния здоровья постояльцев.</p>
+    </div>
+
+    <div class="cards-card">
+      <img data-src="images/cards/dlya-lezhachikh.jpg"
+        src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox%3D'0 0 3 2'%2F%3E"
+        alt="Кровати для лежачих больных"
+        class="cards-image lazy">
+      <h3>Полное обеспечение для лежачих больных</h3>
+      <p class="cards-paragraph">Противопролежневые матрацы, многофункциональные
+        медицинские кровати, специализированные помещения для приема
+        гигиенических процедур.</p>
+    </div>
+  </div>
+</section>
 </body>
 </html>

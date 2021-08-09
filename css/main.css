@@ -39,15 +39,15 @@
 *******************************************************************************/
 
 :root {
-  --color-red:           hsl(4, 77%, 58%); /* #e64c41, orig #e64e43 */
-  --color-platinum:      hsl(72, 11%, 91%); /* #eaebe6, orig #e9eae4 */
-  --color-platinum-dark: hsl(72, 11%, 65%);
+  --color-red:           #e64e43; /* hsl(4, 77%, 58%) */
+  --color-platinum:      #e9eae4; /* hsl(70, 13%, 91%) */
+  --color-platinum-dark: hsl(70, 13%, 65%);
   --color-white:         hsl(0, 0%, 100%);
   --color-black:         hsl(0, 0%, 10%);
 
-  --color-shadow:       hsla(0, 0%, 0%, 0.3);
-  --color-shadow-light: hsla(0, 0%, 0%, 0.2);
-  --color-shadow-dark:  hsla(0, 0%, 0%, 0.6);
+  --color-shadow:       rgba(0, 0, 0, 0.3);
+  --color-shadow-light: rgba(0, 0, 0, 0.2);
+  --color-shadow-dark:  rgba(0, 0, 0, 0.6);
 
   --opacity-s: 0.65;
   --opacity-m: 0.55;
@@ -186,10 +186,6 @@ img, svg {
   display: none !important;
 }
 
-.line-separator {
-  border-top: 1px solid var(--color-platinum-dark);
-}
-
 .btn {
   padding: var(--space-s) var(--space-l);
   border: 1px solid var(--color-red);
@@ -199,6 +195,12 @@ img, svg {
   display: inline-block;
   text-align: center; /* In case there are several lines of text */
   transition: opacity var(--trans-time) var(--trans-func);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    opacity: var(--opacity-l);
+  }
 }
 
 .btn-lg {
@@ -212,10 +214,6 @@ img, svg {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .btn:hover {
-    opacity: var(--opacity-l);
-  }
-
   .btn-filled:hover {
     opacity: var(--opacity-s);
   }
@@ -228,6 +226,16 @@ img, svg {
 .logo {
   display: inline-flex;
   align-items: center;
+}
+
+.logo-img-link {
+  transition: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .logo-img-link:hover {
+    opacity: 1;
+  }
 }
 
 .logo-img {
@@ -246,6 +254,12 @@ img, svg {
   transition: none;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .whatsapp:hover {
+    opacity: 1;
+  }
+}
+
 .whatsapp-icon {
   fill: var(--color-black);
   height: var(--text-l);
@@ -253,10 +267,6 @@ img, svg {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .whatsapp:hover {
-    opacity: 1;
-  }
-
   .whatsapp:hover .whatsapp-icon {
     opacity: var(--opacity-l);
   }
@@ -465,12 +475,41 @@ img, svg {
   background-color: var(--color-platinum);
 }
 
+@media (max-width: /*breakpoint*/720px) {
+  .cover {
+    background-color: transparent;
+  }
+}
+
 .cover-img {
   max-width: 1324px;
   min-height: 690px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+}
+
+@media (min-width: 1249px) {
+  .cover-img {
+    background: url("../images/cover/cover-big-92.jpg") 50%/cover;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1248px) {
+  .cover-img {
+    background: url("../images/cover/cover-medium-80.jpg") 50% 25.7%/cover;
+  }
+}
+
+@media (max-width: /*breakpoint*/720px) {
+  .cover-img {
+    min-height: 0;
+  }
+
+  .cover-img-sm-scr {
+    height: 408px;
+    background: url("../images/cover/cover-small-75.jpg") 0 0/cover;
+  }
 }
 
 .cover-content-wrapper {
@@ -484,14 +523,30 @@ img, svg {
   padding: var(--space-3xl) 0;
 }
 
+@media (max-width: /*breakpoint*/720px) {
+  .cover-content {
+    width: 100%;
+    padding: var(--space-xl) 0 0;
+  }
+}
+
+.cover-content > * + * {
+  margin-top: var(--space-xxl);
+}
+
 .cover-tag {
   position: absolute;
   transform: translatey(10%) rotate(7deg);
   transform-origin: 0 100%;
 }
 
-.cover-content > * + * {
-  margin-top: var(--space-xxl);
+@media (max-width: /*breakpoint*/720px) {
+  .cover-tag {
+    position: static;
+    height: 1px;
+    transform: rotate(5deg);
+    vertical-align: sub;
+  }
 }
 
 .cover-buttons {
@@ -505,45 +560,6 @@ img, svg {
   margin: var(--space-m) var(--space-l);
 }
 
-@media (min-width: 721px) and (max-width: 1248px) {
-  .cover-img {
-    background: url("../images/cover/cover-1248px-95pct.webp") 50% 27.52%/cover;
-  }
-}
-
-@media (min-width: 1249px) {
-  .cover-img {
-    background: url("../images/cover/cover-1324px-95pct.webp") 50%/cover;
-  }
-}
-
-@media (max-width: 720px) { /* Stack cover image and text */
-  .cover {
-    background-color: transparent;
-  }
-
-  .cover-img {
-    min-height: 0;
-  }
-
-  .cover-img-sm-scr {
-    height: 420px;
-    background: url("../images/cover/cover-840px-height.webp") -62px 0/cover;
-  }
-
-  .cover-content {
-    width: 100%;
-    padding: var(--space-xl) 0 0;
-  }
-
-  .cover-tag {
-    position: static;
-    height: 1px;
-    transform: rotate(5deg);
-    vertical-align: sub;
-  }
-}
-
 /*******************************************************************************
 * Header *
 *******************************************************************************/
@@ -554,11 +570,31 @@ img, svg {
   padding-top: var(--space-xl);
 }
 
+@media (max-width: /*breakpoint*/480px) {
+  .header .logo-img {
+    height: calc(4 * var(--text-s));
+  }
+}
+
+@media (max-width: 360px) {
+  .header .logo-text {
+    display: none;
+  }
+}
+
 .header-nav-and-contacts {
   min-width: 0;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: /*breakpoint*/480px) {
+  .header-nav-and-contacts {
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
 }
 
 .header-contacts {
@@ -571,61 +607,16 @@ img, svg {
   margin-left: var(--space-xxl);
 }
 
-.header .btn {
-  font-size: var(--text-s);
-}
-
-.header .nav {
-  margin-top: var(--space-s);
-  margin-left: var(--space-m);
-}
-
-@media (max-width: 840px) {
-  .header-contacts .whatsapp-text {
-    display: none;
-  }
-
-  .header-contacts .phone-text {
-    display: none;
-  }
-
-  .header .nav {
-    margin-top: var(--space-m);
-  }
-}
-
-@media (max-width: 640px) {
-  .header-contacts .btn {
-    display: none;
-  }
-
+@media (max-width: /*breakpoint*/640px) {
   .header-contacts > * + * {
     margin-left: var(--space-xl);
   }
-
-  .header .nav {
-    margin-top: var(--space-l);
-  }
 }
 
-@media (max-width: 480px) { /* Mobile menu */
-  .header-nav-and-contacts {
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-  }
-
-  .header .nav {
-    margin-top: 0;
-  }
-
-  .header-contacts > * + *,
-  .header .nav {
-    margin-left: var(--space-xl);
-  }
-
-  .header .logo-img {
-    height: calc(4 * var(--text-s));
+@media (max-width: /*breakpoint*/840px) {
+  .header-contacts .whatsapp-text,
+  .header-contacts .phone-text {
+    display: none;
   }
 }
 
@@ -635,9 +626,37 @@ img, svg {
   }
 }
 
-@media (max-width: 360px) {
-  .header .logo-text {
+.header-contacts .btn {
+  font-size: var(--text-s);
+}
+
+@media (max-width: /*breakpoint*/640px) {
+  .header-contacts .btn {
     display: none;
+  }
+}
+
+.header .nav {
+  margin-top: var(--space-s);
+  margin-left: var(--space-m);
+}
+
+@media (max-width: /*breakpoint*/840px) {
+  .header .nav {
+    margin-top: var(--space-m);
+  }
+}
+
+@media (max-width: /*breakpoint*/640px) {
+  .header .nav {
+    margin-top: var(--space-l);
+  }
+}
+
+@media (max-width: /*breakpoint*/480px) {
+  .header .nav {
+    margin-top: 0;
+    margin-left: var(--space-xl);
   }
 }
 
@@ -652,17 +671,29 @@ img, svg {
   left: var(--space-m);
 }
 
+@media (max-width: /*breakpoint*/480px) {
+  .nav {
+    left: 0;
+  }
+}
+
 .nav-no-javascript {
   overflow-x: auto;
+}
+
+@media (max-width: /*breakpoint*/480px) {
+  .nav-no-javascript {
+    overflow-x: visible;
+  }
+}
+
+.nav > *:first-child {
+  margin-left: auto;
 }
 
 .nav-item,
 .nav-more {
   padding: 0 var(--space-m);
-}
-
-.nav > *:first-child {
-  margin-left: auto;
 }
 
 .nav-item,
@@ -673,8 +704,21 @@ img, svg {
   white-space: nowrap;
 }
 
+@media (max-width: /*breakpoint*/480px) {
+  .nav-item {
+    display: none;
+  }
+}
+
 .nav-more-and-dropdown {
   display: none;
+}
+
+@media (max-width: /*breakpoint*/480px) {
+  .nav-more-and-dropdown {
+    display: block;
+    margin-left: auto;
+  }
 }
 
 .nav-more {
@@ -682,6 +726,12 @@ img, svg {
   align-items: center;
   cursor: pointer;
   transition: opacity var(--trans-time) var(--trans-func);
+}
+
+@media (max-width: /*breakpoint*/480px) {
+  .nav-more {
+    display: none;
+  }
 }
 
 .nav-more-icon {
@@ -702,6 +752,13 @@ img, svg {
   transition:
     opacity var(--trans-time) var(--trans-func),
     visibility var(--trans-time) var(--trans-func);
+}
+
+@media (max-width: /*breakpoint*/480px) {
+  .nav-dropdown-hoverable {
+    right: 0;
+    padding-top: var(--space-xl);
+  }
 }
 
 .nav-dropdown {
@@ -732,59 +789,11 @@ img, svg {
   padding: var(--space-m) var(--space-xxl);
 }
 
-.nav-mobile,
-.nav-contacts {
+.nav-mobile {
   display: none;
 }
 
-@media (max-width: 640px) { /* Show contacts in dropdown */
-  .nav-contacts {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    white-space: nowrap;
-  }
-
-  .nav-contacts > * {
-    margin: var(--space-m) var(--space-xxl);
-  }
-
-  .nav-contacts .line-separator {
-    align-self: stretch;
-  }
-
-  .nav-contacts .phone-icon {
-    height: var(--text-l);
-  }
-
-  .nav-contacts .phone-number {
-    margin-left: var(--space-s);
-  }
-}
-
-@media (max-width: 480px) { /* Show mobile menu */
-  .nav {
-    left: 0;
-  }
-
-  .nav-no-javascript {
-    overflow: visible;
-  }
-
-  .nav-more-and-dropdown {
-    display: block;
-  }
-
-  .nav-item,
-  .nav-more {
-    display: none;
-  }
-
-  .nav-dropdown-hoverable {
-    right: 0;
-    padding-top: var(--space-xl);
-  }
-
+@media (max-width: /*breakpoint*/480px) {
   .nav-mobile {
     display: block;
     position: relative;
@@ -806,6 +815,40 @@ img, svg {
     top: 0;
     right: 0;
     opacity: 0;
+  }
+}
+
+.nav-contacts {
+  display: none;
+}
+
+@media (max-width: /*breakpoint*/640px) {
+  .nav-contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    white-space: nowrap;
+  }
+
+  .nav-contacts > * {
+    margin: var(--space-m) var(--space-xxl);
+  }
+
+  .nav-line-separator {
+    border-top: 1px solid var(--color-platinum-dark);
+    align-self: stretch;
+  }
+
+  .nav-contacts .phone-icon {
+    height: var(--text-l);
+  }
+
+  .nav-contacts .phone-number {
+    margin-left: var(--space-s);
+  }
+
+  .nav-contacts .btn {
+    font-size: var(--text-s);
   }
 }
 

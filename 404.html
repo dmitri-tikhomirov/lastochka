@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html lang="ru-RU">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base href="">
-    <link rel="icon" href="icons/favicon-48x48.png">
-    <link rel="apple-touch-icon" href="icons/apple-touch-icon-180x180.png">
-    <link rel="manifest" href="manifest.json">
-    <meta name="author" content="Dmitri Tikhomirov">
-    <meta name="description" content="Сеть пансионатов «Ласточка» -
-      Запрашиваемая страница не найдена на сайте. Ошибка 404.">
-    <title>Сеть пансионатов «Ласточка» - Страница не найдена</title>
-    <script src="scripts/main.js" defer></script>
-    <link rel="stylesheet" href="css/main.css">
-  </head>
-  <body>
-    <main class="not-found-page">
-      <img
-        src="icons/logo.svg" alt="Логотип сети пансионатов"
-        width="1" height="1"
-        class="not-found-page-logo">
-      <h1 class="not-found-page-heading">Страница не найдена</h1>
-      <a href="index.html" class="btn">Перейти на главную</a>
-    </main>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="">
+<link rel="icon" href="icons/favicon-48x48.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon-180x180.png">
+<link rel="manifest" href="manifest.json">
+<meta name="author" content="Dmitri Tikhomirov">
+<meta name="description" content="Сеть пансионатов «Ласточка» - Запрашиваемая
+  страница не найдена на сайте. Ошибка 404.">
+<title>Сеть пансионатов «Ласточка» - Страница не найдена</title>
+<link rel="preload" href="fonts/open-sans-normal.woff2" as="font" crossorigin>
+<link rel="preload" href="fonts/open-sans-600.woff2" as="font" crossorigin>
+<link rel="preload" href="fonts/open-sans-bold.woff2" as="font" crossorigin>
+<link rel="preload" href="fonts/alegreya-sc-500.woff2" as="font" crossorigin>
+<link rel="preload" href="images/cover/cover-small-75.jpg" as="image"
+  media="(max-width: 720px)">
+<link rel="preload" href="images/cover/cover-medium-80.jpg" as="image"
+  media="(min-width: 721px) and (max-width: 1248px)">
+<link rel="preload" href="images/cover/cover-big-92.jpg" as="image"
+  media="(min-width: 1249px)">
+<script src="scripts/main.js" defer></script>
+<link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+<main class="not-found-page">
+  <img src="icons/logo.svg" alt="Логотип сети пансионатов" width="1" height="1"
+    class="not-found-page-logo">
+  <h1 class="not-found-page-heading">Страница не найдена</h1>
+  <a href="index.html" class="btn">Перейти на главную</a>
+</main>
+</body>
 </html>
