@@ -63,7 +63,8 @@ document.addEventListener('click', (event) => {
       return;
     } else {
       // Close dropdown on tapping or clicking an inside link
-      const navDropdownLinks = document.querySelectorAll('.nav-dropdown a');
+      const navDropdownLinks =
+        document.querySelectorAll('.nav-dropdown *[href]');
       navDropdownLinks.forEach((element) => {
         if (element.contains(event.target)) {
           closeDropdown();

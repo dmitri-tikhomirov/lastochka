@@ -70,9 +70,12 @@
   --text-xl:  28px;
   --text-xxl: 30px;
 
-  --shadow-xxs: 0px calc(var(--space-xxs) / 4) var(--space-xxs);
-  --shadow-xs:  0px calc(var(--space-xs) / 4) var(--space-xs);
-  --shadow-s:   0px calc(var(--space-s) / 4) var(--space-s);
+  --line-height-s: 1.4;
+  --line-height-m: 1.6;
+
+  --shadow-xxs: 0 calc(var(--space-xxs) / 4) var(--space-xxs);
+  --shadow-xs:  0 calc(var(--space-xs) / 4) var(--space-xs);
+  --shadow-s:   0 calc(var(--space-s) / 4) var(--space-s);
 
   --max-website-width: 1248px;
   --website-padding: var(--space-xl);
@@ -117,7 +120,7 @@ html {
 }
 
 body {
-  font: var(--text-m)/1.6 "Open Sans", Verdana, sans-serif;
+  font: var(--text-m)/var(--line-height-m) "Open Sans", Verdana, sans-serif;
   background-color: var(--color-white);
   color: var(--color-black);
 }
@@ -141,7 +144,7 @@ a:focus-visible {
 
 h1, h2, h3 {
   font-weight: bold;
-  line-height: 1.4;
+  line-height: var(--line-height-s);
 }
 
 h1 {
@@ -174,17 +177,34 @@ img, svg {
 
 .section {
   padding-top: var(--space-3xl);
-  padding-bottom: var(--space-xxl);
+  padding-bottom: var(--space-3xl);
 }
 
 .section-heading {
-  padding-bottom: var(--space-xl);
+  padding-bottom: var(--space-xxl);
   text-align: center;
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-xxl);
+  /* Or "min(280px, 100%)" instead of a media query */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+@media (max-width: 400px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .hide {
   display: none !important;
 }
+
+/*******************************************************************************
+* Buttons *
+*******************************************************************************/
 
 .btn {
   padding: var(--space-s) var(--space-l);
@@ -217,98 +237,6 @@ img, svg {
   .btn-filled:hover {
     opacity: var(--opacity-s);
   }
-}
-
-/*******************************************************************************
-* Logo, whatsapp, phone *
-*******************************************************************************/
-
-.logo {
-  display: inline-flex;
-  align-items: center;
-}
-
-.logo-img-link {
-  transition: none;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .logo-img-link:hover {
-    opacity: 1;
-  }
-}
-
-.logo-img {
-  height: calc(5 * var(--text-s));
-  width: auto;
-}
-
-.logo-text {
-  font: 500 var(--text-s)/1.4 "Alegreya SC", Arial, sans-serif;
-  margin-left: var(--space-l);
-}
-
-.whatsapp {
-  display: inline-flex;
-  align-items: center;
-  transition: none;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .whatsapp:hover {
-    opacity: 1;
-  }
-}
-
-.whatsapp-icon {
-  fill: var(--color-black);
-  height: var(--text-l);
-  transition: opacity var(--trans-time) var(--trans-func);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .whatsapp:hover .whatsapp-icon {
-    opacity: var(--opacity-l);
-  }
-}
-
-.whatsapp-text {
-  font-size: var(--text-xs);
-  opacity: var(--opacity-l);
-  margin-left: var(--space-s);
-}
-
-.phone {
-  display: inline-flex;
-  align-items: center;
-}
-
-.phone-icon {
-  fill: var(--color-red);
-  height: var(--text-xxl);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .phone-icon-link:hover {
-    opacity: var(--opacity-m);
-  }
-}
-
-.phone-text {
-  margin-left: var(--space-m);
-}
-
-.phone-number {
-  display: inline-block;
-  font-size: var(--text-m);
-  font-weight: bold;
-  color: var(--color-black);
-}
-
-.phone-hours {
-  font-size: var(--text-xs);
-  opacity: var(--opacity-l);
-  margin-top: var(--space-xxs);
 }
 
 /*******************************************************************************
@@ -465,6 +393,133 @@ img, svg {
   border: 1px solid var(--color-black);
   margin-left: -1px;
   z-index: -2;
+}
+
+/*******************************************************************************
+* Styled list *
+*******************************************************************************/
+
+.styled-list {
+  list-style-type: none;
+  counter-reset: list;
+}
+
+.styled-list > * {
+  counter-increment: list;
+  display: flex;
+  align-items: flex-start;
+}
+
+.styled-list > *::before { /* List item number */
+  content: counter(list);
+  flex-shrink: 0;
+  background-color: var(--color-red);
+  color: #fff;
+  border-radius: 50%;
+  font-size: var(--text-l);
+  width: calc(2.25 * var(--text-l));
+  /* Vertically center a single line of text */
+  line-height: calc(2.25 * var(--text-l));
+  text-align: center;
+  box-shadow: var(--shadow-s) var(--color-shadow);
+}
+
+.styled-list-text {
+  padding-left: var(--space-m);
+  /* Center the first line of text with the circle */
+  padding-top: calc((2.25 * var(--text-l) - 1em * var(--line-height-m)) / 2);
+}
+
+/*******************************************************************************
+* Logo, whatsapp, phone *
+*******************************************************************************/
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.logo-img-link {
+  transition: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .logo-img-link:hover {
+    opacity: 1;
+  }
+}
+
+.logo-img {
+  height: calc(5 * var(--text-s));
+  width: auto;
+}
+
+.logo-text {
+  font: 500 var(--text-s)/var(--line-height-s) "Alegreya SC", Arial, sans-serif;
+  margin-left: var(--space-l);
+}
+
+.whatsapp {
+  display: inline-flex;
+  align-items: center;
+  transition: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .whatsapp:hover {
+    opacity: 1;
+  }
+}
+
+.whatsapp-icon {
+  fill: var(--color-black);
+  height: var(--text-l);
+  transition: opacity var(--trans-time) var(--trans-func);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .whatsapp:hover .whatsapp-icon {
+    opacity: var(--opacity-l);
+  }
+}
+
+.whatsapp-text {
+  font-size: var(--text-xs);
+  opacity: var(--opacity-l);
+  margin-left: var(--space-s);
+}
+
+.phone {
+  display: inline-flex;
+  align-items: center;
+}
+
+.phone-icon {
+  fill: var(--color-red);
+  height: var(--text-xxl);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .phone-icon-link:hover {
+    opacity: var(--opacity-m);
+  }
+}
+
+.phone-text {
+  margin-left: var(--space-m);
+}
+
+.phone-number {
+  display: inline-block;
+  font-size: var(--text-m);
+  font-weight: bold;
+  color: var(--color-black);
+}
+
+.phone-hours {
+  font-size: var(--text-xs);
+  opacity: var(--opacity-l);
+  margin-top: var(--space-xxs);
 }
 
 /*******************************************************************************
@@ -885,7 +940,7 @@ img, svg {
   text-align: center;
   border-radius: var(--space-s);
   padding: var(--space-xl) var(--space-l);
-  border: 1px solid var(--color-platinum-dark);
+  box-shadow: var(--shadow-s) var(--color-shadow);
 }
 
 .about-us-side-content > * + * {
@@ -904,18 +959,7 @@ img, svg {
   margin-top: var(--space-xxl);
 }
 
-/*******************************************************************************
-* Cards *
-*******************************************************************************/
-
-.cards {
-  display: grid;
-  gap: var(--space-xxl);
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  /* Or "min(280px, 100%)" instead of a media query */
-}
-
-.cards-card {
+.about-us-card {
   background-color: var(--color-platinum);
   border-radius: var(--space-s);
   overflow: hidden;
@@ -923,24 +967,35 @@ img, svg {
   box-shadow: var(--shadow-s) var(--color-shadow);
 }
 
-.cards-card > *:not(.cards-image) {
+.about-us-card > *:not(.about-us-card-image) {
   margin-top: var(--space-l);
   padding: 0 var(--space-xl);
 }
 
-.cards-image {
+.about-us-card-image {
   width: 100%;
   height: auto;
 }
 
-.cards-paragraph {
+.about-us-card-paragraph {
   font-size: var(--text-s);
 }
 
-@media (max-width: 400px) {
-  .cards {
-    grid-template-columns: 1fr;
-  }
+/*******************************************************************************
+* For nursing *
+*******************************************************************************/
+
+.for-nursing-wrapper {
+  background-color: var(--color-platinum);
+}
+
+.for-nursing.section {
+  padding-top: var(--space-4xl);
+  padding-bottom: var(--space-4xl);
+}
+
+.for-nursing .section-heading {
+  padding-bottom: var(--space-3xl);
 }
 
 /*******************************************************************************
