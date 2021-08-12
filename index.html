@@ -15,6 +15,7 @@
 <link rel="preload" href="fonts/open-sans-normal.woff2" as="font" crossorigin>
 <link rel="preload" href="fonts/open-sans-600.woff2" as="font" crossorigin>
 <link rel="preload" href="fonts/open-sans-bold.woff2" as="font" crossorigin>
+<link rel="preload" href="fonts/open-sans-italic.woff2" as="font" crossorigin>
 <link rel="preload" href="fonts/alegreya-sc-500.woff2" as="font" crossorigin>
 <link rel="preload" href="images/cover/cover-small-75.jpg" as="image"
   media="(max-width: 720px)">
@@ -30,110 +31,121 @@
 <div class="cover">
   <div class="cover-img">
     <div class="cover-img-sm-scr">
-      <header class="header container">
-        <div class="logo">
-          <a href="#" class="logo-img-link">
-            <img src="images/global/logo.svg" alt="Логотип сети пансионатов"
-              width="1" height="1" class="logo-img">
-          </a>
-          <p class="logo-text">Сеть&nbsp;пансионатов<br>«Ласточка»</p>
-        </div>
-
-        <div class="header-nav-and-contacts">
-          <div class="header-contacts">
-            <a href="https://wa.me/79186522334" class="whatsapp">
-              <svg viewBox="0 0 448 448" class="whatsapp-icon">
-                <use href="images/global/sprite.svg#whatsapp"/>
-              </svg>
-              <p class="whatsapp-text">Whatsapp</p>
-            </a>
-
-            <div class="phone">
-              <a href="tel:+79186522334" class="phone-icon-link">
-                <svg viewBox="0 0 511.9921875 511.9921875" class="phone-icon">
-                  <use href="images/global/sprite.svg#phone"/>
-                </svg>
+      <div class="header-placeholder"></div>
+      <div class="header-wrapper-wrapper">
+        <div class="header-wrapper">
+          <header class="header container">
+            <div class="logo">
+              <a href="#" class="logo-img-link">
+                <img src="images/global/logo.svg" alt="Логотип сети пансионатов"
+                  width="1" height="1" class="logo-img">
               </a>
-              <div class="phone-text">
-                <a href="tel:+79186522334" class="phone-number">
-                  +7 918 652-23-34
-                </a>
-                <p class="phone-hours">Ежедневно с 9:00 до 22:00</p>
-              </div>
+              <p class="logo-text">Сеть&nbsp;пансионатов<br>«Ласточка»</p>
             </div>
 
-            <a href="#" class="btn">Перезвоните мне</a>
-          </div>
+            <div class="header-nav-and-contacts">
+              <div class="header-contacts">
+                <a href="https://wa.me/79186522334" class="whatsapp">
+                  <svg viewBox="0 0 448 448" class="whatsapp-icon">
+                    <use href="images/global/sprite.svg#whatsapp"/>
+                  </svg>
+                  <p class="whatsapp-text">Whatsapp</p>
+                </a>
 
-          <nav class="nav nav-no-javascript">
-            <a href="#" class="nav-item">О нас</a>
-            <a href="#" class="nav-item">Фото</a>
-            <a href="#" class="nav-item">Показания</a>
-            <a href="#" class="nav-item">Противопоказания</a>
-            <a href="#" class="nav-item">Вопросы и ответы</a>
-            <a href="#" class="nav-item">Контакты</a>
-
-            <div class="nav-more-and-dropdown">
-              <div class="nav-more">
-                <p>Еще</p>
-                <svg viewBox="0 0 297.30859375 168.65234375"
-                    class="nav-more-icon">
-                  <use href="images/global/sprite.svg#caret-down"/>
-                </svg>
-              </div>
-
-              <div class="nav-mobile">
-                <svg viewBox="0 0 448 392" class="nav-mobile-icon">
-                  <use href="images/global/sprite.svg#bars"/>
-                </svg>
-                <svg viewBox="0 0 352 352" class="nav-close-icon">
-                  <use href="images/global/sprite.svg#times"/>
-                </svg>
-              </div>
-
-              <div class="nav-dropdown-hoverable">
-                <div class="nav-dropdown">
-                  <div class="nav-dropdown-tr tr tr-up">
-                    <div class="tr-shape"></div>
-                  </div>
-
-                  <a href="#" class="nav-item-dropdown">О нас</a>
-                  <a href="#" class="nav-item-dropdown">Фото</a>
-                  <a href="#" class="nav-item-dropdown">Показания</a>
-                  <a href="#" class="nav-item-dropdown">Противопоказания</a>
-                  <a href="#" class="nav-item-dropdown">Вопросы и ответы</a>
-                  <a href="#" class="nav-item-dropdown">Контакты</a>
-
-                  <div class="nav-contacts">
-                    <div class="nav-line-separator"></div>
-
-                    <div class="phone">
-                      <a href="tel:+79186522334" class="phone-icon-link">
-                        <svg viewBox="0 0 511.9921875 511.9921875"
-                            class="phone-icon">
-                          <use href="images/global/sprite.svg#phone"/>
-                        </svg>
-                      </a>
-                      <a href="tel:+79186522334" class="phone-number">
-                        +7 918 652-23-34
-                      </a>
-                    </div>
-
-                    <a href="https://wa.me/79186522334" class="whatsapp">
-                      <svg viewBox="0 0 448 448" class="whatsapp-icon">
-                        <use href="images/global/sprite.svg#whatsapp"/>
-                      </svg>
-                      <p class="whatsapp-text">Whatsapp</p>
+                <div class="phone">
+                  <a href="tel:+79186522334" class="phone-icon-link"
+                      aria-label="+7 918 652-23-34">
+                    <svg viewBox="0 0 511.9921875 511.9921875"
+                        class="phone-icon">
+                      <use href="images/global/sprite.svg#phone"/>
+                    </svg>
+                  </a>
+                  <div class="phone-text">
+                    <a href="tel:+79186522334" class="phone-number">
+                      +7 918 652-23-34
                     </a>
-
-                    <a href="#" class="btn">Перезвоните мне</a>
+                    <p class="phone-hours">Ежедневно с 9:00 до 22:00</p>
                   </div>
                 </div>
+
+                <a href="#" class="btn">Перезвоните мне</a>
               </div>
+
+              <nav class="nav nav-no-javascript">
+                <a href="#about-us" class="nav-item">О нас</a>
+                <a href="#" class="nav-item">Фото</a>
+                <a href="#for-nursing" class="nav-item">Показания</a>
+                <a href="#against-nursing" class="nav-item">Противопоказания</a>
+                <a href="#" class="nav-item">Вопросы и ответы</a>
+                <a href="#" class="nav-item">Контакты</a>
+
+                <div class="nav-more-and-dropdown">
+                  <div class="nav-more">
+                    <p>Еще</p>
+                    <svg viewBox="0 0 297.30859375 168.65234375"
+                        class="nav-more-icon">
+                      <use href="images/global/sprite.svg#caret-down"/>
+                    </svg>
+                  </div>
+
+                  <div class="nav-mobile">
+                    <svg viewBox="0 0 448 392" class="nav-mobile-icon">
+                      <use href="images/global/sprite.svg#bars"/>
+                    </svg>
+                    <svg viewBox="0 0 352 352" class="nav-close-icon">
+                      <use href="images/global/sprite.svg#times"/>
+                    </svg>
+                  </div>
+
+                  <div class="nav-dropdown-hoverable">
+                    <div class="nav-dropdown">
+                      <div class="nav-dropdown-tr tr tr-up">
+                        <div class="tr-shape"></div>
+                      </div>
+
+                      <a href="#about-us" class="nav-item-dropdown">О нас</a>
+                      <a href="#" class="nav-item-dropdown">Фото</a>
+                      <a href="#for-nursing" class="nav-item-dropdown">
+                        Показания
+                      </a>
+                      <a href="#against-nursing" class="nav-item-dropdown">
+                        Противопоказания
+                      </a>
+                      <a href="#" class="nav-item-dropdown">Вопросы и ответы</a>
+                      <a href="#" class="nav-item-dropdown">Контакты</a>
+
+                      <div class="nav-contacts">
+                        <div class="nav-line-separator"></div>
+
+                        <div class="phone">
+                          <a href="tel:+79186522334" class="phone-icon-link">
+                            <svg viewBox="0 0 511.9921875 511.9921875"
+                                class="phone-icon">
+                              <use href="images/global/sprite.svg#phone"/>
+                            </svg>
+                          </a>
+                          <a href="tel:+79186522334" class="phone-number">
+                            +7 918 652-23-34
+                          </a>
+                        </div>
+
+                        <a href="https://wa.me/79186522334" class="whatsapp">
+                          <svg viewBox="0 0 448 448" class="whatsapp-icon">
+                            <use href="images/global/sprite.svg#whatsapp"/>
+                          </svg>
+                          <p class="whatsapp-text">Whatsapp</p>
+                        </a>
+
+                        <a href="#" class="btn">Перезвоните мне</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </nav>
             </div>
-          </nav>
+          </header>
         </div>
-      </header>
+      </div>
     </div>
 
     <div class="cover-content-wrapper container">
@@ -167,7 +179,7 @@
   </div>
 </div>
 
-<section class="about-us container section">
+<section class="about-us container section" id="about-us">
   <h2 class="section-heading">О нас</h2>
   <div class="about-us-text-wrapper">
     <div class="about-us-text">
@@ -250,7 +262,7 @@
 </section>
 
 <div class="for-nursing-wrapper">
-  <section class="for-nursing container section">
+  <section class="for-nursing container section" id="for-nursing">
     <h2 class="section-heading">Показания для приема в пансионат</h2>
 
     <ol class="styled-list grid">
@@ -295,6 +307,55 @@
       </li>
       <li>
         <p class="styled-list-text">Артрит, остеохондроз</p>
+      </li>
+    </ol>
+  </section>
+</div>
+
+<div class="against-nursing-wrapper">
+  <section class="against-nursing container section" id="against-nursing">
+    <div class="section-heading">
+      <h2>Противопоказания для приема в пансионат</h2>
+      <p class="section-sub-heading">Заболевания, при которых мы не принимаем в
+        дом престарелых</p>
+    </div>
+
+    <ol class="styled-list grid">
+      <li>
+        <p class="styled-list-text">Алкогольная зависимость</p>
+      </li>
+      <li>
+        <p class="styled-list-text">Туберкулез</p>
+      </li>
+      <li>
+        <p class="styled-list-text">Шизофрения</p>
+      </li>
+      <li>
+        <p class="styled-list-text">Эпилепсия с частыми припадками (более 5 раз
+          за месяц)</p>
+      </li>
+      <li>
+        <p class="styled-list-text">Острые инфекционные заболевания</p>
+      </li>
+      <li>
+        <p class="styled-list-text">Тяжелые хронические заболевания кожи</p>
+      </li>
+      <li>
+        <p class="styled-list-text">Лепра</p>
+      </li>
+      <li>
+        <p class="styled-list-text">Психические заболевания с агрессией и
+          угрозой для окружающих</p>
+      </li>
+      <li>
+        <p class="styled-list-text">Пороки развития лица и черепа с нарушениями
+          функций глотания, дыхания или жевания</p>
+      </li>
+      <li>
+        <p class="styled-list-text">Гангрена</p>
+      </li>
+      <li>
+        <p class="styled-list-text">Трахеостома</p>
       </li>
     </ol>
   </section>

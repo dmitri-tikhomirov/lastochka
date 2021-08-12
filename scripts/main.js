@@ -11,30 +11,10 @@ const navCloseIcon = document.querySelector('.nav-close-icon');
 let dropdownOpened = false;
 let dropdownJustOpenedByMouseEnter = false;
 
-function openDropdown() {
-  navDropdownHoverable.style.opacity = '1';
-  navDropdownHoverable.style.visibility = 'visible';
-  navMore.style.opacity =
-    window.getComputedStyle(navMore).getPropertyValue('--opacity-l');
-  navMoreIcon.style.transform = 'rotate(180deg)';
-  navMobileIcon.style.opacity = '0';
-  navCloseIcon.style.opacity =
-    window.getComputedStyle(navCloseIcon).getPropertyValue('--opacity-l');
-  dropdownOpened = true;
-}
-
-function closeDropdown() {
-  navDropdownHoverable.style.opacity = '';
-  navDropdownHoverable.style.visibility = '';
-  navMore.style.opacity = '';
-  navMoreIcon.style.transform = '';
-  navMobileIcon.style.opacity = '';
-  navCloseIcon.style.opacity = '';
-  dropdownOpened = false;
-}
-
 navMoreAndDropdown.addEventListener('mouseenter', (event) => {
-  openDropdown();
+  navMoreAndDropdown.classList.add('nav-dropdown-open');
+  dropdownOpened = true;
+
   dropdownJustOpenedByMouseEnter = true;
   setTimeout(() => {
     dropdownJustOpenedByMouseEnter = false;
@@ -43,7 +23,8 @@ navMoreAndDropdown.addEventListener('mouseenter', (event) => {
 
 navMoreAndDropdown.addEventListener('mouseleave', (event) => {
   if (dropdownOpened) {
-    closeDropdown();
+    navMoreAndDropdown.classList.remove('nav-dropdown-open');
+    dropdownOpened = false;
   }
 });
 
@@ -51,23 +32,29 @@ document.addEventListener('click', (event) => {
   if (dropdownJustOpenedByMouseEnter) {
     return;
   }
+
   // Open dropdown on tap
   if (!dropdownOpened && navMoreAndDropdown.contains(event.target)) {
-    openDropdown();
+    navMoreAndDropdown.classList.add('nav-dropdown-open');
+    dropdownOpened = true;
     return;
   }
+
   // Close dropdown on outside tap
   if (dropdownOpened) {
     if (!navDropdownHoverable.contains(event.target)) {
-      closeDropdown();
+      navMoreAndDropdown.classList.remove('nav-dropdown-open');
+      dropdownOpened = false;
       return;
     } else {
-      // Close dropdown on tapping or clicking an inside link
       const navDropdownLinks =
         document.querySelectorAll('.nav-dropdown *[href]');
+
+      // Close dropdown on tapping or clicking an inside link
       navDropdownLinks.forEach((element) => {
         if (element.contains(event.target)) {
-          closeDropdown();
+          navMoreAndDropdown.classList.remove('nav-dropdown-open');
+          dropdownOpened = false;
           return;
         }
       });
@@ -110,12 +97,14 @@ const navAdapt = () => {
       if (index === array.length - 1) {
         stopWidth -= navMoreWidth;
       }
+
       if (navWidth >= stopWidth + item.offsetWidth) {
         stopWidth = stopWidth + item.offsetWidth;
       } else {
         stopReached = true;
       }
     }
+
     if (stopReached === true) {
       item.classList.add('hide');
       navHiddenItems.push(index);
@@ -140,17 +129,67 @@ navAdapt();
 window.addEventListener('resize', navAdapt);
 
 /*******************************************************************************
+* Sticky shrinking header *
+*******************************************************************************/
+
+const header = document.querySelector('.header');
+const headerWrapper = document.querySelector('.header-wrapper');
+const headerWrapperWrapper = document.querySelector('.header-wrapper-wrapper');
+const headerPlaceholder = document.querySelector('.header-placeholder');
+
+const headerObserver = new IntersectionObserver(sticky, {
+  threshold: 0.95 // 1 might not always work due to fractional pixels handling
+});
+
+headerObserver.observe(headerWrapperWrapper);
+
+function sticky(entries, observer) {
+  entries.forEach((entry) => {
+    if (entry.target === headerWrapperWrapper &&
+        entry.intersectionRatio < 0.95) {
+      headerWrapper.classList.remove('header-hide');
+      header.classList.remove('header-slide-in');
+
+      headerPlaceholder.style.height = header.offsetHeight + 'px';
+      headerWrapperWrapper.classList.add('header-sticky');
+      headerWrapperWrapper.classList.add('header-hide');
+      headerWrapper.classList.add('header-slide-in');
+
+      observer.unobserve(headerWrapperWrapper);
+      observer.observe(headerPlaceholder);
+
+      return;
+    }
+
+    if (entry.target === headerPlaceholder && entry.intersectionRatio > 0.95) {
+      headerPlaceholder.style.height = '';
+      headerWrapperWrapper.classList.remove('header-sticky');
+      headerWrapperWrapper.classList.remove('header-hide');
+      headerWrapper.classList.remove('header-slide-in');
+
+      headerWrapper.classList.add('header-hide');
+      header.classList.add('header-slide-in');
+
+      observer.unobserve(headerPlaceholder);
+      observer.observe(headerWrapperWrapper);
+
+      return;
+    }
+  });
+};
+
+/*******************************************************************************
 * Lazy loading images *
 *******************************************************************************/
 
-const observer = new IntersectionObserver(lazyLoad, {
+const lazyObserver = new IntersectionObserver(lazyLoad, {
   rootMargin: '250px',
   threshold: 0
 });
 
 // Observe each image
 document.querySelectorAll('.lazy').forEach((element) => {
-  observer.observe(element);
+  lazyObserver.observe(element);
 });
 
 // Change the "src" and stop observing
@@ -162,3 +201,51 @@ function lazyLoad(entries, observer) {
     }
   });
 };
+
+/*******************************************************************************
+* Smooth scroll to section *
+*******************************************************************************/
+
+function smoothScrollTo(pos, time) {
+  if (time === undefined) {
+    time = 500;
+  }
+
+  const startPos = window.scrollY;
+  let startTime;
+  let previousTimeStamp;
+
+  const step = (timeStamp) => {
+    if (startTime === undefined) {
+      startTime = timeStamp;
+    }
+
+    const elapsedTime = timeStamp - startTime;
+
+    if (previousTimeStamp !== timeStamp) {
+      window.scroll(0, startPos + ((pos - startPos) * elapsedTime / time));
+    }
+
+    if (elapsedTime < time) {
+      previousTimeStamp = timeStamp;
+      window.requestAnimationFrame(step);
+    } else {
+      window.scroll(0, pos);
+    }
+  }
+
+  window.requestAnimationFrame(step);
+}
+
+headerWrapperWrapper.classList.add('header-sticky');
+const headerStickyHeight = headerWrapperWrapper.offsetHeight;
+headerWrapperWrapper.classList.remove('header-sticky');
+
+document.querySelectorAll('a[href^="#"]').forEach(element => {
+  element.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      smoothScrollTo(document.querySelector(
+        element.getAttribute('href')).offsetTop - headerStickyHeight);
+  });
+});

@@ -27,6 +27,14 @@
 }
 
 @font-face {
+  font-family: "Open Sans";
+  src: url("../fonts/open-sans-italic.woff2");
+  font-weight: normal;
+  font-style: italic;
+  font-display: block;
+}
+
+@font-face {
   font-family: "Alegreya SC";
   src: url("../fonts/alegreya-sc-500.woff2");
   font-weight: 500;
@@ -39,18 +47,19 @@
 *******************************************************************************/
 
 :root {
-  --color-red:           #e64e43; /* hsl(4, 77%, 58%) */
+  --color-logo:          #e64e43; /* hsl(4, 77%, 58%) */
+  --color-red:           hsl(4, 77%, 41%);
   --color-platinum:      #e9eae4; /* hsl(70, 13%, 91%) */
-  --color-platinum-dark: hsl(70, 13%, 65%);
+  --color-platinum-dark: hsl(70, 13%, 42%);
   --color-white:         hsl(0, 0%, 100%);
   --color-black:         hsl(0, 0%, 10%);
 
-  --color-shadow:       rgba(0, 0, 0, 0.3);
-  --color-shadow-light: rgba(0, 0, 0, 0.2);
-  --color-shadow-dark:  rgba(0, 0, 0, 0.6);
+  --color-shadow:         hsla(0, 0%, 0%, 0.3);
+  --color-shadow-light:   hsla(0, 0%, 0%, 0.2);
+  --color-shadow-dark:    hsla(0, 0%, 0%, 0.6);
+  --color-shadow-inverse: hsla(0, 0%, 100%, 0.3);
 
   --opacity-s: 0.65;
-  --opacity-m: 0.55;
   --opacity-l: 0.45;
 
   --space-xxs: 2px;
@@ -80,7 +89,8 @@
   --max-website-width: 1248px;
   --website-padding: var(--space-xl);
 
-  --trans-time: 0.2s;
+  --trans-time-s: 0.2s;
+  --trans-time-m: 0.5s;
   --trans-func: linear;
 }
 
@@ -128,7 +138,7 @@ body {
 a {
   color: var(--color-black);
   text-decoration: none;
-  transition: opacity var(--trans-time) var(--trans-func);
+  transition: opacity var(--trans-time-s) var(--trans-func);
 }
 
 a:focus-visible {
@@ -182,7 +192,17 @@ img, svg {
 
 .section-heading {
   padding-bottom: var(--space-xxl);
+}
+
+.section-heading,
+.section-sub-heading {
   text-align: center;
+}
+
+.section-sub-heading {
+  font-size: var(--text-m);
+  font-style: italic;
+  margin-top: var(--space-m);
 }
 
 .grid {
@@ -214,7 +234,7 @@ img, svg {
   border-radius: var(--space-s);
   display: inline-block;
   text-align: center; /* In case there are several lines of text */
-  transition: opacity var(--trans-time) var(--trans-func);
+  transition: opacity var(--trans-time-s) var(--trans-func);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -474,7 +494,7 @@ img, svg {
 .whatsapp-icon {
   fill: var(--color-black);
   height: var(--text-l);
-  transition: opacity var(--trans-time) var(--trans-func);
+  transition: opacity var(--trans-time-s) var(--trans-func);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -485,7 +505,7 @@ img, svg {
 
 .whatsapp-text {
   font-size: var(--text-xs);
-  opacity: var(--opacity-l);
+  opacity: var(--opacity-s);
   margin-left: var(--space-s);
 }
 
@@ -501,7 +521,7 @@ img, svg {
 
 @media (hover: hover) and (pointer: fine) {
   .phone-icon-link:hover {
-    opacity: var(--opacity-m);
+    opacity: var(--opacity-s);
   }
 }
 
@@ -518,7 +538,7 @@ img, svg {
 
 .phone-hours {
   font-size: var(--text-xs);
-  opacity: var(--opacity-l);
+  opacity: var(--opacity-s);
   margin-top: var(--space-xxs);
 }
 
@@ -619,16 +639,52 @@ img, svg {
 * Header *
 *******************************************************************************/
 
+.header-placeholder {
+  width: 100%;
+}
+
+.header-sticky {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 9; /* Sticky header should be on top of all other elements */
+}
+
+.header-sticky .header-wrapper {
+  padding-top: var(--space-s);
+  padding-bottom: var(--space-s);
+  background-color: var(--color-platinum);
+  box-shadow: var(--shadow-s) var(--color-shadow);
+}
+
+.header-hide {
+  transform: translatey(-100%);
+}
+
+.header-slide-in {
+  transform: translatey(100%);
+  transition: transform var(--trans-time-m) var(--trans-func);
+}
+
 .header {
   display: flex;
   align-items: center;
   padding-top: var(--space-xl);
 }
 
+.header-sticky .header {
+  padding-top: 0;
+}
+
 @media (max-width: /*breakpoint*/480px) {
   .header .logo-img {
     height: calc(4 * var(--text-s));
   }
+}
+
+.header-sticky .logo-img {
+  height: calc(3.5 * var(--text-s));
 }
 
 @media (max-width: 360px) {
@@ -687,6 +743,14 @@ img, svg {
 
 @media (max-width: /*breakpoint*/640px) {
   .header-contacts .btn {
+    display: none;
+  }
+}
+
+@media (min-width: /*breakpoint*/481px) {
+  .header-sticky .header-contacts .whatsapp,
+  .header-sticky .header-contacts .phone,
+  .header-sticky .header-contacts .btn {
     display: none;
   }
 }
@@ -780,7 +844,7 @@ img, svg {
   display: flex;
   align-items: center;
   cursor: pointer;
-  transition: opacity var(--trans-time) var(--trans-func);
+  transition: opacity var(--trans-time-s) var(--trans-func);
 }
 
 @media (max-width: /*breakpoint*/480px) {
@@ -789,11 +853,19 @@ img, svg {
   }
 }
 
+.nav-dropdown-open .nav-more {
+  opacity: var(--opacity-l);
+}
+
 .nav-more-icon {
   fill: var(--color-red);
   height: var(--space-s);
   margin-left: var(--space-s);
-  transition: transform var(--trans-time) var(--trans-func);
+  transition: transform var(--trans-time-s) var(--trans-func);
+}
+
+.nav-dropdown-open .nav-more-icon {
+  transform: rotate(180deg);
 }
 
 .nav-dropdown-hoverable {
@@ -805,8 +877,8 @@ img, svg {
   opacity: 0;
   visibility: hidden;
   transition:
-    opacity var(--trans-time) var(--trans-func),
-    visibility var(--trans-time) var(--trans-func);
+    opacity var(--trans-time-s) var(--trans-func),
+    visibility var(--trans-time-s) var(--trans-func);
 }
 
 @media (max-width: /*breakpoint*/480px) {
@@ -814,6 +886,11 @@ img, svg {
     right: 0;
     padding-top: var(--space-xl);
   }
+}
+
+.nav-dropdown-open .nav-dropdown-hoverable {
+  opacity: 1;
+  visibility: visible;
 }
 
 .nav-dropdown {
@@ -857,11 +934,15 @@ img, svg {
   .nav-mobile-icon,
   .nav-close-icon {
     height: var(--text-xxl);
-    transition: opacity var(--trans-time) var(--trans-func);
+    transition: opacity var(--trans-time-s) var(--trans-func);
   }
 
   .nav-mobile-icon {
     fill: var(--color-red);
+  }
+
+  .nav-dropdown-open .nav-mobile-icon {
+    opacity: 0;
   }
 
   .nav-close-icon {
@@ -870,6 +951,10 @@ img, svg {
     top: 0;
     right: 0;
     opacity: 0;
+  }
+
+  .nav-dropdown-open .nav-close-icon {
+    opacity: var(--opacity-l);
   }
 }
 
@@ -905,6 +990,33 @@ img, svg {
   .nav-contacts .btn {
     font-size: var(--text-s);
   }
+}
+
+/*******************************************************************************
+* 404 page *
+*******************************************************************************/
+
+.not-found-page {
+  height: 100vh;
+  background-color: var(--color-platinum);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.not-found-page-logo {
+  height: calc(4 * var(--text-xxl));
+  width: auto;
+}
+
+.not-found-page-heading {
+  margin-top: var(--space-m);
+}
+
+.not-found-page .btn {
+  margin-top: var(--space-l);
+  font-size: var(--text-s);
 }
 
 /*******************************************************************************
@@ -982,45 +1094,30 @@ img, svg {
 }
 
 /*******************************************************************************
-* For nursing *
+* For and against nursing *
 *******************************************************************************/
 
 .for-nursing-wrapper {
   background-color: var(--color-platinum);
 }
 
-.for-nursing.section {
+.for-nursing.section,
+.against-nursing.section {
   padding-top: var(--space-4xl);
   padding-bottom: var(--space-4xl);
 }
 
-.for-nursing .section-heading {
+.for-nursing .section-heading,
+.against-nursing .section-heading {
   padding-bottom: var(--space-3xl);
 }
 
-/*******************************************************************************
-* 404 page *
-*******************************************************************************/
-
-.not-found-page {
-  height: 100vh;
-  background-color: var(--color-platinum);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.against-nursing-wrapper {
+  background-color: #333/*hsl(0, 0%, 33%)*/;
+  color: #ccc;
 }
 
-.not-found-page-logo {
-  height: calc(4 * var(--text-xxl));
-  width: auto;
-}
-
-.not-found-page-heading {
-  margin-top: var(--space-m);
-}
-
-.not-found-page .btn {
-  margin-top: var(--space-l);
-  font-size: var(--text-s);
+.against-nursing .styled-list > *::before {
+  background-color: var(--color-platinum-dark);
+  box-shadow: var(--shadow-s) var(--color-shadow-inverse);
 }
