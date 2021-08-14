@@ -51,7 +51,10 @@
   --color-red:           hsl(4, 77%, 41%);
   --color-platinum:      #e9eae4; /* hsl(70, 13%, 91%) */
   --color-platinum-dark: hsl(70, 13%, 42%);
+  --color-green-dark:    hsl(70, 45%, 25%);
   --color-white:         hsl(0, 0%, 100%);
+  --color-gray-light:    hsl(0, 0%, 80%);
+  --color-gray-dark:     hsl(0, 0%, 20%);
   --color-black:         hsl(0, 0%, 10%);
 
   --color-shadow:         hsla(0, 0%, 0%, 0.3);
@@ -135,19 +138,33 @@ body {
   color: var(--color-black);
 }
 
-a {
-  color: var(--color-black);
-  text-decoration: none;
+a, button {
+  -webkit-tap-highlight-color: transparent;
   transition: opacity var(--trans-time-s) var(--trans-func);
 }
 
-a:focus-visible {
+a {
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+button {
+  background-color: transparent;
+  font: inherit;
+  text-align: left;
+  border: none;
+  cursor: pointer;
+}
+
+a:focus-visible,
+button:focus-visible {
   outline: 2px solid var(--color-red);
   outline-offset: var(--space-xs);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  a:hover {
+  a:hover,
+  button:hover {
     opacity: var(--opacity-l);
   }
 }
@@ -172,6 +189,10 @@ h3 {
 
 img, svg {
   display: block;
+}
+
+ul, ol {
+  list-style-type: none;
 }
 
 /*******************************************************************************
@@ -420,7 +441,6 @@ img, svg {
 *******************************************************************************/
 
 .styled-list {
-  list-style-type: none;
   counter-reset: list;
 }
 
@@ -455,7 +475,7 @@ img, svg {
 *******************************************************************************/
 
 .logo {
-  display: inline-flex;
+  display: flex;
   align-items: center;
 }
 
@@ -479,8 +499,23 @@ img, svg {
   margin-left: var(--space-l);
 }
 
+.whatsapp,
+.phone-icon-link {
+  position: relative; /* For clickable areas */
+}
+
+.whatsapp::after,
+.phone-icon-link::after {
+  content: "";
+  position: absolute;
+  top: calc(0px - var(--space-s));
+  bottom: calc(0px - var(--space-s));
+  left: calc(0px - var(--space-m));
+  right: calc(0px - var(--space-m));
+}
+
 .whatsapp {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   transition: none;
 }
@@ -510,7 +545,7 @@ img, svg {
 }
 
 .phone {
-  display: inline-flex;
+  display: flex;
   align-items: center;
 }
 
@@ -648,7 +683,7 @@ img, svg {
   left: 0;
   right: 0;
   top: 0;
-  z-index: 9; /* Sticky header should be on top of all other elements */
+  z-index: 10;
 }
 
 .header-sticky .header-wrapper {
@@ -747,7 +782,7 @@ img, svg {
   }
 }
 
-@media (min-width: /*breakpoint*/481px) {
+@media not all and (max-width: /*breakpoint*/480px) {
   .header-sticky .header-contacts .whatsapp,
   .header-sticky .header-contacts .phone,
   .header-sticky .header-contacts .btn {
@@ -757,7 +792,7 @@ img, svg {
 
 .header .nav {
   margin-top: var(--space-s);
-  margin-left: var(--space-m);
+  margin-left: var(--space-xl);
 }
 
 @media (max-width: /*breakpoint*/840px) {
@@ -775,7 +810,6 @@ img, svg {
 @media (max-width: /*breakpoint*/480px) {
   .header .nav {
     margin-top: 0;
-    margin-left: var(--space-xl);
   }
 }
 
@@ -786,14 +820,7 @@ img, svg {
 .nav {
   display: flex;
   font-size: var(--text-xs);
-  position: relative;
-  left: var(--space-m);
-}
-
-@media (max-width: /*breakpoint*/480px) {
-  .nav {
-    left: 0;
-  }
+  position: relative; /* For dropdown */
 }
 
 .nav-no-javascript {
@@ -810,9 +837,29 @@ img, svg {
   margin-left: auto;
 }
 
+.nav > * + * {
+  margin-left: var(--space-xl);
+}
+
 .nav-item,
-.nav-more {
-  padding: 0 var(--space-m);
+.nav-more,
+.nav-mobile {
+  position: relative; /* For clickable areas */
+}
+
+.nav-item::after,
+.nav-more::after,
+.nav-mobile::after {
+  content: "";
+  position: absolute;
+  top: calc(0px - var(--space-s));
+  bottom: calc(0px - var(--space-s));
+  left: calc(0px - var(--space-m));
+  right: calc(0px - var(--space-m));
+}
+
+.nav-mobile::after { /* On top of dropdown */
+  z-index: 12;
 }
 
 .nav-item,
@@ -868,12 +915,16 @@ img, svg {
   transform: rotate(180deg);
 }
 
-.nav-dropdown-hoverable {
+.nav-dropdown {
   position: absolute;
-  z-index: 9; /* Dropdown should be on top of any other elements */
-  right: var(--space-m);
+  z-index: 11;
+  right: 0;
   top: 100%;
-  padding-top: var(--space-l);
+  margin-top: var(--space-l);
+  padding: var(--space-l) 0;
+  border-radius: var(--space-s);
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-s) var(--color-shadow);
   opacity: 0;
   visibility: hidden;
   transition:
@@ -881,24 +932,27 @@ img, svg {
     visibility var(--trans-time-s) var(--trans-func);
 }
 
+.nav-dropdown::before { /* Hoverable top margin for dropdown */
+  content: "";
+  width: 100%;
+  height: var(--space-l);
+  position: absolute;
+  bottom: 100%;
+}
+
 @media (max-width: /*breakpoint*/480px) {
-  .nav-dropdown-hoverable {
-    right: 0;
-    padding-top: var(--space-xl);
+  .nav-dropdown {
+    margin-top: var(--space-xl);
+  }
+
+  .nav-dropdown::before {
+    height: var(--space-xl);
   }
 }
 
-.nav-dropdown-open .nav-dropdown-hoverable {
+.nav-dropdown-open .nav-dropdown {
   opacity: 1;
   visibility: visible;
-}
-
-.nav-dropdown {
-  position: relative;
-  padding: var(--space-l) 0;
-  border-radius: var(--space-s);
-  background-color: var(--color-white);
-  box-shadow: var(--shadow-s) var(--color-shadow);
 }
 
 .nav-dropdown-tr {
@@ -928,7 +982,8 @@ img, svg {
 @media (max-width: /*breakpoint*/480px) {
   .nav-mobile {
     display: block;
-    position: relative;
+    position: relative; /* For closing icon */
+    cursor: pointer;
   }
 
   .nav-mobile-icon,
@@ -975,7 +1030,7 @@ img, svg {
   }
 
   .nav-line-separator {
-    border-top: 1px solid var(--color-platinum-dark);
+    border-top: 1px solid var(--color-gray-light);
     align-self: stretch;
   }
 
@@ -1113,11 +1168,86 @@ img, svg {
 }
 
 .against-nursing-wrapper {
-  background-color: #333/*hsl(0, 0%, 33%)*/;
-  color: #ccc;
+  background-color: var(--color-gray-dark);
+  color: var(--color-gray-light);
 }
 
 .against-nursing .styled-list > *::before {
   background-color: var(--color-platinum-dark);
   box-shadow: var(--shadow-s) var(--color-shadow-inverse);
+}
+
+/*******************************************************************************
+* Q&A *
+*******************************************************************************/
+
+.q-and-a-wrapper {
+  background-color: var(--color-platinum);
+}
+
+.q-and-a-question {
+  display: flex;
+  width: 100%;
+  padding: var(--space-m) 0;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--color-green-dark);
+  border-bottom: 1px solid var(--color-gray-light);
+}
+
+.q-and-a-open.q-and-a-question {
+  border-bottom: none;
+}
+
+.q-and-a-icon {
+  margin-left: var(--space-xl);
+  flex-shrink: 0;
+  fill: var(--color-red);
+  height: var(--text-xs);
+  transition: transform var(--trans-time-s) var(--trans-func);
+}
+
+.q-and-a-open .q-and-a-icon {
+  transform: rotate(180deg);
+}
+
+.q-and-a-answer-wrapper {
+  visibility: hidden;
+  position: absolute;
+  opacity: 0;
+  border-bottom: 1px solid var(--color-gray-light);
+  transition: opacity var(--trans-time-s) var(--trans-func);
+}
+
+.q-and-a-open.q-and-a-answer-wrapper {
+  visibility: visible;
+  position: static;
+  opacity: 1;
+}
+
+.q-and-a-answer {
+  max-width: 800px;
+}
+
+.q-and-a-answer > * + * {
+  padding-top: var(--space-l);
+}
+
+.q-and-a-answer > *:last-child {
+  padding-bottom: var(--space-l);
+}
+
+.q-and-a-list {
+  padding-left: var(--space-xl);
+}
+
+.q-and-a-list > *:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 50%;
+  width: var(--space-s);
+  height: var(--space-s);
+  background-color: var(--color-red);
+  margin-right: var(--space-m);
 }

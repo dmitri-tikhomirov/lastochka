@@ -28,7 +28,7 @@
 </head>
 
 <body>
-<div class="cover">
+<div class="cover" id="cover">
   <div class="cover-img">
     <div class="cover-img-sm-scr">
       <div class="header-placeholder"></div>
@@ -36,7 +36,7 @@
         <div class="header-wrapper">
           <header class="header container">
             <div class="logo">
-              <a href="#" class="logo-img-link">
+              <a href="#cover" class="logo-img-link">
                 <img src="images/global/logo.svg" alt="Логотип сети пансионатов"
                   width="1" height="1" class="logo-img">
               </a>
@@ -76,7 +76,7 @@
                 <a href="#" class="nav-item">Фото</a>
                 <a href="#for-nursing" class="nav-item">Показания</a>
                 <a href="#against-nursing" class="nav-item">Противопоказания</a>
-                <a href="#" class="nav-item">Вопросы и ответы</a>
+                <a href="#q-and-a" class="nav-item">Вопросы и ответы</a>
                 <a href="#" class="nav-item">Контакты</a>
 
                 <div class="nav-more-and-dropdown">
@@ -97,47 +97,44 @@
                     </svg>
                   </div>
 
-                  <div class="nav-dropdown-hoverable">
-                    <div class="nav-dropdown">
-                      <div class="nav-dropdown-tr tr tr-up">
-                        <div class="tr-shape"></div>
-                      </div>
+                  <div class="nav-dropdown">
+                    <div class="nav-dropdown-tr tr tr-up">
+                      <div class="tr-shape"></div>
+                    </div>
 
-                      <a href="#about-us" class="nav-item-dropdown">О нас</a>
-                      <a href="#" class="nav-item-dropdown">Фото</a>
-                      <a href="#for-nursing" class="nav-item-dropdown">
-                        Показания
-                      </a>
-                      <a href="#against-nursing" class="nav-item-dropdown">
-                        Противопоказания
-                      </a>
-                      <a href="#" class="nav-item-dropdown">Вопросы и ответы</a>
-                      <a href="#" class="nav-item-dropdown">Контакты</a>
+                    <a href="#about-us" class="nav-item-dropdown">О нас</a>
+                    <a href="#" class="nav-item-dropdown">Фото</a>
+                    <a href="#for-nursing" class="nav-item-dropdown">
+                      Показания</a>
+                    <a href="#against-nursing" class="nav-item-dropdown">
+                      Противопоказания</a>
+                    <a href="#q-and-a" class="nav-item-dropdown">Вопросы
+                      и ответы</a>
+                    <a href="#" class="nav-item-dropdown">Контакты</a>
 
-                      <div class="nav-contacts">
-                        <div class="nav-line-separator"></div>
+                    <div class="nav-contacts">
+                      <div class="nav-line-separator"></div>
 
-                        <div class="phone">
-                          <a href="tel:+79186522334" class="phone-icon-link">
-                            <svg viewBox="0 0 511.9921875 511.9921875"
-                                class="phone-icon">
-                              <use href="images/global/sprite.svg#phone"/>
-                            </svg>
-                          </a>
-                          <a href="tel:+79186522334" class="phone-number">
-                            +7 918 652-23-34
-                          </a>
-                        </div>
-
-                        <a href="https://wa.me/79186522334" class="whatsapp">
-                          <svg viewBox="0 0 448 448" class="whatsapp-icon">
-                            <use href="images/global/sprite.svg#whatsapp"/>
+                      <div class="phone">
+                        <a href="tel:+79186522334" class="phone-icon-link">
+                          <svg viewBox="0 0 511.9921875 511.9921875"
+                              class="phone-icon">
+                            <use href="images/global/sprite.svg#phone"/>
                           </svg>
-                          <p class="whatsapp-text">Whatsapp</p>
                         </a>
-
-                        <a href="#" class="btn">Перезвоните мне</a>
+                        <a href="tel:+79186522334" class="phone-number">
+                          +7 918 652-23-34
+                        </a>
                       </div>
+
+                      <a href="https://wa.me/79186522334" class="whatsapp">
+                        <svg viewBox="0 0 448 448" class="whatsapp-icon">
+                          <use href="images/global/sprite.svg#whatsapp"/>
+                        </svg>
+                        <p class="whatsapp-text">Whatsapp</p>
+                      </a>
+
+                      <a href="#" class="btn">Перезвоните мне</a>
                     </div>
                   </div>
                 </div>
@@ -358,6 +355,198 @@
         <p class="styled-list-text">Трахеостома</p>
       </li>
     </ol>
+  </section>
+</div>
+
+<div class="q-and-a-wrapper">
+  <section class="q-and-a container section" id="q-and-a">
+    <div class="section-heading">
+      <h2>Вопросы и ответы</h2>
+      <p class="section-sub-heading">Ответы на часто задаваемые вопросы о доме
+        престарелых</p>
+    </div>
+
+    <button class="q-and-a-question">
+      Какие документы нужны для оформления в пансионат?
+      <svg viewBox="0 0 436.6875 265.0078125" class="q-and-a-icon">
+        <use href="images/global/sprite.svg#chevron-down"/>
+      </svg>
+    </button>
+
+    <div class="q-and-a-answer-wrapper">
+      <div class="q-and-a-answer">
+        <p>Для оформления в пансионат для пожилых людей вам понадобятся:</p>
+
+        <ul class="q-and-a-list">
+          <li>копия паспорта постояльца (оригинал предъявить),</li>
+          <li>копия паспорта родственника, с которым заключается договор
+            (оригинал предъявить),</li>
+          <li>страховой полис ОМС,</li>
+          <li>выписка из истории болезни (если есть).</li>
+        </ul>
+
+        <p>Иные документы могут быть запрошены индивидуально.</p>
+      </div>
+    </div>
+
+    <button class="q-and-a-question">
+      Какой минимальный срок пребывания в пансионате?
+      <svg viewBox="0 0 436.6875 265.0078125" class="q-and-a-icon">
+        <use href="images/global/sprite.svg#chevron-down"/>
+      </svg>
+    </button>
+
+    <div class="q-and-a-answer-wrapper">
+      <div class="q-and-a-answer">
+        <p>Вы можете привезти к нам своего родственника на пару дней, к примеру,
+          во время вашей командировки или отпуска. Так же у нас возможно только
+          дневное пребывание.</p>
+      </div>
+    </div>
+
+    <button class="q-and-a-question">
+      От чего зависит стоимость проживания в пансионате?
+      <svg viewBox="0 0 436.6875 265.0078125" class="q-and-a-icon">
+        <use href="images/global/sprite.svg#chevron-down"/>
+      </svg>
+    </button>
+
+    <div class="q-and-a-answer-wrapper">
+      <div class="q-and-a-answer">
+        <p>Цена зависит от того:</p>
+
+        <ul class="q-and-a-list">
+          <li>самостоятельно ли передвигается человек (если самостоятельно, то
+            дешевле),</li>
+          <li>от типа номера,</li>
+          <li>от желаемых дополнительных услуг (таких, как косметолог, педикюр и
+            т.д.).</li>
+        </ul>
+
+        <p>Позвоните нам по телефону, чтобы узнать варианты тарифов, подходящих
+          конкретно для вашего случая.</p>
+      </div>
+    </div>
+
+    <button class="q-and-a-question">
+      Что не входит в стоимость проживания в пансионате?
+      <svg viewBox="0 0 436.6875 265.0078125" class="q-and-a-icon">
+        <use href="images/global/sprite.svg#chevron-down"/>
+      </svg>
+    </button>
+
+    <div class="q-and-a-answer-wrapper">
+      <div class="q-and-a-answer">
+        <p>В стоимость проживания не входят:</p>
+
+        <ul class="q-and-a-list">
+          <li>памперсы,</li>
+          <li>пеленки,</li>
+          <li>лекарственные препараты,</li>
+          <li>вызов и консультации специалистов узкого профиля,</li>
+          <li>диагностики узкой направленности.</li>
+        </ul>
+      </div>
+    </div>
+
+    <button class="q-and-a-question">
+      Как быть с покупкой лекарств?
+      <svg viewBox="0 0 436.6875 265.0078125" class="q-and-a-icon">
+        <use href="images/global/sprite.svg#chevron-down"/>
+      </svg>
+    </button>
+
+    <div class="q-and-a-answer-wrapper">
+      <div class="q-and-a-answer">
+        <p>Если у вас нет возможности привозить лекарства — мы купим их за вас!
+          Мы предоставим вам все чеки, а вы их оплатите дистанционно.</p>
+      </div>
+    </div>
+
+    <button class="q-and-a-question">
+      Можете ли вы помочь с перевозкой до пансионата?
+      <svg viewBox="0 0 436.6875 265.0078125" class="q-and-a-icon">
+        <use href="images/global/sprite.svg#chevron-down"/>
+      </svg>
+    </button>
+
+    <div class="q-and-a-answer-wrapper">
+      <div class="q-and-a-answer">
+        <p>Трансфер лежачих пожилых людей на специализированных машинах скорой
+          помощи осуществляется за отдельную плату. Выбор способа перевозки
+          пожилого человека в пансионат зависит от его (ее) состояния и
+          предпочтений заказчика. Свяжитесь с нами, чтобы мы проконсультировали
+          вас по конкретно вашему случаю.</p>
+      </div>
+    </div>
+
+    <button class="q-and-a-question">
+      Какие вещи нужно взять с собой?
+      <svg viewBox="0 0 436.6875 265.0078125" class="q-and-a-icon">
+        <use href="images/global/sprite.svg#chevron-down"/>
+      </svg>
+    </button>
+
+    <div class="q-and-a-answer-wrapper">
+      <div class="q-and-a-answer">
+        <p>Примерный список, что необходимо привезти с собой для комфортного
+          размещения в доме престарелых.</p>
+
+        <p>Одежда и обувь:</p>
+
+        <ul class="q-and-a-list">
+          <li>повседневная одежда, белье, носки,</li>
+          <li>пижама,</li>
+          <li>сланцы для душа,</li>
+          <li>домашние тапочки.</li>
+        </ul>
+
+        <p>Предметы личной гигиены:</p>
+
+        <ul class="q-and-a-list">
+          <li>памперсы, впитывающие пеленки 60х90 см,</li>
+          <li>зубная паста и щетка или ополаскиватель для ротовой полости,</li>
+          <li>жидкость и стаканчик для зубных протезов (по необходимости),</li>
+          <li>расческа,</li>
+          <li>бритвенные принадлежности (для мужчин),</li>
+          <li>очки,</li>
+          <li>средства для мытья и ухода за телом,</li>
+          <li>по возможности: постельное белье, плед, полотенца.</li>
+        </ul>
+
+        <p>Лекарства в соответствии с назначениями врача, с рекомендациями
+          приема. Трость, ходунки и т.п. (по необходимости).</p>
+
+        <p>Любые другие личные/любимые вещи.</p>
+      </div>
+    </div>
+
+    <button class="q-and-a-question">
+      Что подарить пожилому человеку во время посещения?
+      <svg viewBox="0 0 436.6875 265.0078125" class="q-and-a-icon">
+        <use href="images/global/sprite.svg#chevron-down"/>
+      </svg>
+    </button>
+
+    <div class="q-and-a-answer-wrapper">
+      <div class="q-and-a-answer">
+        <p>Несколько советов:</p>
+
+        <ul class="q-and-a-list">
+          <li>Подарите фотографии или просто устройте показ фотографий из жизни
+            тех, кого они любят.</li>
+          <li>Приведите с собой внуков или правнуков. Принесите в подарок
+            поделки или рисунки внуков.</li>
+          <li>Запишите видео-обращение от дорогих людей, которые не могут лично
+            поговорить, на мобильный телефон и покажите ему (ей). Сейчас это
+            сделать очень просто. Однако такие «видео письма» часто очень
+            трогают чувства пожилых людей.</li>
+        </ul>
+
+        <p>Любой знак внимания, оказанный пожилому человеку с любовью будет
+          приятен для него.</p>
+      </div>
+    </div>
   </section>
 </div>
 </body>

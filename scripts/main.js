@@ -3,7 +3,7 @@
 *******************************************************************************/
 
 const navMoreAndDropdown = document.querySelector('.nav-more-and-dropdown');
-const navDropdownHoverable = document.querySelector('.nav-dropdown-hoverable');
+const navDropdown = document.querySelector('.nav-dropdown');
 const navMore = document.querySelector('.nav-more');
 const navMoreIcon = document.querySelector('.nav-more-icon');
 const navMobileIcon = document.querySelector('.nav-mobile-icon');
@@ -42,13 +42,13 @@ document.addEventListener('click', (event) => {
 
   // Close dropdown on outside tap
   if (dropdownOpened) {
-    if (!navDropdownHoverable.contains(event.target)) {
+    if (!navDropdown.contains(event.target)) {
       navMoreAndDropdown.classList.remove('nav-dropdown-open');
       dropdownOpened = false;
       return;
     } else {
       const navDropdownLinks =
-        document.querySelectorAll('.nav-dropdown *[href]');
+        document.querySelectorAll('.nav-dropdown a[href]');
 
       // Close dropdown on tapping or clicking an inside link
       navDropdownLinks.forEach((element) => {
@@ -85,7 +85,9 @@ const navAdapt = () => {
   navMoreAndDropdown.style.display = 'block';
 
   const navWidth = document.querySelector('.nav').offsetWidth;
-  let navMoreWidth = navMoreAndDropdown.offsetWidth;
+  let navMoreWidth = navMoreAndDropdown.offsetWidth +
+    parseFloat(window.getComputedStyle(navMoreAndDropdown)
+      .getPropertyValue('margin-left'));
   let stopWidth = navMoreWidth;
   let navHiddenItems = [];
   let stopReached = false;
@@ -93,13 +95,16 @@ const navAdapt = () => {
   // Hide nav items that don't fit
   navItems.forEach((item, index, array) => {
     if (stopReached === false) {
+      let itemMargin = parseFloat(window.getComputedStyle(item)
+        .getPropertyValue('margin-left'));
+
       // Try to fit the last item without "more"
       if (index === array.length - 1) {
         stopWidth -= navMoreWidth;
       }
 
-      if (navWidth >= stopWidth + item.offsetWidth) {
-        stopWidth = stopWidth + item.offsetWidth;
+      if (navWidth >= stopWidth + item.offsetWidth + itemMargin) {
+        stopWidth = stopWidth + item.offsetWidth + itemMargin;
       } else {
         stopReached = true;
       }
@@ -241,11 +246,35 @@ headerWrapperWrapper.classList.add('header-sticky');
 const headerStickyHeight = headerWrapperWrapper.offsetHeight;
 headerWrapperWrapper.classList.remove('header-sticky');
 
-document.querySelectorAll('a[href^="#"]').forEach(element => {
+document.querySelectorAll('a[href^="#"]').forEach((element) => {
   element.addEventListener('click', (event) => {
-      event.preventDefault();
+    event.preventDefault();
 
-      smoothScrollTo(document.querySelector(
-        element.getAttribute('href')).offsetTop - headerStickyHeight);
+    smoothScrollTo(document.querySelector(
+      element.getAttribute('href')).offsetTop - headerStickyHeight);
+  });
+});
+
+/*******************************************************************************
+* Q&A *
+*******************************************************************************/
+
+let previouslyOpened;
+
+document.querySelectorAll('.q-and-a-question').forEach((element) => {
+  element.addEventListener('click', (event) => {
+    if (previouslyOpened !== undefined && previouslyOpened !== element) {
+      previouslyOpened.classList.remove('q-and-a-open');
+      previouslyOpened.nextElementSibling.classList.remove('q-and-a-open');
+    }
+
+    if (!element.classList.contains('q-and-a-open')) {
+      element.classList.add('q-and-a-open');
+      element.nextElementSibling.classList.add('q-and-a-open');
+      previouslyOpened = element;
+    } else {
+      element.classList.remove('q-and-a-open');
+      element.nextElementSibling.classList.remove('q-and-a-open');
+    }
   });
 });
