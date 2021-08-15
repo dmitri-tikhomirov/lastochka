@@ -25,6 +25,7 @@
   media="(min-width: 1249px)">
 <script src="scripts/main.js" defer></script>
 <link rel="stylesheet" href="css/main.css">
+<script></script>
 </head>
 
 <body>
@@ -32,39 +33,43 @@
   <div class="cover-img">
     <div class="cover-img-sm-scr">
       <div class="header-placeholder"></div>
+
       <div class="header-wrapper-wrapper">
         <div class="header-wrapper">
           <header class="header container">
-            <div class="logo">
-              <a href="#cover" class="logo-img-link">
+            <div class="header-logo">
+              <a href="#cover" class="header-logo-link">
                 <img src="images/global/logo.svg" alt="Логотип сети пансионатов"
-                  width="1" height="1" class="logo-img">
+                  width="1" height="1" class="header-logo-img">
               </a>
-              <p class="logo-text">Сеть&nbsp;пансионатов<br>«Ласточка»</p>
+              <p class="header-logo-text">Сеть&nbsp;пансионатов<br>
+                «Ласточка»</p>
             </div>
 
             <div class="header-nav-and-contacts">
               <div class="header-contacts">
-                <a href="https://wa.me/79186522334" class="whatsapp">
-                  <svg viewBox="0 0 448 448" class="whatsapp-icon">
-                    <use href="images/global/sprite.svg#whatsapp"/>
+                <a href="https://wa.me/79186522334" class="header-whatsapp
+                    click-area">
+                  <svg viewBox="0 0 448 448" class="header-whatsapp-icon">
+                    <use href="images/global/sprite.svg#whatsapp-v4"/>
                   </svg>
-                  <p class="whatsapp-text">Whatsapp</p>
+                  <p class="header-whatsapp-text">Whatsapp</p>
                 </a>
 
-                <div class="phone">
-                  <a href="tel:+79186522334" class="phone-icon-link"
+                <div class="header-phone">
+                  <a href="tel:+79186522334"
+                      class="header-phone-icon-link click-area"
                       aria-label="+7 918 652-23-34">
-                    <svg viewBox="0 0 511.9921875 511.9921875"
-                        class="phone-icon">
-                      <use href="images/global/sprite.svg#phone"/>
+                    <svg viewBox="0 0 1408 1408"
+                        class="header-phone-icon">
+                      <use href="images/global/sprite.svg#phone-v4"/>
                     </svg>
                   </a>
-                  <div class="phone-text">
-                    <a href="tel:+79186522334" class="phone-number">
+                  <div class="header-phone-text">
+                    <a href="tel:+79186522334" class="header-phone-number">
                       +7 918 652-23-34
                     </a>
-                    <p class="phone-hours">Ежедневно с 9:00 до 22:00</p>
+                    <p class="header-phone-hours">Ежедневно с 9:00 до 22:00</p>
                   </div>
                 </div>
 
@@ -72,28 +77,30 @@
               </div>
 
               <nav class="nav nav-no-javascript">
-                <a href="#about-us" class="nav-item">О нас</a>
-                <a href="#" class="nav-item">Фото</a>
-                <a href="#for-nursing" class="nav-item">Показания</a>
-                <a href="#against-nursing" class="nav-item">Противопоказания</a>
-                <a href="#q-and-a" class="nav-item">Вопросы и ответы</a>
-                <a href="#" class="nav-item">Контакты</a>
+                <a href="#about-us" class="nav-item click-area">О нас</a>
+                <a href="#" class="nav-item click-area">Фото</a>
+                <a href="#for-nursing" class="nav-item click-area">Показания</a>
+                <a href="#against-nursing" class="nav-item click-area">
+                  Противопоказания</a>
+                <a href="#q-and-a" class="nav-item click-area">Вопросы и
+                  ответы</a>
+                <a href="#" class="nav-item click-area">Контакты</a>
 
                 <div class="nav-more-and-dropdown">
-                  <div class="nav-more">
+                  <div class="nav-more click-area">
                     <p>Еще</p>
                     <svg viewBox="0 0 297.30859375 168.65234375"
                         class="nav-more-icon">
-                      <use href="images/global/sprite.svg#caret-down"/>
+                      <use href="images/global/sprite.svg#caret-down-v5"/>
                     </svg>
                   </div>
 
-                  <div class="nav-mobile">
+                  <div class="nav-mobile click-area">
                     <svg viewBox="0 0 448 392" class="nav-mobile-icon">
-                      <use href="images/global/sprite.svg#bars"/>
+                      <use href="images/global/sprite.svg#bars-v5"/>
                     </svg>
                     <svg viewBox="0 0 352 352" class="nav-close-icon">
-                      <use href="images/global/sprite.svg#times"/>
+                      <use href="images/global/sprite.svg#times-v5"/>
                     </svg>
                   </div>
 
@@ -115,23 +122,19 @@
                     <div class="nav-contacts">
                       <div class="nav-line-separator"></div>
 
-                      <div class="phone">
-                        <a href="tel:+79186522334" class="phone-icon-link">
-                          <svg viewBox="0 0 511.9921875 511.9921875"
-                              class="phone-icon">
-                            <use href="images/global/sprite.svg#phone"/>
-                          </svg>
-                        </a>
-                        <a href="tel:+79186522334" class="phone-number">
-                          +7 918 652-23-34
-                        </a>
-                      </div>
-
-                      <a href="https://wa.me/79186522334" class="whatsapp">
-                        <svg viewBox="0 0 448 448" class="whatsapp-icon">
-                          <use href="images/global/sprite.svg#whatsapp"/>
+                      <a href="tel:+79186522334" class="nav-contact nav-phone">
+                        <svg viewBox="0 0 1408 1408" class="nav-contact-icon">
+                          <use href="images/global/sprite.svg#phone-v4"/>
                         </svg>
-                        <p class="whatsapp-text">Whatsapp</p>
+                        <p href="tel:+79186522334" class="nav-contact-text">
+                          +7 918 652-23-34</p>
+                      </a>
+
+                      <a href="https://wa.me/79186522334" class="nav-contact">
+                        <svg viewBox="0 0 448 448" class="nav-contact-icon">
+                          <use href="images/global/sprite.svg#whatsapp-v4"/>
+                        </svg>
+                        <p class="nav-contact-text">Whatsapp</p>
                       </a>
 
                       <a href="#" class="btn">Перезвоните мне</a>
@@ -369,7 +372,7 @@
     <button class="q-and-a-question">
       Какие документы нужны для оформления в пансионат?
       <svg viewBox="0 0 436.6875 265.0078125" class="q-and-a-icon">
-        <use href="images/global/sprite.svg#chevron-down"/>
+        <use href="images/global/sprite.svg#chevron-down-v5"/>
       </svg>
     </button>
 
@@ -392,7 +395,7 @@
     <button class="q-and-a-question">
       Какой минимальный срок пребывания в пансионате?
       <svg viewBox="0 0 436.6875 265.0078125" class="q-and-a-icon">
-        <use href="images/global/sprite.svg#chevron-down"/>
+        <use href="images/global/sprite.svg#chevron-down-v5"/>
       </svg>
     </button>
 
@@ -407,7 +410,7 @@
     <button class="q-and-a-question">
       От чего зависит стоимость проживания в пансионате?
       <svg viewBox="0 0 436.6875 265.0078125" class="q-and-a-icon">
-        <use href="images/global/sprite.svg#chevron-down"/>
+        <use href="images/global/sprite.svg#chevron-down-v5"/>
       </svg>
     </button>
 
@@ -431,7 +434,7 @@
     <button class="q-and-a-question">
       Что не входит в стоимость проживания в пансионате?
       <svg viewBox="0 0 436.6875 265.0078125" class="q-and-a-icon">
-        <use href="images/global/sprite.svg#chevron-down"/>
+        <use href="images/global/sprite.svg#chevron-down-v5"/>
       </svg>
     </button>
 
@@ -452,7 +455,7 @@
     <button class="q-and-a-question">
       Как быть с покупкой лекарств?
       <svg viewBox="0 0 436.6875 265.0078125" class="q-and-a-icon">
-        <use href="images/global/sprite.svg#chevron-down"/>
+        <use href="images/global/sprite.svg#chevron-down-v5"/>
       </svg>
     </button>
 
@@ -466,7 +469,7 @@
     <button class="q-and-a-question">
       Можете ли вы помочь с перевозкой до пансионата?
       <svg viewBox="0 0 436.6875 265.0078125" class="q-and-a-icon">
-        <use href="images/global/sprite.svg#chevron-down"/>
+        <use href="images/global/sprite.svg#chevron-down-v5"/>
       </svg>
     </button>
 
@@ -483,7 +486,7 @@
     <button class="q-and-a-question">
       Какие вещи нужно взять с собой?
       <svg viewBox="0 0 436.6875 265.0078125" class="q-and-a-icon">
-        <use href="images/global/sprite.svg#chevron-down"/>
+        <use href="images/global/sprite.svg#chevron-down-v5"/>
       </svg>
     </button>
 
@@ -524,7 +527,7 @@
     <button class="q-and-a-question">
       Что подарить пожилому человеку во время посещения?
       <svg viewBox="0 0 436.6875 265.0078125" class="q-and-a-icon">
-        <use href="images/global/sprite.svg#chevron-down"/>
+        <use href="images/global/sprite.svg#chevron-down-v5"/>
       </svg>
     </button>
 
@@ -548,6 +551,53 @@
       </div>
     </div>
   </section>
+</div>
+
+<div class="footer-wrapper">
+  <footer class="container">
+    <div class="footer-text-and-contacts">
+      <div class="footer-text">
+        <p>Сеть пансионатов для пожилых людей (частных домов престарелых) в
+          Краснодаре. Качественный уход за пожилыми людьми.</p>
+      </div>
+
+      <div class="footer-contacts">
+        <a href="tel:+79186522334"
+            class="footer-contact footer-phone click-area">
+          <svg viewBox="0 0 1408 1408" class="footer-contact-icon">
+            <use href="images/global/sprite.svg#phone-v4"/>
+          </svg>
+          <p class="footer-contact-text">+7 918 652-23-34</p>
+        </a>
+
+        <a href="https://wa.me/79186522334" class="footer-contact click-area">
+          <svg viewBox="0 0 448 448" class="footer-contact-icon">
+            <use href="images/global/sprite.svg#whatsapp-v4"/>
+          </svg>
+          <p class="footer-contact-text">Whatsapp</p>
+        </a>
+
+        <a href="mailto:lastochkakrd@yandex.ru"
+            class="footer-contact click-area">
+          <svg viewBox="0 0 1792 1408" class="footer-contact-icon">
+            <use href="images/global/sprite.svg#envelope-v4"/>
+          </svg>
+          <p class="footer-contact-text">lastochkakrd@yandex.ru</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-line-separator"></div>
+
+    <div class="footer-copyright">
+      <p class="footer-copyright-text">© Сеть пансионатов «Ласточка»</p>
+
+      <a href="#cover" class="footer-logo">
+        <img src="images/global/logo.svg" alt="Логотип сети пансионатов"
+          width="1" height="1" class="footer-logo-img">
+      </a>
+    </div>
+  </footer>
 </div>
 </body>
 </html>

@@ -213,10 +213,6 @@ ul, ol {
 
 .section-heading {
   padding-bottom: var(--space-xxl);
-}
-
-.section-heading,
-.section-sub-heading {
   text-align: center;
 }
 
@@ -237,6 +233,19 @@ ul, ol {
   .grid {
     grid-template-columns: 1fr;
   }
+}
+
+.click-area {
+  position: relative;
+}
+
+.click-area::after {
+  content: "";
+  position: absolute;
+  top: calc(0px - var(--space-s));
+  bottom: calc(0px - var(--space-s));
+  left: calc(0px - var(--space-m));
+  right: calc(0px - var(--space-m));
 }
 
 .hide {
@@ -471,113 +480,6 @@ ul, ol {
 }
 
 /*******************************************************************************
-* Logo, whatsapp, phone *
-*******************************************************************************/
-
-.logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo-img-link {
-  transition: none;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .logo-img-link:hover {
-    opacity: 1;
-  }
-}
-
-.logo-img {
-  height: calc(5 * var(--text-s));
-  width: auto;
-}
-
-.logo-text {
-  font: 500 var(--text-s)/var(--line-height-s) "Alegreya SC", Arial, sans-serif;
-  margin-left: var(--space-l);
-}
-
-.whatsapp,
-.phone-icon-link {
-  position: relative; /* For clickable areas */
-}
-
-.whatsapp::after,
-.phone-icon-link::after {
-  content: "";
-  position: absolute;
-  top: calc(0px - var(--space-s));
-  bottom: calc(0px - var(--space-s));
-  left: calc(0px - var(--space-m));
-  right: calc(0px - var(--space-m));
-}
-
-.whatsapp {
-  display: flex;
-  align-items: center;
-  transition: none;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .whatsapp:hover {
-    opacity: 1;
-  }
-}
-
-.whatsapp-icon {
-  fill: var(--color-black);
-  height: var(--text-l);
-  transition: opacity var(--trans-time-s) var(--trans-func);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .whatsapp:hover .whatsapp-icon {
-    opacity: var(--opacity-l);
-  }
-}
-
-.whatsapp-text {
-  font-size: var(--text-xs);
-  opacity: var(--opacity-s);
-  margin-left: var(--space-s);
-}
-
-.phone {
-  display: flex;
-  align-items: center;
-}
-
-.phone-icon {
-  fill: var(--color-red);
-  height: var(--text-xxl);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .phone-icon-link:hover {
-    opacity: var(--opacity-s);
-  }
-}
-
-.phone-text {
-  margin-left: var(--space-m);
-}
-
-.phone-number {
-  display: inline-block;
-  font-size: var(--text-m);
-  font-weight: bold;
-  color: var(--color-black);
-}
-
-.phone-hours {
-  font-size: var(--text-xs);
-  opacity: var(--opacity-s);
-  margin-top: var(--space-xxs);
-}
-
-/*******************************************************************************
 * Cover *
 *******************************************************************************/
 
@@ -712,18 +614,43 @@ ul, ol {
   padding-top: 0;
 }
 
+.header-logo {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo-link {
+  transition: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .header-logo-link:hover {
+    opacity: 1;
+  }
+}
+
+.header-logo-img {
+  height: calc(5 * var(--text-s));
+  width: auto;
+}
+
 @media (max-width: /*breakpoint*/480px) {
-  .header .logo-img {
+  .header-logo-img {
     height: calc(4 * var(--text-s));
   }
 }
 
-.header-sticky .logo-img {
+.header-sticky .header-logo-img {
   height: calc(3.5 * var(--text-s));
 }
 
+.header-logo-text {
+  font: 500 var(--text-s)/var(--line-height-s) "Alegreya SC", Arial, sans-serif;
+  margin-left: var(--space-l);
+}
+
 @media (max-width: 360px) {
-  .header .logo-text {
+  .header-logo-text {
     display: none;
   }
 }
@@ -759,17 +686,96 @@ ul, ol {
   }
 }
 
-@media (max-width: /*breakpoint*/840px) {
-  .header-contacts .whatsapp-text,
-  .header-contacts .phone-text {
-    display: none;
+.header-whatsapp {
+  display: flex;
+  align-items: center;
+  transition: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .header-whatsapp:hover {
+    opacity: 1;
   }
 }
 
 @media (max-width: 400px) {
-  .header-contacts .whatsapp {
+  .header-whatsapp {
     display: none;
   }
+}
+
+@media not all and (max-width: /*breakpoint*/480px) {
+  .header-sticky .header-whatsapp {
+    display: none;
+  }
+}
+
+.header-whatsapp-icon {
+  fill: var(--color-black);
+  height: var(--text-l);
+  transition: opacity var(--trans-time-s) var(--trans-func);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .header-whatsapp:hover .header-whatsapp-icon {
+    opacity: var(--opacity-l);
+  }
+}
+
+.header-whatsapp-text {
+  font-size: var(--text-xs);
+  opacity: var(--opacity-s);
+  margin-left: var(--space-s);
+}
+
+@media (max-width: /*breakpoint*/840px) {
+  .header-whatsapp-text {
+    display: none;
+  }
+}
+
+.header-phone {
+  display: flex;
+  align-items: center;
+}
+
+@media not all and (max-width: /*breakpoint*/480px) {
+  .header-sticky .header-phone  {
+    display: none;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .header-phone-icon-link:hover {
+    opacity: var(--opacity-s);
+  }
+}
+
+.header-phone-icon {
+  fill: var(--color-red);
+  height: var(--text-xxl);
+}
+
+.header-phone-text {
+  margin-left: var(--space-m);
+}
+
+@media (max-width: /*breakpoint*/840px) {
+  .header-phone-text {
+    display: none;
+  }
+}
+
+.header-phone-number {
+  display: inline-block;
+  font-size: var(--text-m);
+  font-weight: bold;
+}
+
+.header-phone-hours {
+  font-size: var(--text-xs);
+  opacity: var(--opacity-s);
+  margin-top: var(--space-xxs);
 }
 
 .header-contacts .btn {
@@ -783,8 +789,6 @@ ul, ol {
 }
 
 @media not all and (max-width: /*breakpoint*/480px) {
-  .header-sticky .header-contacts .whatsapp,
-  .header-sticky .header-contacts .phone,
   .header-sticky .header-contacts .btn {
     display: none;
   }
@@ -843,27 +847,6 @@ ul, ol {
 
 .nav-item,
 .nav-more,
-.nav-mobile {
-  position: relative; /* For clickable areas */
-}
-
-.nav-item::after,
-.nav-more::after,
-.nav-mobile::after {
-  content: "";
-  position: absolute;
-  top: calc(0px - var(--space-s));
-  bottom: calc(0px - var(--space-s));
-  left: calc(0px - var(--space-m));
-  right: calc(0px - var(--space-m));
-}
-
-.nav-mobile::after { /* On top of dropdown */
-  z-index: 12;
-}
-
-.nav-item,
-.nav-more,
 .nav-item-dropdown {
   font-weight: 600;
   text-transform: uppercase;
@@ -915,6 +898,48 @@ ul, ol {
   transform: rotate(180deg);
 }
 
+.nav-mobile {
+  display: none;
+}
+
+@media (max-width: /*breakpoint*/480px) {
+  .nav-mobile {
+    display: block;
+    position: relative; /* For closing icon */
+    cursor: pointer;
+  }
+
+  .nav-mobile::after { /* Clickable area on top of dropdown */
+    z-index: 12;
+  }
+
+  .nav-mobile-icon,
+  .nav-close-icon {
+    height: var(--text-xxl);
+    transition: opacity var(--trans-time-s) var(--trans-func);
+  }
+
+  .nav-mobile-icon {
+    fill: var(--color-red);
+  }
+
+  .nav-dropdown-open .nav-mobile-icon {
+    opacity: 0;
+  }
+
+  .nav-close-icon {
+    fill: var(--color-red);
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+  }
+
+  .nav-dropdown-open .nav-close-icon {
+    opacity: var(--opacity-l);
+  }
+}
+
 .nav-dropdown {
   position: absolute;
   z-index: 11;
@@ -922,6 +947,7 @@ ul, ol {
   top: 100%;
   margin-top: var(--space-l);
   padding: var(--space-l) 0;
+  text-align: right;
   border-radius: var(--space-s);
   background-color: var(--color-white);
   box-shadow: var(--shadow-s) var(--color-shadow);
@@ -934,10 +960,11 @@ ul, ol {
 
 .nav-dropdown::before { /* Hoverable top margin for dropdown */
   content: "";
-  width: 100%;
   height: var(--space-l);
   position: absolute;
   bottom: 100%;
+  left: 0;
+  right: 0;
 }
 
 @media (max-width: /*breakpoint*/480px) {
@@ -971,46 +998,7 @@ ul, ol {
 
 .nav-item-dropdown {
   display: block;
-  text-align: right;
   padding: var(--space-m) var(--space-xxl);
-}
-
-.nav-mobile {
-  display: none;
-}
-
-@media (max-width: /*breakpoint*/480px) {
-  .nav-mobile {
-    display: block;
-    position: relative; /* For closing icon */
-    cursor: pointer;
-  }
-
-  .nav-mobile-icon,
-  .nav-close-icon {
-    height: var(--text-xxl);
-    transition: opacity var(--trans-time-s) var(--trans-func);
-  }
-
-  .nav-mobile-icon {
-    fill: var(--color-red);
-  }
-
-  .nav-dropdown-open .nav-mobile-icon {
-    opacity: 0;
-  }
-
-  .nav-close-icon {
-    fill: var(--color-red);
-    position: absolute;
-    top: 0;
-    right: 0;
-    opacity: 0;
-  }
-
-  .nav-dropdown-open .nav-close-icon {
-    opacity: var(--opacity-l);
-  }
 }
 
 .nav-contacts {
@@ -1019,31 +1007,44 @@ ul, ol {
 
 @media (max-width: /*breakpoint*/640px) {
   .nav-contacts {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    display: block;
     white-space: nowrap;
-  }
-
-  .nav-contacts > * {
-    margin: var(--space-m) var(--space-xxl);
   }
 
   .nav-line-separator {
     border-top: 1px solid var(--color-gray-light);
-    align-self: stretch;
+    margin: var(--space-m) var(--space-xxl);
   }
 
-  .nav-contacts .phone-icon {
+  .nav-contact {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--space-m) var(--space-xxl);
+  }
+
+  .nav-contact-icon {
+    fill: var(--color-black);
     height: var(--text-l);
   }
 
-  .nav-contacts .phone-number {
+  .nav-phone .nav-contact-icon {
+    fill: var(--color-red);
+  }
+
+  .nav-contact-text {
+    font-size: var(--text-xs);
     margin-left: var(--space-s);
+  }
+
+  .nav-phone .nav-contact-text {
+    font-size: var(--text-m);
+    font-weight: bold;
   }
 
   .nav-contacts .btn {
     font-size: var(--text-s);
+    margin: var(--space-m) var(--space-xxl);
   }
 }
 
@@ -1080,7 +1081,7 @@ ul, ol {
 
 .about-us-text {
   display: flex;
-  flex-flow: row wrap;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: calc(0px - var(--space-xl));
   margin-left: calc(0px - var(--space-3xl));
@@ -1156,6 +1157,11 @@ ul, ol {
   background-color: var(--color-platinum);
 }
 
+.against-nursing-wrapper {
+  background-color: var(--color-gray-dark);
+  color: var(--color-gray-light);
+}
+
 .for-nursing.section,
 .against-nursing.section {
   padding-top: var(--space-4xl);
@@ -1165,11 +1171,6 @@ ul, ol {
 .for-nursing .section-heading,
 .against-nursing .section-heading {
   padding-bottom: var(--space-3xl);
-}
-
-.against-nursing-wrapper {
-  background-color: var(--color-gray-dark);
-  color: var(--color-gray-light);
 }
 
 .against-nursing .styled-list > *::before {
@@ -1250,4 +1251,96 @@ ul, ol {
   height: var(--space-s);
   background-color: var(--color-red);
   margin-right: var(--space-m);
+}
+
+/*******************************************************************************
+* Footer *
+*******************************************************************************/
+
+.footer-wrapper {
+  background-color: var(--color-gray-dark);
+  color: var(--color-gray-light);
+}
+
+.footer-text-and-contacts {
+  padding-top: var(--space-l);
+  padding-bottom: var(--space-l);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: calc(0px - var(--space-4xl));
+}
+
+.footer-text-and-contacts > * {
+  margin: var(--space-l) 0 var(--space-l) var(--space-4xl);
+}
+
+.footer-text {
+  flex: 1 1 300px;
+  max-width: 550px;
+  font-size: var(--text-s);
+}
+
+.footer-contacts > * + * {
+  margin-top: var(--space-m);
+}
+
+.footer-contact {
+  display: flex;
+  align-items: center;
+}
+
+.footer-contact-icon {
+  fill: #fff;
+  height: var(--text-m);
+}
+
+.footer-contact-text {
+  font-size: var(--text-xs);
+  color: var(--color-gray-light);
+  margin-left: var(--space-s);
+}
+
+.footer-phone .footer-contact-text {
+  font-size: var(--text-s);
+}
+
+.footer-line-separator {
+  border-top: 1px solid hsl(0, 0%, 30%);
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.footer-copyright {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-copyright-text {
+  font: 500 var(--text-s) "Alegreya SC", Arial, sans-serif;
+  text-align: center;
+}
+
+.footer-copyright > * + * {
+  margin-top: var(--space-m);
+}
+
+.footer-logo {
+  transition: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer-logo:hover {
+    opacity: 1;
+  }
+}
+
+.footer-logo-img {
+  height: calc(4.5 * var(--text-s));
+  width: auto;
 }
