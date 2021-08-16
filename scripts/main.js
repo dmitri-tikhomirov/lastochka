@@ -243,7 +243,7 @@ function smoothScrollTo(pos, time) {
 }
 
 headerWrapperWrapper.classList.add('header-sticky');
-const headerStickyHeight = headerWrapperWrapper.offsetHeight;
+const headerStickyHeight = headerWrapper.offsetHeight;
 headerWrapperWrapper.classList.remove('header-sticky');
 
 document.querySelectorAll('a[href^="#"]').forEach((element) => {
