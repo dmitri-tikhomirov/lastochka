@@ -206,14 +206,32 @@ ul, ol {
   padding-right: var(--website-padding);
 }
 
+.container-s {
+  max-width: 850px;
+}
+
 .section {
   padding-top: var(--space-3xl);
   padding-bottom: var(--space-3xl);
 }
 
+.section-more-pad {
+  padding-top: var(--space-4xl);
+  padding-bottom: var(--space-4xl);
+}
+
 .section-heading {
   padding-bottom: var(--space-xxl);
   text-align: center;
+}
+
+.section-more-pad .section-heading {
+  padding-bottom: var(--space-3xl);
+}
+
+.container-s .section-heading {
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .section-sub-heading {
@@ -1156,17 +1174,6 @@ ul, ol {
   color: var(--color-gray-light);
 }
 
-.for-nursing.section,
-.against-nursing.section {
-  padding-top: var(--space-4xl);
-  padding-bottom: var(--space-4xl);
-}
-
-.for-nursing .section-heading,
-.against-nursing .section-heading {
-  padding-bottom: var(--space-3xl);
-}
-
 .against-nursing .styled-list > *::before {
   background-color: var(--color-platinum-dark);
   box-shadow: var(--shadow-s) var(--color-shadow-inverse);
@@ -1218,10 +1225,6 @@ ul, ol {
   visibility: visible;
   position: static;
   opacity: 1;
-}
-
-.q-and-a-answer {
-  max-width: 800px;
 }
 
 .q-and-a-answer > * + * {
@@ -1334,7 +1337,31 @@ ul, ol {
 
 #contacts-map {
   width: 100%;
-  height: 360px;
+  height: 380px;
+}
+
+/*******************************************************************************
+* Corona *
+*******************************************************************************/
+
+.corona-wrapper {
+  background-color: var(--color-platinum);
+}
+
+.corona-list > * {
+  display: flex;
+  align-items: flex-start;
+}
+
+.corona-list > * + * {
+  margin-top: var(--space-xxl);
+}
+
+.corona-marker {
+  flex-shrink: 0;
+  height: var(--text-l);
+  fill: var(--color-red);
+  margin-right: var(--space-m);
 }
 
 /*******************************************************************************
@@ -1362,7 +1389,7 @@ ul, ol {
 
 .footer-text {
   flex: 1 1 300px;
-  max-width: 550px;
+  max-width: 450px;
   font-size: var(--text-s);
 }
 
