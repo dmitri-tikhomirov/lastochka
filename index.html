@@ -24,6 +24,8 @@
 <link rel="preload" href="images/cover/cover-big-92.jpg" as="image"
   media="(min-width: 1249px)">
 <script src="scripts/main.js" defer></script>
+<script data-src="https://api-maps.yandex.ru/2.1/?apikey=d183450f-f1ab-4e90-bb81-4f53e839afb9&lang=ru_RU"
+  type="text/javascript" id="contacts-map-script"></script>
 <link rel="stylesheet" href="css/main.css">
 </head>
 
@@ -56,8 +58,7 @@
                 </a>
 
                 <div class="header-phone">
-                  <a href="tel:+79186522334"
-                      class="header-phone-icon-link click-area"
+                  <a href="tel:+79186522334" class="click-area"
                       aria-label="+7 918 652-23-34">
                     <svg viewBox="0 0 1408 1408"
                         class="header-phone-icon">
@@ -83,7 +84,7 @@
                   Противопоказания</a>
                 <a href="#q-and-a" class="nav-item click-area">Вопросы и
                   ответы</a>
-                <a href="#" class="nav-item click-area">Контакты</a>
+                <a href="#contacts" class="nav-item click-area">Контакты</a>
 
                 <div class="nav-more-and-dropdown">
                   <div class="nav-more click-area">
@@ -116,7 +117,7 @@
                       Противопоказания</a>
                     <a href="#q-and-a" class="nav-item-dropdown">Вопросы
                       и ответы</a>
-                    <a href="#" class="nav-item-dropdown">Контакты</a>
+                    <a href="#contacts" class="nav-item-dropdown">Контакты</a>
 
                     <div class="nav-contacts">
                       <div class="nav-line-separator"></div>
@@ -167,7 +168,7 @@
           самую уязвленную группу населения, при этом их проживание будет
           скрашено повышенным комфортом.</p>
 
-        <div class="cover-buttons-wrapper">
+        <div>
           <div class="cover-buttons">
             <a href="#" class="btn btn-lg">Наши меры против вируса</a>
             <a href="#" class="btn btn-lg btn-filled">Заказать звонок</a>
@@ -551,6 +552,83 @@
     </div>
   </section>
 </div>
+
+<section class="contacts container section" id="contacts">
+  <h2 class="section-heading">Контакты</h2>
+
+  <p>Звоните или пишите по любым вопросам. Запишитесь на ознакомительное
+    посещение и воочию все проверьте.</p>
+
+  <div>
+    <div class="contacts-tiles">
+      <div class="contacts-contact contacts-phone">
+        <a href="tel:+79186522334" class="click-area"
+            aria-label="+7 918 652-23-34">
+          <svg viewBox="0 0 1408 1408" class="contacts-contact-icon">
+            <use href="images/global/sprite.svg#phone-v4"/>
+          </svg>
+        </a>
+        <div class="contacts-contact-text">
+          <a href="tel:+79186522334" class="contacts-phone-number">
+            +7 918 652-23-34</a>
+          <p class="contacts-phone-hours">Ежедневно с 9:00 до 22:00</p>
+        </div>
+      </div>
+
+      <a href="https://wa.me/79186522334"
+          class="contacts-contact contacts-whatsapp click-area">
+        <svg viewBox="0 0 448 448" class="contacts-contact-icon">
+          <use href="images/global/sprite.svg#whatsapp-v4"/>
+        </svg>
+        <p class="contacts-contact-text">Whatsapp</p>
+      </a>
+
+      <a href="mailto:lastochkakrd@yandex.ru"
+          class="contacts-contact click-area">
+        <svg viewBox="0 0 1792 1408" class="contacts-contact-icon">
+          <use href="images/global/sprite.svg#envelope-v4"/>
+        </svg>
+        <p class="contacts-contact-text">lastochkakrd@yandex.ru</p>
+      </a>
+    </div>
+  </div>
+
+  <p>Наш адрес:</p>
+
+  <div class="contacts-addresses">
+    <div class="contacts-contact">
+      <svg viewBox="0 0 1024 1536" class="contacts-contact-icon">
+        <use href="images/global/sprite.svg#map-marker-v4"/>
+      </svg>
+      <p class="contacts-contact-text">Краснодар,<br>ул. Дементия Красюка, 34</p>
+    </div>
+  </div>
+
+  <p>Оставьте отзыв о нас на крупнейших сайтах. Ваш отзыв очень поможет нам
+    в работе.</p>
+
+  <div>
+    <div class="contacts-reviews">
+      <a href="https://www.google.com/maps/search/?api=1&query=45.0767,39.0125&query_place_id=ChIJn7i-YUdF8EARn2jmqgi_mxc"
+          class="btn contacts-google">
+        Мы в Google</a>
+      <a href="https://yandex.ru/maps/org/lastochka/182652923033"
+          class="btn contacts-yandex">
+        Мы в Яндексе</a>
+      <a href="https://2gis.ru/krasnodar/firm/70000001043497235"
+          class="btn contacts-2gis">
+        Мы в 2ГИС</a>
+      <a href="https://krasnodar.zoon.ru/public_services/pansionat_dlya_pozhilyh_lyudej_lastochka/"
+          class="btn contacts-zoon">
+        Мы на Zoon.ru</a>
+    </div>
+  </div>
+
+  <div id="contacts-map"></div>
+
+  <p><i>Нажмите один раз где-либо внутри карты, чтобы включить возможность
+    прокрутки.</i></p>
+</section>
 
 <div class="footer-wrapper">
   <footer class="container">

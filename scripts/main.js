@@ -184,7 +184,7 @@ function sticky(entries, observer) {
 };
 
 /*******************************************************************************
-* Lazy loading images *
+* Lazy loading images and map *
 *******************************************************************************/
 
 const lazyObserver = new IntersectionObserver(lazyLoad, {
@@ -197,11 +197,60 @@ document.querySelectorAll('.lazy').forEach((element) => {
   lazyObserver.observe(element);
 });
 
+// Observe map
+lazyObserver.observe(document.querySelector('#contacts-map'));
+
 // Change the "src" and stop observing
 function lazyLoad(entries, observer) {
   entries.forEach((entry) => {
     if (entry.intersectionRatio > 0) {
-      entry.target.src = entry.target.dataset.src;
+      if (entry.target.id === 'contacts-map') {
+        document.querySelector('#contacts-map-script').src =
+          document.querySelector('#contacts-map-script').dataset.src;
+
+        document.querySelector('#contacts-map-script')
+            .addEventListener('load', () => {
+          ymaps.ready(() => {
+            const myMap = new ymaps.Map('contacts-map', {
+              center: [45.07682442, 39.01240056],
+              zoom: 14,
+              controls: []
+            });
+
+            myMap.geoObjects.add(new ymaps.Placemark(
+              [45.07682442, 39.01240056],
+              {},
+              {
+                preset: 'islands#homeIcon',
+                iconColor: 'hsl(4, 77%, 41%)'
+              }
+            ));
+
+            myMap.controls.add('geolocationControl', {
+              size: 'small'
+            });
+            myMap.controls.add('zoomControl', {
+              size: 'small'
+            });
+            myMap.controls.add('trafficControl', {
+              size: 'large'
+            });
+
+            myMap.behaviors.disable(['scrollZoom', 'drag']);
+
+            document.addEventListener('click', (event) => {
+              if (document.querySelector('#contacts-map').contains(event.target)) {
+                myMap.behaviors.enable(['scrollZoom', 'drag']);
+              } else {
+                myMap.behaviors.disable(['scrollZoom', 'drag']);
+              }
+            });
+          });
+        }, {once: true});
+      } else {
+        entry.target.src = entry.target.dataset.src;
+      }
+
       observer.unobserve(entry.target);
     }
   });
