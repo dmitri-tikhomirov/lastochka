@@ -1,4 +1,14 @@
 /*******************************************************************************
+* Focus *
+*******************************************************************************/
+
+document.querySelectorAll('a, button').forEach((element) => {
+  element.addEventListener('mousedown', (event) => {
+    event.preventDefault();
+  });
+});
+
+/*******************************************************************************
 * Navigation *
 *******************************************************************************/
 
@@ -47,8 +57,9 @@ document.addEventListener('click', (event) => {
       dropdownOpened = false;
       return;
     } else {
-      const navDropdownLinks =
-        document.querySelectorAll('.nav-dropdown a[href]');
+      const navDropdownLinks = document.querySelectorAll(
+        '.nav-dropdown a[href], .nav-dropdown button'
+      );
 
       // Close dropdown on tapping or clicking an inside link
       navDropdownLinks.forEach((element) => {
@@ -239,7 +250,8 @@ function lazyLoad(entries, observer) {
             myMap.behaviors.disable(['scrollZoom', 'drag']);
 
             document.addEventListener('click', (event) => {
-              if (document.querySelector('#contacts-map').contains(event.target)) {
+              if (document.querySelector('#contacts-map')
+                  .contains(event.target)) {
                 myMap.behaviors.enable(['scrollZoom', 'drag']);
               } else {
                 myMap.behaviors.disable(['scrollZoom', 'drag']);
@@ -327,3 +339,23 @@ document.querySelectorAll('.q-and-a-question').forEach((element) => {
     }
   });
 });
+
+/*******************************************************************************
+* Form *
+*******************************************************************************/
+
+const formWrapper = document.querySelector('.form-wrapper');
+
+document.querySelector('.form-close').addEventListener('click', () => {
+  formWrapper.classList.remove('form-shown');
+})
+
+document.querySelectorAll('.call-back').forEach((element) => {
+  element.addEventListener('click', () => {
+    formWrapper.classList.add('form-shown');
+  });
+});
+
+const formPhone = document.querySelector('#form-phone');
+const formName = document.querySelector('#form-name');
+const formMessage = document.querySelector('#form-message');

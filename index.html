@@ -25,7 +25,7 @@
   media="(min-width: 1249px)">
 <script src="scripts/main.js" defer></script>
 <script data-src="https://api-maps.yandex.ru/2.1/?apikey=d183450f-f1ab-4e90-bb81-4f53e839afb9&lang=ru_RU"
-  type="text/javascript" id="contacts-map-script"></script>
+  id="contacts-map-script"></script>
 <link rel="stylesheet" href="css/main.css">
 </head>
 
@@ -73,7 +73,7 @@
                   </div>
                 </div>
 
-                <a href="#" class="btn">Перезвоните мне</a>
+                <button class="call-back btn">Перезвоните мне</button>
               </div>
 
               <nav class="nav nav-no-javascript">
@@ -87,22 +87,22 @@
                 <a href="#contacts" class="nav-item click-area">Контакты</a>
 
                 <div class="nav-more-and-dropdown">
-                  <div class="nav-more click-area">
-                    <p>Еще</p>
+                  <button class="nav-more click-area">
+                    Еще
                     <svg viewBox="0 0 297.30859375 168.65234375"
                         class="nav-more-icon">
                       <use href="images/global/sprite.svg#caret-down-v5"/>
                     </svg>
-                  </div>
+                  </button>
 
-                  <div class="nav-mobile click-area">
+                  <button class="nav-mobile click-area">
                     <svg viewBox="0 0 448 392" class="nav-mobile-icon">
                       <use href="images/global/sprite.svg#bars-v5"/>
                     </svg>
                     <svg viewBox="0 0 352 352" class="nav-close-icon">
                       <use href="images/global/sprite.svg#times-v5"/>
                     </svg>
-                  </div>
+                  </button>
 
                   <div class="nav-dropdown">
                     <div class="nav-dropdown-tr tr tr-up">
@@ -126,8 +126,7 @@
                         <svg viewBox="0 0 1408 1408" class="nav-contact-icon">
                           <use href="images/global/sprite.svg#phone-v4"/>
                         </svg>
-                        <p href="tel:+79186522334" class="nav-contact-text">
-                          +7 918 652-23-34</p>
+                        <p class="nav-contact-text">+7 918 652-23-34</p>
                       </a>
 
                       <a href="https://wa.me/79186522334" class="nav-contact">
@@ -137,7 +136,7 @@
                         <p class="nav-contact-text">Whatsapp</p>
                       </a>
 
-                      <a href="#" class="btn">Перезвоните мне</a>
+                      <button class="call-back btn">Перезвоните мне</button>
                     </div>
                   </div>
                 </div>
@@ -171,12 +170,57 @@
         <div>
           <div class="cover-buttons">
             <a href="#corona" class="btn btn-lg">Наши меры против вируса</a>
-            <a href="#" class="btn btn-lg btn-filled">Заказать звонок</a>
+            <button class="call-back btn btn-lg btn-filled">Заказать
+              звонок</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<div class="form-wrapper">
+  <section class="form-content">
+    <div class="form-close">
+      <button class="click-area">
+        <svg viewBox="0 0 352 352" class="form-close-icon">
+          <use href="images/global/sprite.svg#times-v5"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="form-heading">
+      <h2>Заказать звонок</h2>
+      <p class="form-sub-heading">Мы свяжемся с вами в ближайшее время</p>
+    </div>
+
+    <form action="#" class="form">
+      <div class="form-field">
+        <label for="form-phone">Телефон: <span class="form-required">*</span>
+          </label>
+        <input type="tel" id="form-phone" pattern="[0-9 ()+-]*"
+          title="Только цифры, пробел, плюс, скобки и дефис" required
+          class="form-input">
+      </div>
+
+      <div class="form-field">
+        <label for="form-name">Имя:</label>
+        <input type="text" id="form-name" class="form-input">
+      </div>
+
+      <div class="form-field">
+        <label for="form-message">Комментарий:</label>
+        <textarea id="form-message" maxlength="255" rows="3" class="form-input">
+          </textarea>
+      </div>
+
+      <p><span class="form-required">*</span> обязательное поле</p>
+
+      <div class="form-btn">
+        <button type="submit" class="btn">Отправить</button>
+      </div>
+    </form>
+  </section>
 </div>
 
 <section class="about-us container section" id="about-us">
@@ -585,7 +629,7 @@
         <p class="contacts-contact-text">Whatsapp</p>
       </a>
 
-      <a href="mailto:lastochkakrd@yandex.ru"
+      <a href="mailto:lastochkakrd@yandex.ru" target="_blank"
           class="contacts-contact click-area">
         <svg viewBox="0 0 1792 1408" class="contacts-contact-icon">
           <use href="images/global/sprite.svg#envelope-v4"/>
@@ -741,7 +785,7 @@
           <p class="footer-contact-text">Whatsapp</p>
         </a>
 
-        <a href="mailto:lastochkakrd@yandex.ru"
+        <a href="mailto:lastochkakrd@yandex.ru" target="_blank"
             class="footer-contact click-area">
           <svg viewBox="0 0 1792 1408" class="footer-contact-icon">
             <use href="images/global/sprite.svg#envelope-v4"/>

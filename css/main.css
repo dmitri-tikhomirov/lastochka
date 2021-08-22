@@ -53,7 +53,7 @@
   --color-platinum-dark: hsl(70, 13%, 42%);
   --color-green-dark:    hsl(70, 45%, 25%);
   --color-white:         hsl(0, 0%, 100%);
-  --color-gray-light:    hsl(0, 0%, 80%);
+  --color-gray-light:    hsl(0, 0%, 75%);
   --color-gray-dark:     hsl(0, 0%, 20%);
   --color-black:         hsl(0, 0%, 10%);
 
@@ -156,8 +156,8 @@ button {
   cursor: pointer;
 }
 
-a:focus-visible,
-button:focus-visible {
+a:focus,
+button:focus {
   outline: 2px solid var(--color-red);
   outline-offset: var(--space-xs);
 }
@@ -187,8 +187,27 @@ h3 {
   font-size: var(--text-l);
 }
 
-img, svg {
+img, svg,
+input, textarea {
   display: block;
+}
+
+input, textarea {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background-color: none;
+}
+
+textarea {
+  resize: none;
+  overflow: auto; /* In case some browsers default to "scroll" */
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px var(--color-black);
 }
 
 ul, ol {
@@ -885,8 +904,6 @@ ul, ol {
 .nav-more {
   display: flex;
   align-items: center;
-  cursor: pointer;
-  transition: opacity var(--trans-time-s) var(--trans-func);
 }
 
 @media (max-width: /*breakpoint*/480px) {
@@ -918,7 +935,13 @@ ul, ol {
   .nav-mobile {
     display: block;
     position: relative; /* For closing icon */
-    cursor: pointer;
+    transition: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .nav-mobile:hover {
+      opacity: 1;
+    }
   }
 
   .nav-mobile::after { /* Clickable area on top of dropdown */
@@ -1058,6 +1081,93 @@ ul, ol {
     font-size: var(--text-s);
     margin: var(--space-m) var(--space-xxl);
   }
+}
+
+/*******************************************************************************
+* Form *
+*******************************************************************************/
+
+.form-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  background-color: var(--color-shadow);
+  overflow: auto; /* Add a scrollbar if needed */
+  visibility: hidden;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity var(--trans-time-s) var(--trans-func),
+    visibility var(--trans-time-s) var(--trans-func);
+}
+
+.form-shown.form-wrapper {
+  visibility: visible;
+  opacity: 1;
+}
+
+.form-content {
+  background-color: var(--color-white);
+  border-radius: var(--space-s);
+  padding: var(--website-padding);
+  width: 100%;
+  margin: 0 var(--website-padding);
+  max-width: 480px;
+}
+
+.form-close {
+  text-align: right;
+}
+
+.form-close-icon {
+  height: var(--text-xxl);
+  fill: var(--color-red);
+}
+
+.form-heading {
+  text-align: center;
+  margin-top: var(--space-s);
+  margin-bottom: var(--space-xl);
+}
+
+.form-sub-heading {
+  font-style: italic;
+  margin-top: var(--space-s);
+}
+
+.form > * + * {
+  margin-top: var(--space-l);
+}
+
+.form-field > * + * {
+  margin-top: var(--space-xs);
+}
+
+.form-required {
+  color: var(--color-red);
+}
+
+.form-input {
+  width: 100%;
+  padding: var(--space-s);
+  border: 1px solid var(--color-black);
+  opacity: var(--opacity-l);
+  border-radius: var(--space-xs);
+  transition: opacity var(--trans-time-s) var(--trans-func);
+}
+
+.form-input:focus {
+  opacity: 1;
+}
+
+.form-btn {
+  text-align: center;
+  margin-top: var(--space-xxl);
 }
 
 /*******************************************************************************
