@@ -57,9 +57,7 @@ document.addEventListener('click', (event) => {
       dropdownOpened = false;
       return;
     } else {
-      const navDropdownLinks = document.querySelectorAll(
-        '.nav-dropdown a[href], .nav-dropdown button'
-      );
+      const navDropdownLinks = navDropdown.querySelectorAll('a[href], button');
 
       // Close dropdown on tapping or clicking an inside link
       navDropdownLinks.forEach((element) => {
@@ -195,7 +193,7 @@ function sticky(entries, observer) {
 };
 
 /*******************************************************************************
-* Lazy loading images and map *
+* Lazy loading images, video posters, map *
 *******************************************************************************/
 
 const lazyObserver = new IntersectionObserver(lazyLoad, {
@@ -205,6 +203,11 @@ const lazyObserver = new IntersectionObserver(lazyLoad, {
 
 // Observe each image
 document.querySelectorAll('.lazy').forEach((element) => {
+  lazyObserver.observe(element);
+});
+
+// Observe video posters
+document.querySelectorAll('.videos-video').forEach((element) => {
   lazyObserver.observe(element);
 });
 
@@ -259,8 +262,17 @@ function lazyLoad(entries, observer) {
             });
           });
         }, {once: true});
-      } else {
+      } else if (entry.target.hasAttribute('data-src')) {
         entry.target.src = entry.target.dataset.src;
+      } else if (entry.target.hasAttribute('data-poster')) {
+        entry.target.poster = entry.target.dataset.poster;
+
+        const shadow = getComputedStyle(entry.target.parentElement)
+          .getPropertyValue('--color-shadow-dark');
+
+        entry.target.parentElement.style.background =
+          'linear-gradient(' + shadow + ', ' + shadow + '),' +
+          'url("' + entry.target.poster + '") 50% 50%/cover';
       }
 
       observer.unobserve(entry.target);
@@ -303,9 +315,15 @@ function smoothScrollTo(pos, time) {
   window.requestAnimationFrame(step);
 }
 
-headerWrapperWrapper.classList.add('header-sticky');
-const headerStickyHeight = headerWrapper.offsetHeight;
-headerWrapperWrapper.classList.remove('header-sticky');
+let headerStickyHeight = 64;
+
+function getHeaderHeight() {
+  headerWrapperWrapper.classList.add('header-sticky');
+  headerStickyHeight = headerWrapper.offsetHeight;
+  headerWrapperWrapper.classList.remove('header-sticky');
+}
+
+getHeaderHeight();
 
 document.querySelectorAll('a[href^="#"]').forEach((element) => {
   element.addEventListener('click', (event) => {

@@ -188,7 +188,8 @@ h3 {
 }
 
 img, svg,
-input, textarea {
+input, textarea,
+video {
   display: block;
 }
 
@@ -1269,6 +1270,64 @@ ul, ol {
 
 .about-us-card-paragraph {
   font-size: var(--text-s);
+}
+
+/*******************************************************************************
+* Photos *
+*******************************************************************************/
+
+.photos-wrapper {
+  background-color: var(--color-platinum);
+}
+
+/*******************************************************************************
+* Videos *
+*******************************************************************************/
+
+.videos-grid {
+  display: grid;
+  gap: var(--space-3xl) var(--space-l);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+@media (max-width: 400px) {
+  .videos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.videos-card {
+  text-align: center;
+}
+
+.videos-card > * + * {
+  margin-top: var(--space-l);
+}
+
+.videos-video-wrapper-wrapper {
+  width: 100%;
+  padding-top: 56.25%;
+  position: relative;
+}
+
+.videos-video-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.videos-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: 50% 50%;
+}
+
+.videos-heading {
+  font-weight: normal;
+  font-size: var(--text-m);
 }
 
 /*******************************************************************************
