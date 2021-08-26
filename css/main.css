@@ -138,37 +138,6 @@ body {
   color: var(--color-black);
 }
 
-a, button {
-  -webkit-tap-highlight-color: transparent;
-  transition: opacity var(--trans-time-s) var(--trans-func);
-}
-
-a {
-  color: var(--color-black);
-  text-decoration: none;
-}
-
-button {
-  background-color: transparent;
-  font: inherit;
-  text-align: left;
-  border: none;
-  cursor: pointer;
-}
-
-a:focus,
-button:focus {
-  outline: 2px solid var(--color-red);
-  outline-offset: var(--space-xs);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  a:hover,
-  button:hover {
-    opacity: var(--opacity-l);
-  }
-}
-
 h1, h2, h3 {
   font-weight: bold;
   line-height: var(--line-height-s);
@@ -193,11 +162,41 @@ video {
   display: block;
 }
 
+ul, ol {
+  list-style-type: none;
+}
+
+a, button {
+  transition: opacity var(--trans-time-s) var(--trans-func);
+}
+
+a {
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+button {
+  background-color: transparent;
+  font: inherit;
+  text-align: left;
+  border: none;
+  cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a:hover,
+  button:hover {
+    opacity: var(--opacity-l);
+  }
+}
+
 input, textarea {
   font: inherit;
   color: inherit;
   border: none;
   background-color: none;
+  /* Remove default OS styling including "box-shadow" used by some browsers */
+  -webkit-appearance: none;
 }
 
 textarea {
@@ -205,14 +204,24 @@ textarea {
   overflow: auto; /* In case some browsers default to "scroll" */
 }
 
+a, button,
+input, textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus,
+button:focus,
 input:focus,
 textarea:focus {
   outline: none;
-  box-shadow: 0 0 0 1px var(--color-black);
 }
 
-ul, ol {
-  list-style-type: none;
+.user-is-tabbing a:focus,
+.user-is-tabbing button:focus,
+.user-is-tabbing input:focus,
+.user-is-tabbing textarea:focus {
+  outline: 2px solid var(--color-red);
+  outline-offset: var(--space-xs);
 }
 
 /*******************************************************************************
@@ -336,7 +345,7 @@ ul, ol {
   --base-angle: 30deg;
   --tan: 0.57735; /* tan(30) = 0.57735, tan(45) = 1, tan(60) = 1.73205 */
   --sin: 0.5; /* sin(30) = 0.5, sin(45) = 0.70711, sin(60) = 0.86603 */
-  --space-top: 0px;  /* For example, to accomodate box-shadow */
+  --space-top: 0px; /* For example, to accomodate box-shadow */
   --space-lr: 0px;
   overflow: hidden;
   position: relative;
@@ -1163,6 +1172,8 @@ ul, ol {
 }
 
 .form-input:focus {
+  /* Outline doesn't necessarily have rounded corners in all browsers */
+  box-shadow: 0 0 0 1px var(--color-black);
   opacity: 1;
 }
 

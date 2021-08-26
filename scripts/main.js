@@ -2,11 +2,21 @@
 * Focus *
 *******************************************************************************/
 
-document.querySelectorAll('a, button').forEach((element) => {
-  element.addEventListener('mousedown', (event) => {
-    event.preventDefault();
-  });
-});
+function tabHandler(event) {
+  if (event.keyCode === 9) {
+    document.body.classList.add('user-is-tabbing');
+    window.removeEventListener('keydown', tabHandler);
+    window.addEventListener('mousedown', mouseDownHandler);
+  }
+}
+
+function mouseDownHandler() {
+  document.body.classList.remove('user-is-tabbing');
+  window.removeEventListener('mousedown', mouseDownHandler);
+  window.addEventListener('keydown', tabHandler);
+}
+
+window.addEventListener('keydown', tabHandler);
 
 /*******************************************************************************
 * Navigation *
@@ -28,7 +38,7 @@ navMoreAndDropdown.addEventListener('mouseenter', (event) => {
   dropdownJustOpenedByMouseEnter = true;
   setTimeout(() => {
     dropdownJustOpenedByMouseEnter = false;
-  }, 1);
+  }, 100);
 });
 
 navMoreAndDropdown.addEventListener('mouseleave', (event) => {
@@ -150,6 +160,8 @@ const header = document.querySelector('.header');
 const headerWrapper = document.querySelector('.header-wrapper');
 const headerWrapperWrapper = document.querySelector('.header-wrapper-wrapper');
 const headerPlaceholder = document.querySelector('.header-placeholder');
+let headerIsSticky = false;
+let headerStickyHeight = 60;
 
 const headerObserver = new IntersectionObserver(sticky, {
   threshold: 0.95 // 1 might not always work due to fractional pixels handling
@@ -169,6 +181,11 @@ function sticky(entries, observer) {
       headerWrapperWrapper.classList.add('header-hide');
       headerWrapper.classList.add('header-slide-in');
 
+      headerIsSticky = true;
+      if (headerStickyHeight === 60) {
+        headerStickyHeight = headerWrapper.offsetHeight;
+      }
+
       observer.unobserve(headerWrapperWrapper);
       observer.observe(headerPlaceholder);
 
@@ -184,6 +201,8 @@ function sticky(entries, observer) {
       headerWrapper.classList.add('header-hide');
       header.classList.add('header-slide-in');
 
+      headerIsSticky = false;
+
       observer.unobserve(headerPlaceholder);
       observer.observe(headerWrapperWrapper);
 
@@ -191,6 +210,14 @@ function sticky(entries, observer) {
     }
   });
 };
+
+window.addEventListener('resize', () => {
+  if (headerIsSticky) {
+    headerStickyHeight = headerWrapper.offsetHeight;
+  } else {
+    headerStickyHeight = 60;
+  }
+})
 
 /*******************************************************************************
 * Lazy loading images, video posters, map *
@@ -315,22 +342,13 @@ function smoothScrollTo(pos, time) {
   window.requestAnimationFrame(step);
 }
 
-let headerStickyHeight = 64;
-
-function getHeaderHeight() {
-  headerWrapperWrapper.classList.add('header-sticky');
-  headerStickyHeight = headerWrapper.offsetHeight;
-  headerWrapperWrapper.classList.remove('header-sticky');
-}
-
-getHeaderHeight();
-
 document.querySelectorAll('a[href^="#"]').forEach((element) => {
   element.addEventListener('click', (event) => {
     event.preventDefault();
 
     smoothScrollTo(document.querySelector(
       element.getAttribute('href')).offsetTop - headerStickyHeight);
+    console.log(headerStickyHeight);
   });
 });
 
