@@ -1291,6 +1291,47 @@ textarea:focus {
   background-color: var(--color-platinum);
 }
 
+.photos-grid {
+  display: grid;
+  gap: var(--space-m);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+@media (max-width: 300px) {
+  .photos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.photos-thumbnail-wrapper-wrapper {
+  width: 100%;
+  padding-top: 66.66667%;
+  position: relative;
+}
+
+.photos-thumbnail-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.photos-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: 50% 100%;
+}
+
+/*******************************************************************************
+* Slider *
+*******************************************************************************/
+
+.slider {
+  display: none;
+}
+
 /*******************************************************************************
 * Videos *
 *******************************************************************************/
