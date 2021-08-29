@@ -3,7 +3,7 @@
 *******************************************************************************/
 
 function tabHandler(event) {
-  if (event.keyCode === 9) {
+  if (event.key === 'Tab') { // Tab
     document.body.classList.add('user-is-tabbing');
     window.removeEventListener('keydown', tabHandler);
     window.addEventListener('mousedown', mouseDownHandler);
@@ -395,3 +395,175 @@ document.querySelectorAll('.call-back').forEach((element) => {
 const formPhone = document.querySelector('#form-phone');
 const formName = document.querySelector('#form-name');
 const formMessage = document.querySelector('#form-message');
+
+/*******************************************************************************
+* Slider *
+*******************************************************************************/
+
+const slider = document.querySelector('.slider');
+const sliderSlides = document.querySelectorAll('.slider-slide');
+const sliderSlidesNumber = document.querySelectorAll('.slider-slide');
+const photosThumbnailWrapper =
+  document.querySelectorAll('.photos-thumbnail-wrapper');
+const sliderPosition = document.querySelector('.slider-position');
+let sliderPositionNumber = 0;
+
+// Load the current, prev, and next images
+function sliderLazy(slide) {
+  const load = (image) => {
+    if (image.hasAttribute('data-src')) {
+      image.src = image.dataset.src;
+
+      image.removeAttribute('data-src');
+    }
+  }
+
+  load(slide.querySelector('.slider-img'));
+
+  let nextSlide;
+
+  if (slide.nextElementSibling !== null &&
+      slide.nextElementSibling.classList.contains('slider-slide')) {
+    nextSlide = slide.nextElementSibling;
+  } else {
+    nextSlide = sliderSlides[0];
+  }
+
+  load(nextSlide.querySelector('.slider-img'));
+
+  let prevSlide;
+
+  if (slide.previousElementSibling !== null &&
+      slide.previousElementSibling.classList.contains('slider-slide')) {
+    prevSlide = slide.previousElementSibling;
+  } else {
+    prevSlide = sliderSlides[sliderSlides.length - 1];
+  }
+
+  load(prevSlide.querySelector('.slider-img'));
+}
+
+// Open slider on thumbnail click
+photosThumbnailWrapper.forEach((element, index) => {
+  element.addEventListener('click', () => {
+    slider.classList.add('slider-shown');
+
+    sliderSlides[index].classList.add('slider-current');
+
+    sliderSlides[index].querySelector('.slider-caption')
+      .classList.add('slider-caption-slide-in');
+
+    sliderLazy(sliderSlides[index]);
+
+    sliderPositionNumber = index + 1;
+    sliderPosition.textContent =
+      sliderPositionNumber + '/' + sliderSlides.length;
+  });
+});
+
+// Close slider
+function closeSlider() {
+  slider.classList.remove('slider-shown');
+
+  const sliderCurrent = document.querySelector('.slider-current');
+  sliderCurrent.classList.remove('slider-current');
+
+  sliderCurrent.querySelector('.slider-caption')
+    .classList.remove('slider-caption-slide-in');
+}
+
+// Show prev slide
+function prevSlide() {
+  const sliderCurrent = document.querySelector('.slider-current');
+
+  sliderCurrent.classList.remove('slider-current');
+
+  sliderCurrent.querySelector('.slider-caption')
+    .classList.remove('slider-caption-slide-in');
+
+  if (sliderCurrent.previousElementSibling !== null &&
+      sliderCurrent.previousElementSibling.classList.contains('slider-slide')) {
+    sliderCurrent.previousElementSibling.classList.add('slider-current');
+
+    sliderLazy(sliderCurrent.previousElementSibling);
+
+    sliderCurrent.previousElementSibling.querySelector('.slider-caption')
+      .classList.add('slider-caption-slide-in');
+
+    sliderPositionNumber -= 1;
+    sliderPosition.textContent =
+      sliderPositionNumber + '/' + sliderSlides.length;
+  } else {
+    sliderSlides[sliderSlides.length - 1].classList.add('slider-current');
+
+    sliderLazy(sliderSlides[sliderSlides.length - 1]);
+
+    sliderSlides[sliderSlides.length - 1].querySelector('.slider-caption')
+      .classList.add('slider-caption-slide-in');
+
+    sliderPositionNumber = sliderSlides.length;
+    sliderPosition.textContent =
+      sliderPositionNumber + '/' + sliderSlides.length;
+  }
+}
+
+// Show next slide
+function nextSlide() {
+  const sliderCurrent = document.querySelector('.slider-current');
+
+  sliderCurrent.classList.remove('slider-current');
+
+  sliderCurrent.querySelector('.slider-caption')
+    .classList.remove('slider-caption-slide-in');
+
+  if (sliderCurrent.nextElementSibling !== null &&
+      sliderCurrent.nextElementSibling.classList.contains('slider-slide')) {
+    sliderCurrent.nextElementSibling.classList.add('slider-current');
+
+    sliderLazy(sliderCurrent.nextElementSibling);
+
+    sliderCurrent.nextElementSibling.querySelector('.slider-caption')
+      .classList.add('slider-caption-slide-in');
+
+    sliderPositionNumber += 1;
+    sliderPosition.textContent =
+      sliderPositionNumber + '/' + sliderSlides.length;
+  } else {
+    sliderSlides[0].classList.add('slider-current');
+
+    sliderLazy(sliderSlides[0]);
+
+    sliderSlides[0].querySelector('.slider-caption')
+      .classList.add('slider-caption-slide-in');
+
+    sliderPositionNumber = 1;
+    sliderPosition.textContent =
+      sliderPositionNumber + '/' + sliderSlides.length;
+  }
+}
+
+const sliderPrev = document.querySelector('.slider-prev');
+const sliderNext = document.querySelector('.slider-next');
+const sliderClose = document.querySelector('.slider-close');
+
+// Event listeners
+sliderPrev.addEventListener('click', prevSlide);
+sliderNext.addEventListener('click', nextSlide);
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'ArrowLeft') {
+    prevSlide();
+  }
+
+  if (event.key === 'ArrowRight') {
+    nextSlide();
+  }
+
+  if (event.key === 'Escape') {
+    closeSlider();
+  }
+});
+
+sliderClose.addEventListener('click', () => {
+  closeSlider();
+})
