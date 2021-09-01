@@ -1294,31 +1294,18 @@ textarea:focus {
 }
 
 .photos-grid {
-  display: grid;
-  gap: var(--space-xs);
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: calc(0px - var(--space-xxs));
 }
 
-@media (max-width: 250px) {
-  .photos-grid {
-    grid-template-columns: 1fr;
-  }
+.photos-grid > * {
+  margin: var(--space-xxs);
 }
 
-.photos-thumbnail-wrapper-wrapper {
-  width: 100%;
-  padding-top: 100%;
-  position: relative;
-}
-
-.photos-thumbnail-wrapper {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  cursor: zoom-in;
-  transition: none;
+.photos-grid-short-last-row.photos-grid > *:last-child {
+  margin-right: auto;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1328,10 +1315,7 @@ textarea:focus {
 }
 
 .photos-thumbnail {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 50%;
+  width: auto;
 }
 
 /*******************************************************************************
@@ -1365,7 +1349,7 @@ textarea:focus {
   position: absolute;
   z-index: 21;
   color: var(--color-gray-lighter);
-  background-color: #000;
+  background-color: var(--color-shadow-dark);
   margin: var(--space-m);
 }
 
@@ -1399,7 +1383,7 @@ textarea:focus {
 }
 
 .slider-img-wrapper {
-  position: absolute;
+  position: fixed; /* Safari has a problem with "absolute" */
   top: 0;
   left: 0;
   width: 100%;
@@ -1424,12 +1408,12 @@ textarea:focus {
 
 .slider-caption {
   color: var(--color-gray-lighter);
-  background-color: #000;
+  background-color: var(--color-shadow-dark);
   font-size: var(--text-m);
   padding: var(--space-m) var(--space-xl);
 }
 
-.slider-caption-slide-in {
+.slider-current .slider-caption {
   transform: translateX(100%);
   transition:
     transform var(--trans-time-m) ease var(--trans-time-s);
@@ -1441,6 +1425,11 @@ textarea:focus {
   transform: translateY(-50%);
   border-radius: 50%;
   padding: var(--space-l);
+}
+
+.slider-hide-controls .slider-prev,
+.slider-hide-controls .slider-next {
+  opacity: 0;
 }
 
 .slider-prev {
@@ -1500,6 +1489,7 @@ textarea:focus {
   height: 100%;
   object-fit: contain;
   object-position: 50% 50%;
+  position: relative;
 }
 
 .videos-heading {

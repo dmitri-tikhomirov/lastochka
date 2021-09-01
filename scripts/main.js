@@ -91,6 +91,8 @@ document.querySelector('.nav').classList.remove('nav-no-javascript');
 const navItems = document.querySelectorAll('.nav-item');
 const navDropdownItems = document.querySelectorAll('.nav-item-dropdown');
 
+let navWidth = document.querySelector('.nav').offsetWidth;
+
 const navAdapt = () => {
   // Reveal all items before calculation
   navItems.forEach((item) => {
@@ -103,7 +105,6 @@ const navAdapt = () => {
 
   navMoreAndDropdown.style.display = 'block';
 
-  const navWidth = document.querySelector('.nav').offsetWidth;
   let navMoreWidth = navMoreAndDropdown.offsetWidth +
     parseFloat(window.getComputedStyle(navMoreAndDropdown)
       .getPropertyValue('margin-left'));
@@ -149,8 +150,14 @@ const navAdapt = () => {
 
 // Adapt immediately
 navAdapt();
+
 // Adapt on window resize
-window.addEventListener('resize', navAdapt);
+window.addEventListener('resize', () => {
+  if (navWidth !== document.querySelector('.nav').offsetWidth) {
+    navWidth = document.querySelector('.nav').offsetWidth;
+    navAdapt();
+  }
+});
 
 /*******************************************************************************
 * Sticky shrinking header *
@@ -211,11 +218,15 @@ function sticky(entries, observer) {
   });
 };
 
+let headerWidth = header.offsetWidth;
+
 window.addEventListener('resize', () => {
-  if (headerIsSticky) {
-    headerStickyHeight = headerWrapper.offsetHeight;
-  } else {
-    headerStickyHeight = 60;
+  if (headerWidth !== header.offsetWidth) {
+    if (headerIsSticky) {
+      headerStickyHeight = headerWrapper.offsetHeight;
+    } else {
+      headerStickyHeight = 60;
+    }
   }
 })
 
@@ -348,7 +359,6 @@ document.querySelectorAll('a[href^="#"]').forEach((element) => {
 
     smoothScrollTo(document.querySelector(
       element.getAttribute('href')).offsetTop - headerStickyHeight);
-    console.log(headerStickyHeight);
   });
 });
 
@@ -382,13 +392,13 @@ document.querySelectorAll('.q-and-a-question').forEach((element) => {
 
 const formWrapper = document.querySelector('.form-wrapper');
 
-document.querySelector('.form-close').addEventListener('click', () => {
-  formWrapper.classList.remove('form-shown');
-})
-
 document.querySelectorAll('.call-back').forEach((element) => {
   element.addEventListener('click', () => {
     formWrapper.classList.add('form-shown');
+
+    document.querySelector('.form-close').addEventListener('click', () => {
+      formWrapper.classList.remove('form-shown');
+    }, {once: true});
   });
 });
 
@@ -397,16 +407,83 @@ const formName = document.querySelector('#form-name');
 const formMessage = document.querySelector('#form-message');
 
 /*******************************************************************************
+* Photos *
+*******************************************************************************/
+
+let photosGridWidth = document.querySelector('.photos-grid').offsetWidth;
+
+function setHeight() {
+  const maxRowHeight = 200;
+  const thumbnails = document.querySelectorAll('.photos-thumbnail');
+  const margin =
+    parseFloat(window.getComputedStyle(
+      document.querySelector('.photos-thumbnail-wrapper'))
+      .getPropertyValue('margin-left')) +
+    parseFloat(window.getComputedStyle(
+      document.querySelector('.photos-thumbnail-wrapper'))
+      .getPropertyValue('margin-right'));
+  let index = 0;
+  let lastImgReached = false;
+
+  do {
+    const rowStart = index;
+    let currentLineWidth = 0;
+
+    // Add images to row until they exceed row width
+    do {
+      thumbnails[index].style.height = maxRowHeight + 'px';
+      //thumbnails[index].style.width = 'auto';
+
+      currentLineWidth += thumbnails[index].offsetWidth;
+      currentLineWidth += margin;
+
+      index += 1;
+
+      if (index > thumbnails.length - 1) {
+        lastImgReached = true;
+      }
+    } while (currentLineWidth < photosGridWidth && !lastImgReached);
+
+    if (lastImgReached) {
+      if (currentLineWidth < photosGridWidth) {
+        document.querySelector('.photos-grid')
+          .classList.add('photos-grid-short-last-row');
+      } else {
+        document.querySelector('.photos-grid')
+          .classList.remove('photos-grid-short-last-row');
+      }
+    }
+
+    const rowEnd = index;
+
+    if (currentLineWidth > photosGridWidth) {
+      const rowAspectRatio = maxRowHeight /
+        (currentLineWidth - margin * (rowEnd - rowStart));
+      // "-0.1" because of rounding
+      const height = rowAspectRatio *
+        (photosGridWidth - margin * (rowEnd - rowStart)) - 0.1;
+
+      for (let i = rowStart; i < rowEnd; i++) {
+        thumbnails[i].style.height = height + 'px';
+      }
+    }
+  } while (!lastImgReached);
+}
+
+setHeight();
+
+window.addEventListener('resize', () => {
+  if (photosGridWidth !== document.querySelector('.photos-grid').offsetWidth) {
+    photosGridWidth = document.querySelector('.photos-grid').offsetWidth;
+    setHeight();
+  }
+});
+
+/*******************************************************************************
 * Slider *
 *******************************************************************************/
 
-const slider = document.querySelector('.slider');
 const sliderSlides = document.querySelectorAll('.slider-slide');
-const sliderSlidesNumber = document.querySelectorAll('.slider-slide');
-const photosThumbnailWrapper =
-  document.querySelectorAll('.photos-thumbnail-wrapper');
-const sliderPosition = document.querySelector('.slider-position');
-let sliderPositionNumber = 0;
 
 // Load the current, prev, and next images
 function sliderLazy(slide) {
@@ -420,7 +497,7 @@ function sliderLazy(slide) {
 
   load(slide.querySelector('.slider-img'));
 
-  let nextSlide;
+  let nextSlide = {};
 
   if (slide.nextElementSibling !== null &&
       slide.nextElementSibling.classList.contains('slider-slide')) {
@@ -431,7 +508,7 @@ function sliderLazy(slide) {
 
   load(nextSlide.querySelector('.slider-img'));
 
-  let prevSlide;
+  let prevSlide = {};
 
   if (slide.previousElementSibling !== null &&
       slide.previousElementSibling.classList.contains('slider-slide')) {
@@ -443,127 +520,179 @@ function sliderLazy(slide) {
   load(prevSlide.querySelector('.slider-img'));
 }
 
+const slider = document.querySelector('.slider');
+const thumbnails = document.querySelectorAll('.photos-thumbnail-wrapper');
+const sliderPosition = document.querySelector('.slider-position');
+let sliderPositionNumber = 0;
+
 // Open slider on thumbnail click
-photosThumbnailWrapper.forEach((element, index) => {
+thumbnails.forEach((element, index) => {
   element.addEventListener('click', () => {
     slider.classList.add('slider-shown');
 
     sliderSlides[index].classList.add('slider-current');
-
-    sliderSlides[index].querySelector('.slider-caption')
-      .classList.add('slider-caption-slide-in');
 
     sliderLazy(sliderSlides[index]);
 
     sliderPositionNumber = index + 1;
     sliderPosition.textContent =
       sliderPositionNumber + '/' + sliderSlides.length;
+
+    sliderAddListeners();
   });
 });
 
-// Close slider
-function closeSlider() {
-  slider.classList.remove('slider-shown');
-
-  const sliderCurrent = document.querySelector('.slider-current');
-  sliderCurrent.classList.remove('slider-current');
-
-  sliderCurrent.querySelector('.slider-caption')
-    .classList.remove('slider-caption-slide-in');
-}
-
-// Show prev slide
-function prevSlide() {
-  const sliderCurrent = document.querySelector('.slider-current');
-
-  sliderCurrent.classList.remove('slider-current');
-
-  sliderCurrent.querySelector('.slider-caption')
-    .classList.remove('slider-caption-slide-in');
-
-  if (sliderCurrent.previousElementSibling !== null &&
-      sliderCurrent.previousElementSibling.classList.contains('slider-slide')) {
-    sliderCurrent.previousElementSibling.classList.add('slider-current');
-
-    sliderLazy(sliderCurrent.previousElementSibling);
-
-    sliderCurrent.previousElementSibling.querySelector('.slider-caption')
-      .classList.add('slider-caption-slide-in');
-
-    sliderPositionNumber -= 1;
-    sliderPosition.textContent =
-      sliderPositionNumber + '/' + sliderSlides.length;
-  } else {
-    sliderSlides[sliderSlides.length - 1].classList.add('slider-current');
-
-    sliderLazy(sliderSlides[sliderSlides.length - 1]);
-
-    sliderSlides[sliderSlides.length - 1].querySelector('.slider-caption')
-      .classList.add('slider-caption-slide-in');
-
-    sliderPositionNumber = sliderSlides.length;
-    sliderPosition.textContent =
-      sliderPositionNumber + '/' + sliderSlides.length;
-  }
-}
-
-// Show next slide
-function nextSlide() {
-  const sliderCurrent = document.querySelector('.slider-current');
-
-  sliderCurrent.classList.remove('slider-current');
-
-  sliderCurrent.querySelector('.slider-caption')
-    .classList.remove('slider-caption-slide-in');
-
-  if (sliderCurrent.nextElementSibling !== null &&
-      sliderCurrent.nextElementSibling.classList.contains('slider-slide')) {
-    sliderCurrent.nextElementSibling.classList.add('slider-current');
-
-    sliderLazy(sliderCurrent.nextElementSibling);
-
-    sliderCurrent.nextElementSibling.querySelector('.slider-caption')
-      .classList.add('slider-caption-slide-in');
-
-    sliderPositionNumber += 1;
-    sliderPosition.textContent =
-      sliderPositionNumber + '/' + sliderSlides.length;
-  } else {
-    sliderSlides[0].classList.add('slider-current');
-
-    sliderLazy(sliderSlides[0]);
-
-    sliderSlides[0].querySelector('.slider-caption')
-      .classList.add('slider-caption-slide-in');
-
-    sliderPositionNumber = 1;
-    sliderPosition.textContent =
-      sliderPositionNumber + '/' + sliderSlides.length;
-  }
-}
-
-const sliderPrev = document.querySelector('.slider-prev');
-const sliderNext = document.querySelector('.slider-next');
-const sliderClose = document.querySelector('.slider-close');
-
 // Event listeners
-sliderPrev.addEventListener('click', prevSlide);
-sliderNext.addEventListener('click', nextSlide);
+function sliderAddListeners() {
+  const sliderPrev = document.querySelector('.slider-prev');
+  const sliderNext = document.querySelector('.slider-next');
 
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'ArrowLeft') {
-    prevSlide();
+  // Show prev slide
+  const prevSlide = () => {
+    const currentSlide = document.querySelector('.slider-current');
+
+    currentSlide.classList.remove('slider-current');
+
+    if (currentSlide.previousElementSibling !== null &&
+        currentSlide.previousElementSibling.classList
+          .contains('slider-slide')) {
+      currentSlide.previousElementSibling.classList.add('slider-current');
+
+      sliderLazy(currentSlide.previousElementSibling);
+
+      sliderPositionNumber -= 1;
+      sliderPosition.textContent =
+        sliderPositionNumber + '/' + sliderSlides.length;
+    } else {
+      sliderSlides[sliderSlides.length - 1].classList.add('slider-current');
+
+      sliderLazy(sliderSlides[sliderSlides.length - 1]);
+
+      sliderPositionNumber = sliderSlides.length;
+      sliderPosition.textContent =
+        sliderPositionNumber + '/' + sliderSlides.length;
+    }
   }
 
-  if (event.key === 'ArrowRight') {
-    nextSlide();
+  sliderPrev.addEventListener('click', prevSlide);
+
+  // Show next slide
+  const nextSlide = () => {
+    const currentSlide = document.querySelector('.slider-current');
+
+    currentSlide.classList.remove('slider-current');
+
+    if (currentSlide.nextElementSibling !== null &&
+        currentSlide.nextElementSibling.classList.contains('slider-slide')) {
+      currentSlide.nextElementSibling.classList.add('slider-current');
+
+      sliderLazy(currentSlide.nextElementSibling);
+
+      sliderPositionNumber += 1;
+      sliderPosition.textContent =
+        sliderPositionNumber + '/' + sliderSlides.length;
+    } else {
+      sliderSlides[0].classList.add('slider-current');
+
+      sliderLazy(sliderSlides[0]);
+
+      sliderPositionNumber = 1;
+      sliderPosition.textContent =
+        sliderPositionNumber + '/' + sliderSlides.length;
+    }
   }
 
-  if (event.key === 'Escape') {
-    closeSlider();
-  }
-});
+  sliderNext.addEventListener('click', nextSlide);
 
-sliderClose.addEventListener('click', () => {
-  closeSlider();
-})
+  const preventDefault = (event) => {
+    event.preventDefault();
+  }
+
+  // Disable context menu
+  slider.addEventListener('contextmenu', preventDefault);
+
+  // Disable scrolling
+  slider.addEventListener('touchmove', preventDefault, {passive: false});
+
+  let controlsHidden = false;
+
+  // Swipe
+  const swipeSlide = (event) => {
+    let startPos = event.touches[0].clientX;
+
+    slider.addEventListener('touchend', (event) => {
+      let endPos = event.changedTouches[0].clientX;
+      let movedX = startPos - endPos;
+
+      if (Math.abs(movedX) > 10) {
+        if (movedX > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+
+        slider.classList.add('slider-hide-controls');
+        controlsHidden = true;
+
+        // Show controls on click or tap
+        slider.addEventListener('click', (event) => {
+          if (controlsHidden) {
+            slider.classList.remove('slider-hide-controls');
+            controlsHidden = false;
+          }
+        }, {once: true});
+
+        // Show controls on mouse move
+        slider.addEventListener('mousemove', () => {
+          if (controlsHidden) {
+            slider.classList.remove('slider-hide-controls');
+            controlsHidden = false;
+          }
+        }, {once: true});
+      }
+    }, {once: true});
+  }
+
+  slider.addEventListener('touchstart', swipeSlide, {passive: true});
+
+  // Remove event listeners
+  const sliderRemoveListeners = () => {
+    sliderPrev.removeEventListener('click', prevSlide);
+    sliderNext.removeEventListener('click', nextSlide);
+    slider.removeEventListener('contextmenu', preventDefault);
+    slider.removeEventListener('touchmove', preventDefault, {passive: false});
+    slider.removeEventListener('touchstart', swipeSlide, {passive: true});
+    document.removeEventListener('keydown', keyboardNav);
+    sliderClose.removeEventListener('click', closeSlider);
+  }
+
+  // Close slider
+  const closeSlider = () => {
+    slider.classList.remove('slider-shown');
+
+    const currentSlide = document.querySelector('.slider-current');
+    currentSlide.classList.remove('slider-current');
+
+    sliderRemoveListeners();
+  }
+
+  // Keyboard navigation
+  const keyboardNav = (event) => {
+    if (event.key === 'ArrowLeft') {
+      prevSlide();
+    }
+
+    if (event.key === 'ArrowRight') {
+      nextSlide();
+    }
+
+    if (event.key === 'Escape') {
+      closeSlider();
+    }
+  }
+
+  document.addEventListener('keydown', keyboardNav);
+
+  const sliderClose = document.querySelector('.slider-close');
+  sliderClose.addEventListener('click', closeSlider);
+}
