@@ -432,7 +432,6 @@ function setHeight() {
     // Add images to row until they exceed row width
     do {
       thumbnails[index].style.height = maxRowHeight + 'px';
-      //thumbnails[index].style.width = 'auto';
 
       currentLineWidth += thumbnails[index].offsetWidth;
       currentLineWidth += margin;
@@ -459,9 +458,8 @@ function setHeight() {
     if (currentLineWidth > photosGridWidth) {
       const rowAspectRatio = maxRowHeight /
         (currentLineWidth - margin * (rowEnd - rowStart));
-      // "-0.1" because of rounding
-      const height = rowAspectRatio *
-        (photosGridWidth - margin * (rowEnd - rowStart)) - 0.1;
+      const height = Math.floor(rowAspectRatio *
+        (photosGridWidth - margin * (rowEnd - rowStart)));
 
       for (let i = rowStart; i < rowEnd; i++) {
         thumbnails[i].style.height = height + 'px';
