@@ -91,7 +91,7 @@ document.querySelector('.nav').classList.remove('nav-no-javascript');
 const navItems = document.querySelectorAll('.nav-item');
 const navDropdownItems = document.querySelectorAll('.nav-item-dropdown');
 
-let navWidth = document.querySelector('.nav').offsetWidth;
+let navWidth = document.querySelector('.nav').getBoundingClientRect().width;
 
 const navAdapt = () => {
   // Reveal all items before calculation
@@ -105,17 +105,17 @@ const navAdapt = () => {
 
   navMoreAndDropdown.style.display = 'block';
 
-  let navMoreWidth = navMoreAndDropdown.offsetWidth +
+  const navMoreWidth = navMoreAndDropdown.getBoundingClientRect().width +
     parseFloat(window.getComputedStyle(navMoreAndDropdown)
       .getPropertyValue('margin-left'));
+  const navHiddenItems = [];
   let stopWidth = navMoreWidth;
-  let navHiddenItems = [];
   let stopReached = false;
 
   // Hide nav items that don't fit
   navItems.forEach((item, index, array) => {
     if (stopReached === false) {
-      let itemMargin = parseFloat(window.getComputedStyle(item)
+      const itemMargin = parseFloat(window.getComputedStyle(item)
         .getPropertyValue('margin-left'));
 
       // Try to fit the last item without "more"
@@ -123,8 +123,9 @@ const navAdapt = () => {
         stopWidth -= navMoreWidth;
       }
 
-      if (navWidth >= stopWidth + item.offsetWidth + itemMargin) {
-        stopWidth = stopWidth + item.offsetWidth + itemMargin;
+      if (navWidth >= stopWidth + item.getBoundingClientRect().width +
+          itemMargin) {
+        stopWidth = stopWidth + item.getBoundingClientRect().width + itemMargin;
       } else {
         stopReached = true;
       }
@@ -153,8 +154,11 @@ navAdapt();
 
 // Adapt on window resize
 window.addEventListener('resize', () => {
-  if (navWidth !== document.querySelector('.nav').offsetWidth) {
-    navWidth = document.querySelector('.nav').offsetWidth;
+  const newWidth =
+    document.querySelector('.nav').getBoundingClientRect().width;
+
+  if (navWidth !== newWidth) {
+    navWidth = newWidth;
     navAdapt();
   }
 });
@@ -183,14 +187,15 @@ function sticky(entries, observer) {
       headerWrapper.classList.remove('header-hide');
       header.classList.remove('header-slide-in');
 
-      headerPlaceholder.style.height = header.offsetHeight + 'px';
+      headerPlaceholder.style.height =
+        header.getBoundingClientRect().height + 'px';
       headerWrapperWrapper.classList.add('header-sticky');
       headerWrapperWrapper.classList.add('header-hide');
       headerWrapper.classList.add('header-slide-in');
 
       headerIsSticky = true;
       if (headerStickyHeight === 60) {
-        headerStickyHeight = headerWrapper.offsetHeight;
+        headerStickyHeight = headerWrapper.getBoundingClientRect().height;
       }
 
       observer.unobserve(headerWrapperWrapper);
@@ -218,12 +223,16 @@ function sticky(entries, observer) {
   });
 };
 
-let headerWidth = header.offsetWidth;
+let headerWidth = header.getBoundingClientRect().width;
 
 window.addEventListener('resize', () => {
-  if (headerWidth !== header.offsetWidth) {
+  const newWidth = header.getBoundingClientRect().width;
+
+  if (headerWidth !== newWidth) {
+    headerWidth = newWidth;
+
     if (headerIsSticky) {
-      headerStickyHeight = headerWrapper.offsetHeight;
+      headerStickyHeight = headerWrapper.getBoundingClientRect().height;
     } else {
       headerStickyHeight = 60;
     }
@@ -410,11 +419,12 @@ const formMessage = document.querySelector('#form-message');
 * Photos *
 *******************************************************************************/
 
-let photosGridWidth = document.querySelector('.photos-grid').offsetWidth;
+const photosThumbnails = document.querySelectorAll('.photos-thumbnail');
+const maxRowHeight = photosThumbnails[0].offsetHeight;
+let photosGridWidth =
+  document.querySelector('.photos-grid').getBoundingClientRect().width;
 
 function setHeight() {
-  const maxRowHeight = 200;
-  const thumbnails = document.querySelectorAll('.photos-thumbnail');
   const margin =
     parseFloat(window.getComputedStyle(
       document.querySelector('.photos-thumbnail-wrapper'))
@@ -431,14 +441,14 @@ function setHeight() {
 
     // Add images to row until they exceed row width
     do {
-      thumbnails[index].style.height = maxRowHeight + 'px';
+      photosThumbnails[index].style.height = '';
 
-      currentLineWidth += thumbnails[index].offsetWidth;
+      currentLineWidth += photosThumbnails[index].getBoundingClientRect().width;
       currentLineWidth += margin;
 
       index += 1;
 
-      if (index > thumbnails.length - 1) {
+      if (index > photosThumbnails.length - 1) {
         lastImgReached = true;
       }
     } while (currentLineWidth < photosGridWidth && !lastImgReached);
@@ -456,13 +466,15 @@ function setHeight() {
     const rowEnd = index;
 
     if (currentLineWidth > photosGridWidth) {
-      const rowAspectRatio = maxRowHeight /
+      const rowAspectRatio =  maxRowHeight /
         (currentLineWidth - margin * (rowEnd - rowStart));
-      const height = Math.floor(rowAspectRatio *
-        (photosGridWidth - margin * (rowEnd - rowStart)));
+      const height = rowAspectRatio *
+        (photosGridWidth - margin * (rowEnd - rowStart));
+      // For browsers other than Safari "height - 0.05" seems enough
+      const safeHeight = Math.max(height - 0.5, Math.floor(height));
 
       for (let i = rowStart; i < rowEnd; i++) {
-        thumbnails[i].style.height = height + 'px';
+        photosThumbnails[i].style.height = safeHeight + 'px';
       }
     }
   } while (!lastImgReached);
@@ -471,8 +483,11 @@ function setHeight() {
 setHeight();
 
 window.addEventListener('resize', () => {
-  if (photosGridWidth !== document.querySelector('.photos-grid').offsetWidth) {
-    photosGridWidth = document.querySelector('.photos-grid').offsetWidth;
+  const newWidth =
+    document.querySelector('.photos-grid').getBoundingClientRect().width;
+
+  if (photosGridWidth !== newWidth) {
+    photosGridWidth = newWidth;
     setHeight();
   }
 });
@@ -495,7 +510,7 @@ function sliderLazy(slide) {
 
   load(slide.querySelector('.slider-img'));
 
-  let nextSlide = {};
+  let nextSlide;
 
   if (slide.nextElementSibling !== null &&
       slide.nextElementSibling.classList.contains('slider-slide')) {
@@ -506,7 +521,7 @@ function sliderLazy(slide) {
 
   load(nextSlide.querySelector('.slider-img'));
 
-  let prevSlide = {};
+  let prevSlide;
 
   if (slide.previousElementSibling !== null &&
       slide.previousElementSibling.classList.contains('slider-slide')) {
@@ -519,12 +534,12 @@ function sliderLazy(slide) {
 }
 
 const slider = document.querySelector('.slider');
-const thumbnails = document.querySelectorAll('.photos-thumbnail-wrapper');
+const sliderThumbnails = document.querySelectorAll('.photos-thumbnail-wrapper');
 const sliderPosition = document.querySelector('.slider-position');
 let sliderPositionNumber = 0;
 
 // Open slider on thumbnail click
-thumbnails.forEach((element, index) => {
+sliderThumbnails.forEach((element, index) => {
   element.addEventListener('click', () => {
     slider.classList.add('slider-shown');
 

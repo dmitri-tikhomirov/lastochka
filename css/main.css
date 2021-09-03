@@ -1297,11 +1297,11 @@ textarea:focus {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: calc(0px - var(--space-xxs));
+  margin: calc(0px - var(--space-xs));
 }
 
 .photos-grid > * {
-  margin: var(--space-xxs);
+  margin: var(--space-xs);
 }
 
 .photos-grid-short-last-row.photos-grid > *:last-child {
@@ -1315,6 +1315,7 @@ textarea:focus {
 }
 
 .photos-thumbnail {
+  height: 200px;
   width: auto;
 }
 
