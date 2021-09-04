@@ -314,7 +314,7 @@ function lazyLoad(entries, observer) {
       } else if (entry.target.hasAttribute('data-poster')) {
         entry.target.poster = entry.target.dataset.poster;
 
-        const shadow = getComputedStyle(entry.target.parentElement)
+        const shadow = window.getComputedStyle(entry.target.parentElement)
           .getPropertyValue('--color-shadow-dark');
 
         entry.target.parentElement.style.background =
@@ -366,8 +366,8 @@ document.querySelectorAll('a[href^="#"]').forEach((element) => {
   element.addEventListener('click', (event) => {
     event.preventDefault();
 
-    smoothScrollTo(document.querySelector(
-      element.getAttribute('href')).offsetTop - headerStickyHeight);
+    smoothScrollTo(document.querySelector(element.getAttribute('href'))
+      .getBoundingClientRect().top + window.scrollY - headerStickyHeight);
   });
 });
 
@@ -427,10 +427,10 @@ let photosGridWidth =
 function setHeight() {
   const margin =
     parseFloat(window.getComputedStyle(
-      document.querySelector('.photos-thumbnail-wrapper'))
+      document.querySelector('.photos-grid > *'))
       .getPropertyValue('margin-left')) +
     parseFloat(window.getComputedStyle(
-      document.querySelector('.photos-thumbnail-wrapper'))
+      document.querySelector('.photos-grid > *'))
       .getPropertyValue('margin-right'));
   let index = 0;
   let lastImgReached = false;

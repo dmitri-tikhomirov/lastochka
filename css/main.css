@@ -300,6 +300,17 @@ textarea:focus {
 .hide {
   display: none !important;
 }
+/*
+.debug {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 90;
+  padding: 12px 24px;
+  background-color: hsla(0, 0%, 0%, 0.6);
+  color: #fff;
+}*/
 
 /*******************************************************************************
 * Buttons *
@@ -1317,6 +1328,8 @@ textarea:focus {
 .photos-thumbnail {
   height: 200px;
   width: auto;
+  display: inline-block; /* Without it Safari 14 breaks the grid after reload */
+  vertical-align: bottom;
 }
 
 /*******************************************************************************
@@ -1384,7 +1397,7 @@ textarea:focus {
 }
 
 .slider-img-wrapper {
-  position: fixed; /* Safari has a problem with "absolute" */
+  position: fixed; /* Safari 14 has a problem with "absolute" */
   top: 0;
   left: 0;
   width: 100%;

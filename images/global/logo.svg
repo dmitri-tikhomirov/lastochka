@@ -4,7 +4,7 @@
   xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="grad1">
-      <stop style="stop-color:#e64c41" offset="0"/>
+      <stop style="stop-color:#e64e43" offset="0"/>
       <stop style="stop-color:#ffffff" offset="1"/>
     </linearGradient>
     <linearGradient
