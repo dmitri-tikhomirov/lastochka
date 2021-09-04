@@ -1,5 +1,0 @@
-Popup size:
-- Smallest dimension 1080px max.
-- Largest dimension 1920px max.
-
-Thumbnail size: 420px height.

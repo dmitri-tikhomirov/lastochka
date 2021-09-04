@@ -411,9 +411,53 @@ document.querySelectorAll('.call-back').forEach((element) => {
   });
 });
 
+const form = document.querySelector('.form');
 const formPhone = document.querySelector('#form-phone');
 const formName = document.querySelector('#form-name');
 const formMessage = document.querySelector('#form-message');
+
+form.addEventListener('submit', makeRequest);
+
+function makeRequest(event) {
+  event.preventDefault();
+
+  const phone = formPhone.value;
+  const name = formName.value;
+  const message = formMessage.value;
+
+  fetch('/', {
+    method: 'post',
+    headers: {
+      "Content-type": "application/x-www-form-urlencoded"
+    },
+    body: 'phone=' + phone + '&' + 'name=' + name + '&' + 'message=' + message
+  })
+    .then((response) => {
+      return response.text();
+    })
+    .then((responseText) => {
+      document.querySelector('.form-time').textContent = currentTime() +
+        responseText;
+    });
+}
+
+function currentTime() {
+  const today = new Date();
+  const hh = today.getHours();
+  const mm = today.getMinutes();
+  const ss = today.getSeconds();
+  const time = addZero(hh) + ':' + addZero(mm) + ':' + addZero(ss);
+
+  return time;
+}
+
+function addZero(number) {
+  if (number < 10) {
+    number += '0';
+  }
+
+  return number;
+}
 
 /*******************************************************************************
 * Photos *
@@ -470,7 +514,7 @@ function setHeight() {
         (currentLineWidth - margin * (rowEnd - rowStart));
       const height = rowAspectRatio *
         (photosGridWidth - margin * (rowEnd - rowStart));
-      // For browsers other than Safari "height - 0.05" seems enough
+      // For browsers other than Safari 14 "height - 0.05" seems enough
       const safeHeight = Math.max(height - 0.5, Math.floor(height));
 
       for (let i = rowStart; i < rowEnd; i++) {
