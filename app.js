@@ -1,30 +1,57 @@
-const path = require('path');
+const http = require('http');
 
-const express = require('express');
-const bodyParser = require('body-parser');
+const config = require('./config');
 
-const app = express();
-const port = 3000;
-app.set('view engine', 'ejs');
-app.set('views', 'views');
+const nodemailer = require('nodemailer');
 
-app.use(express.urlencoded({extended: false}));
-app.use(express.static('public'));
+const transporter = nodemailer.createTransport(config.transporter);
 
-app.get('/', (req, res, next) => {
-  res.render('index', {
-    pageTitle: 'Сеть пансионатов "Ласточка"',
-    pageDescription: 'Сеть пансионатов для пожилых людей "Ласточка"'
-  });
+const server = http.createServer((req, res) => {
+  if (req.url === '/message' && req.method === 'POST') {
+    const body = [];
+
+    req.on('data', chunk => {
+      body.push(chunk);
+    });
+
+    return req.on('end', () => {
+      const parsedBody = Buffer.concat(body).toString();
+      const phone = decodeURIComponent(parsedBody.split('&')[0].split('=')[1]
+        .replace(/\+/g, ' '));
+      const name = decodeURIComponent(parsedBody.split('&')[1].split('=')[1]
+        .replace(/\+/g, ' '));
+      const message = decodeURIComponent(parsedBody.split('&')[2].split('=')[1]
+        .replace(/\+/g, ' '));
+
+      res.end();
+
+      transporter.sendMail({
+        to: 'lastochkakrd@yandex.ru',
+        from: config.from,
+        subject: 'Тестирование нового сайта',
+        html:
+          '<div style="' +
+          'display: inline-block;' +
+          'padding: 24px;' +
+          'background-color: #e9eae4;' +
+          'color: #111;' +
+          'border: 1px solid #111;">' +
+          '<b>Заявка с сайта:</b><br><br>' +
+          '<b>Телефон:</b> ' + phone + '<br>' +
+          '<b>Имя:</b> ' + name + '<br>' +
+          '<b>Комментарий:</b> ' + message +
+          '</div>'
+      }, (error, info) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+    });
+  }
 });
 
-app.use((req, res, next) => {
-  res.status(404).render('404', {
-    pageTitle: 'Страница не найдена',
-    pageDescription: 'По этой ссылке ничего нет. Ошибка 404.'
-  });
-});
-
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+server.listen(config.port, () => {
+  console.log(`Server running on port ${config.port}`);
 });

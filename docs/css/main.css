@@ -297,9 +297,18 @@ textarea:focus {
   right: calc(0px - var(--space-m));
 }
 
+.sectionWithOffsetParent {
+  position: relative;
+}
+
+.sectionWithOffset {
+  position: absolute;
+}
+
 .hide {
   display: none !important;
 }
+
 /*
 .debug {
   position: fixed;
@@ -1110,7 +1119,8 @@ textarea:focus {
 * Form *
 *******************************************************************************/
 
-.form-wrapper {
+.form-wrapper,
+.form-sent-wrapper {
   position: fixed;
   top: 0;
   left: 0;
@@ -1129,18 +1139,27 @@ textarea:focus {
     visibility var(--trans-time-s) var(--trans-func);
 }
 
-.form-shown.form-wrapper {
+.form-shown {
   visibility: visible;
   opacity: 1;
 }
 
-.form-content {
+.form-content,
+.form-sent {
   background-color: var(--color-white);
   border-radius: var(--space-s);
   padding: var(--website-padding);
   width: 100%;
   margin: 0 var(--website-padding);
   max-width: 480px;
+}
+
+.form-sent {
+  text-align: center;
+}
+
+.form-sent-close {
+  margin-top: var(--space-l);
 }
 
 .form-close {
@@ -1308,11 +1327,11 @@ textarea:focus {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: calc(0px - var(--space-xs));
+  margin: calc(0px - var(--space-xxs));
 }
 
 .photos-grid > * {
-  margin: var(--space-xs);
+  margin: var(--space-xxs);
 }
 
 .photos-grid-short-last-row.photos-grid > *:last-child {
@@ -1351,7 +1370,7 @@ textarea:focus {
     visibility var(--trans-time-s) var(--trans-func);
 }
 
-.slider-shown.slider {
+.slider-shown {
   visibility: visible;
   opacity: 1;
 }
@@ -1517,6 +1536,7 @@ textarea:focus {
 
 .for-nursing-wrapper {
   background-color: var(--color-platinum);
+  position: relative;
 }
 
 .against-nursing-wrapper {

@@ -172,7 +172,6 @@ const headerWrapper = document.querySelector('.header-wrapper');
 const headerWrapperWrapper = document.querySelector('.header-wrapper-wrapper');
 const headerPlaceholder = document.querySelector('.header-placeholder');
 let headerIsSticky = false;
-let headerStickyHeight = 60;
 
 const headerObserver = new IntersectionObserver(sticky, {
   threshold: 0.95 // 1 might not always work due to fractional pixels handling
@@ -194,9 +193,6 @@ function sticky(entries, observer) {
       headerWrapper.classList.add('header-slide-in');
 
       headerIsSticky = true;
-      if (headerStickyHeight === 60) {
-        headerStickyHeight = headerWrapper.getBoundingClientRect().height;
-      }
 
       observer.unobserve(headerWrapperWrapper);
       observer.observe(headerPlaceholder);
@@ -223,6 +219,32 @@ function sticky(entries, observer) {
   });
 };
 
+const sectionLinks = document.querySelectorAll('a[href^="#"]');
+let headerStickyHeight = 0;
+
+function setSectionOffset() {
+  if (!headerIsSticky) {
+    headerWrapperWrapper.classList.add('header-sticky');
+    headerStickyHeight = headerWrapper.getBoundingClientRect().height;
+    headerWrapperWrapper.classList.remove('header-sticky');
+  } else {
+    headerStickyHeight = headerWrapper.getBoundingClientRect().height;
+  }
+
+  sectionLinks.forEach((element) => {
+    if (element.getAttribute('href') !== '#') {
+      const sectionWithOffset =
+        document.querySelector(element.getAttribute('href'));
+
+      sectionWithOffset.classList.add('sectionWithOffset');
+      sectionWithOffset.parentElement.classList.add('sectionWithOffsetParent');
+      sectionWithOffset.style.top = -headerStickyHeight + 'px';
+    }
+  });
+}
+
+setSectionOffset();
+
 let headerWidth = header.getBoundingClientRect().width;
 
 window.addEventListener('resize', () => {
@@ -231,11 +253,7 @@ window.addEventListener('resize', () => {
   if (headerWidth !== newWidth) {
     headerWidth = newWidth;
 
-    if (headerIsSticky) {
-      headerStickyHeight = headerWrapper.getBoundingClientRect().height;
-    } else {
-      headerStickyHeight = 60;
-    }
+    setSectionOffset();
   }
 })
 
@@ -362,12 +380,21 @@ function smoothScrollTo(pos, time) {
   window.requestAnimationFrame(step);
 }
 
-document.querySelectorAll('a[href^="#"]').forEach((element) => {
+sectionLinks.forEach((element) => {
   element.addEventListener('click', (event) => {
     event.preventDefault();
 
-    smoothScrollTo(document.querySelector(element.getAttribute('href'))
-      .getBoundingClientRect().top + window.scrollY - headerStickyHeight);
+    if (element.getAttribute('href') !== '#') {
+      smoothScrollTo(document.querySelector(element.getAttribute('href'))
+        .getBoundingClientRect().top + window.scrollY);
+
+      window.history
+        .pushState({}, document.title, element.getAttribute('href'));
+    } else {
+      smoothScrollTo(0);
+
+      window.history.pushState({}, document.title, '/');
+    }
   });
 });
 
@@ -399,47 +426,62 @@ document.querySelectorAll('.q-and-a-question').forEach((element) => {
 * Form *
 *******************************************************************************/
 
-const formWrapper = document.querySelector('.form-wrapper');
-
 document.querySelectorAll('.call-back').forEach((element) => {
   element.addEventListener('click', () => {
+    const formWrapper = document.querySelector('.form-wrapper');
+
+    // Open form
     formWrapper.classList.add('form-shown');
 
-    document.querySelector('.form-close').addEventListener('click', () => {
+    const form = document.querySelector('.form');
+
+    // Close form
+    const closeForm = () => {
       formWrapper.classList.remove('form-shown');
-    }, {once: true});
+      form.removeEventListener('submit', makeRequest);
+      formClose.removeEventListener('click', closeForm);
+    }
+
+    const formClose = document.querySelector('.form-close');
+
+    formClose.addEventListener('click', closeForm);
+
+    // Submit form
+    const makeRequest = (event) => {
+      event.preventDefault();
+
+      const phone = document.querySelector('#form-phone').value;
+      const name = document.querySelector('#form-name').value;
+      const message = document.querySelector('#form-message').value;
+
+      fetch('/message', {
+        method: 'post',
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded"
+        },
+        body: 'phone=' + phone + '&' + 'name=' + name + '&' +
+          'message=' + message
+      }).then(() => {
+        formWrapper.classList.remove('form-shown');
+        form.removeEventListener('submit', makeRequest);
+        formClose.removeEventListener('click', closeForm);
+
+        const formSentWrapper = document.querySelector('.form-sent-wrapper');
+
+        formSentWrapper.classList.add('form-shown');
+        document.querySelector('.form-sent-time').textContent = currentTime();
+
+        const formSentClose = document.querySelector('.form-sent-close');
+
+        formSentClose.addEventListener('click', () => {
+          formSentWrapper.classList.remove('form-shown');
+        }, {once: true});
+      });
+    }
+
+    form.addEventListener('submit', makeRequest);
   });
 });
-
-const form = document.querySelector('.form');
-const formPhone = document.querySelector('#form-phone');
-const formName = document.querySelector('#form-name');
-const formMessage = document.querySelector('#form-message');
-
-form.addEventListener('submit', makeRequest);
-
-function makeRequest(event) {
-  event.preventDefault();
-
-  const phone = formPhone.value;
-  const name = formName.value;
-  const message = formMessage.value;
-
-  fetch('/', {
-    method: 'post',
-    headers: {
-      "Content-type": "application/x-www-form-urlencoded"
-    },
-    body: 'phone=' + phone + '&' + 'name=' + name + '&' + 'message=' + message
-  })
-    .then((response) => {
-      return response.text();
-    })
-    .then((responseText) => {
-      document.querySelector('.form-time').textContent = currentTime() +
-        responseText;
-    });
-}
 
 function currentTime() {
   const today = new Date();
@@ -453,7 +495,7 @@ function currentTime() {
 
 function addZero(number) {
   if (number < 10) {
-    number += '0';
+    number = '0' + number;
   }
 
   return number;
@@ -509,17 +551,27 @@ function setHeight() {
 
     const rowEnd = index;
 
+    // Set row height
+    // Rounding might be different in browsers
+    // For example, Safari 14 rounds image width to integer
     if (currentLineWidth > photosGridWidth) {
-      const rowAspectRatio =  maxRowHeight /
-        (currentLineWidth - margin * (rowEnd - rowStart));
-      const height = rowAspectRatio *
-        (photosGridWidth - margin * (rowEnd - rowStart));
-      // For browsers other than Safari 14 "height - 0.05" seems enough
-      const safeHeight = Math.max(height - 0.5, Math.floor(height));
+      const rowAspectRatio = (currentLineWidth - margin * (rowEnd - rowStart)) /
+        maxRowHeight;
+      let height = (photosGridWidth - margin * (rowEnd - rowStart)) /
+        rowAspectRatio;
 
-      for (let i = rowStart; i < rowEnd; i++) {
-        photosThumbnails[i].style.height = safeHeight + 'px';
-      }
+      do {
+        currentLineWidth = 0;
+
+        for (let i = rowStart; i < rowEnd; i++) {
+          photosThumbnails[i].style.height = height + 'px';
+
+          currentLineWidth += photosThumbnails[i].getBoundingClientRect().width;
+          currentLineWidth += margin;
+        }
+
+        height -= 0.01;
+      } while (currentLineWidth > photosGridWidth);
     }
   } while (!lastImgReached);
 }
