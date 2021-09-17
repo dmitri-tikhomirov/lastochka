@@ -1209,9 +1209,19 @@ textarea:focus {
   opacity: 1;
 }
 
-.form-btn {
+.form-btn-and-error {
   text-align: center;
   margin-top: var(--space-xxl);
+  position: relative;
+}
+
+.form-error {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--color-red);
+  font-size: var(--text-s);
 }
 
 /*******************************************************************************

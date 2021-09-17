@@ -23,12 +23,10 @@ const server = http.createServer((req, res) => {
       const message = decodeURIComponent(parsedBody.split('&')[2].split('=')[1]
         .replace(/\+/g, ' '));
 
-      res.end();
-
       transporter.sendMail({
         to: 'lastochkakrd@yandex.ru',
         from: config.from,
-        subject: 'Тестирование нового сайта',
+        subject: 'Заявка с сайта',
         html:
           '<div style="' +
           'display: inline-block;' +
@@ -43,8 +41,16 @@ const server = http.createServer((req, res) => {
           '</div>'
       }, (error, info) => {
         if (error) {
+          res.statusCode = 502;
+          res.write('Email not sent');
+          res.end();
+
           console.log(error);
         } else {
+          res.statusCode = 200;
+          res.write('Email sent');
+          res.end();
+
           console.log('Email sent: ' + info.response);
         }
       });

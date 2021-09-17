@@ -453,6 +453,12 @@ document.querySelectorAll('.call-back').forEach((element) => {
       const phone = document.querySelector('#form-phone').value;
       const name = document.querySelector('#form-name').value;
       const message = document.querySelector('#form-message').value;
+      const formError = document.querySelector('.form-error');
+      const formSubmit = document.querySelector('.form-btn');
+
+      formSubmit.setAttribute('disabled', ''); // Prevent double form submit
+
+      formError.textContent = 'Отправляем...';
 
       fetch('/message', {
         method: 'post',
@@ -461,21 +467,36 @@ document.querySelectorAll('.call-back').forEach((element) => {
         },
         body: 'phone=' + phone + '&' + 'name=' + name + '&' +
           'message=' + message
-      }).then(() => {
-        formWrapper.classList.remove('form-shown');
-        form.removeEventListener('submit', makeRequest);
-        formClose.removeEventListener('click', closeForm);
+      }).then((res) => {
+        return res.text();
+      }).then((resText) => {
+        if (resText === 'Email sent') {
+          formError.textContent = '';
+          formWrapper.classList.remove('form-shown');
+          form.removeEventListener('submit', makeRequest);
+          formClose.removeEventListener('click', closeForm);
 
-        const formSentWrapper = document.querySelector('.form-sent-wrapper');
+          const formSentWrapper = document.querySelector('.form-sent-wrapper');
 
-        formSentWrapper.classList.add('form-shown');
-        document.querySelector('.form-sent-time').textContent = currentTime();
+          formSentWrapper.classList.add('form-shown');
+          document.querySelector('.form-sent-time').textContent = currentTime();
 
-        const formSentClose = document.querySelector('.form-sent-close');
+          const formSentClose = document.querySelector('.form-sent-close');
 
-        formSentClose.addEventListener('click', () => {
-          formSentWrapper.classList.remove('form-shown');
-        }, {once: true});
+          formSentClose.addEventListener('click', () => {
+            formSentWrapper.classList.remove('form-shown');
+          }, {once: true});
+        } else if (resText === 'Email not sent') {
+          formError.textContent = 'Ошибка доставки';
+        } else {
+          formError.textContent = 'Ошибка сервера';
+        }
+
+        formSubmit.removeAttribute('disabled');
+      }).catch(() => {
+        formError.textContent = 'Ошибка сети';
+
+        formSubmit.removeAttribute('disabled');
       });
     }
 

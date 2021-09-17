@@ -3,15 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<base href="">
-<link rel="icon" href="images/global/favicon-48x48.png">
-<link rel="apple-touch-icon" href="images/global/apple-touch-icon-180x180.png">
-<link rel="manifest" href="manifest.json">
 <meta name="author" content="Dmitri Tikhomirov">
 <meta name="description" content="Сеть пансионатов для пожилых людей (частных
   домов престарелых) в Краснодаре. Пансионаты для лежачих. Качественный уход
   за пожилыми людьми.">
 <title>Сеть пансионатов «Ласточка»</title>
+
+<!-- Google Tag Manager
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-********');</script>
+End Google Tag Manager -->
+
+<base href="">
+
+<link rel="icon" href="images/global/favicon-48x48.png">
+<link rel="apple-touch-icon" href="images/global/apple-touch-icon-180x180.png">
+<link rel="manifest" href="manifest.json">
+
 <link rel="preload" href="fonts/open-sans-normal.woff2" as="font" crossorigin>
 <link rel="preload" href="fonts/open-sans-600.woff2" as="font" crossorigin>
 <link rel="preload" href="fonts/open-sans-bold.woff2" as="font" crossorigin>
@@ -23,14 +34,19 @@
   media="(min-width: 721px) and (max-width: 1248px)">
 <link rel="preload" href="images/cover/cover-big-92.jpg" as="image"
   media="(min-width: 1249px)">
-<script src="scripts/main.js" defer></script>
+
+<script src="scripts/main-min.js" defer></script>
 <script data-src="https://api-maps.yandex.ru/2.1/?apikey=d183450f-f1ab-4e90-bb81-4f53e839afb9&lang=ru_RU"
   id="contacts-map-script"></script>
-<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/main-min.css">
 <script>console.log('CSS is loaded');</script>
 </head>
 
 <body>
+<!-- Google Tag Manager (noscript)
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-********"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+End Google Tag Manager (noscript) -->
 
 <!-- Cover -->
 
@@ -224,8 +240,9 @@
 
       <p><span class="form-required">*</span> обязательное поле</p>
 
-      <div class="form-btn">
-        <button type="submit" class="btn">Отправить</button>
+      <div class="form-btn-and-error">
+        <button type="submit" class="form-btn btn">Отправить</button>
+        <p class="form-error"></p>
       </div>
     </form>
   </section>
@@ -871,7 +888,7 @@
         </div>
       </div>
 
-      <h3 class="videos-heading">Лепим из пластелина</h3>
+      <h3 class="videos-heading">Лепим из пластилина</h3>
     </article>
 
     <article class="videos-card">
