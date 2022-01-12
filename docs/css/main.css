@@ -755,50 +755,50 @@ textarea:focus {
   }
 }
 
-.header-whatsapp {
+.header-social {
   display: flex;
   align-items: center;
   transition: none;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .header-whatsapp:hover {
+  .header-social:hover {
     opacity: 1;
   }
 }
 
-@media (max-width: 400px) {
-  .header-whatsapp {
+@media (max-width: 440px) {
+  .header-social {
     display: none;
   }
 }
 
 @media not all and (max-width: /*breakpoint*/480px) {
-  .header-sticky .header-whatsapp {
+  .header-sticky .header-social {
     display: none;
   }
 }
 
-.header-whatsapp-icon {
+.header-social-icon {
   fill: var(--color-black);
   height: var(--text-l);
   transition: opacity var(--trans-time-s) var(--trans-func);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .header-whatsapp:hover .header-whatsapp-icon {
+  .header-social:hover .header-social-icon {
     opacity: var(--opacity-l);
   }
 }
 
-.header-whatsapp-text {
+.header-social-text {
   font-size: var(--text-xs);
   opacity: var(--opacity-s);
   margin-left: var(--space-s);
 }
 
-@media (max-width: /*breakpoint*/840px) {
-  .header-whatsapp-text {
+@media (max-width: /*breakpoint*/920px) {
+  .header-social-text {
     display: none;
   }
 }
@@ -823,7 +823,7 @@ textarea:focus {
   margin-left: var(--space-m);
 }
 
-@media (max-width: /*breakpoint*/840px) {
+@media (max-width: /*breakpoint*/920px) {
   .header-phone-text {
     display: none;
   }
@@ -862,7 +862,7 @@ textarea:focus {
   margin-left: var(--space-xl);
 }
 
-@media (max-width: /*breakpoint*/840px) {
+@media (max-width: /*breakpoint*/920px) {
   .header .nav {
     margin-top: var(--space-m);
   }
@@ -1673,7 +1673,7 @@ textarea:focus {
   font-size: var(--text-xs);
 }
 
-.contacts-whatsapp .contacts-contact-icon {
+.contacts-social .contacts-contact-icon {
   fill: var(--color-black);
 }
 
